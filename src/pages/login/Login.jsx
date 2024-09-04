@@ -2,13 +2,13 @@ import "./Login.css";
 import { useCallback, useEffect } from "react";
 import useAuthStore from "../../store/use-auth-store";
 import UserDAO from "/src/daos/UserDao";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { user, loginGoogleWithPopUp, logout, observeAuthState, loading } =
     useAuthStore();
 
-  //const navigate = useNavigate();
+    const navigate = useNavigate();
 
   useEffect(() => {
     observeAuthState();
