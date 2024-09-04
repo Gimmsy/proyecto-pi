@@ -1,17 +1,71 @@
+/* Estilos generales para la página */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Degradado oscuro superpuesto sobre la imagen de fondo */
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('src/assets/image/contaminacion-del-agua-1920x1180.avif'); /* Cambia esta ruta por la de tu imagen */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Contenedor principal de login */
 .container-login {
+    background-color: #ffffff; /* Fondo blanco */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px; /* Ancho máximo para no ocupar toda la pantalla */
+    text-align: center; /* Centrar el texto */
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: 100vh;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición para hover */
 }
 
+/* Animación de hover en el contenedor */
+.container-login:hover {
+    transform: translateY(-10px); /* Efecto de elevación */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Sombra más intensa en hover */
+}
+
+/* Texto de bienvenida */
 .welcome-text {
-    font-size: x-large;
-    color: #333;
+    font-size: 1.8rem; /* Aumentamos el tamaño de fuente */
+    color: #2c3e50; /* Color oscuro elegante */
+    margin-bottom: 1rem; /* Separación inferior */
+    font-weight: 600; /* Un poco más grueso */
 }
 
+/* Texto de carga */
 .loading-text {
-    font-size: medium;
-    color: #666;
+    font-size: 1rem; /* Tamaño de fuente medio */
+    color: #95a5a6; /* Gris suave */
+    margin-top: 0.5rem; /* Separación superior */
+    font-style: italic; /* Añadimos estilo itálico para suavidad */
+}
+
+/* Botón de interacción, por si tienes alguno */
+.button {
+    background-color: #3498db; /* Color primario azul */
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button:hover {
+    background-color: #2980b9; /* Oscurecer el color en hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra suave en hover */
 }

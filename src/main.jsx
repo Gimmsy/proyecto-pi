@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/login/Login.jsx";
-import House from "./pages/house/House.jsx";
+import World from "./pages/house/World.jsx";
 
 const router = createBrowserRouter([
   {
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/House",
-    element: <House />,
+    element: <World />,
   },
 ]);
 createRoot(document.getElementById("root")).render(
