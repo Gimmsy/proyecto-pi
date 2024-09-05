@@ -6,6 +6,7 @@ import House from "./House";
 import useAuthStore from "../../store/use-auth-store";
 import { useNavigate } from "react-router-dom";
 
+
 const World = () => {
   const { logout } = useAuthStore();
   const navigate = useNavigate();

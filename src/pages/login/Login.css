@@ -17,55 +17,64 @@ body {
 /* Contenedor principal de login */
 .container-login {
     background-color: #ffffff;
-    /* Fondo blanco */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    /* Sombra suave */
     border-radius: 10px;
-    /* Bordes redondeados */
     padding: 2rem;
     width: 100%;
     max-width: 400px;
-    /* Ancho máximo para no ocupar toda la pantalla */
     text-align: center;
-    /* Centrar el texto */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* Transición para hover */
 }
 
 /* Animación de hover en el contenedor */
 .container-login:hover {
     transform: translateY(-10px);
-    /* Efecto de elevación */
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    /* Sombra más intensa en hover */
 }
 
 /* Texto de bienvenida */
 .welcome-text {
     font-size: 1.8rem;
-    /* Aumentamos el tamaño de fuente */
     color: #2c3e50;
-    /* Color oscuro elegante */
     margin-bottom: 1rem;
-    /* Separación inferior */
     font-weight: 600;
-    /* Un poco más grueso */
+}
+
+.button-logout {
+    position: absolute;
+    top: 10px;
+    /* Distancia desde la parte superior de la pantalla */
+    right: 10px;
+    /* Distancia desde la derecha de la pantalla */
+    padding: 10px 20px;
+    background-color: #e74c3c;
+    /* Color de fondo del botón */
+    color: white;
+    /* Color del texto */
+    border: none;
+    border-radius: 5px;
+    /* Bordes redondeados */
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 100;
+    /* Asegura que el botón esté encima de otros elementos */
+}
+
+.button-logout:hover {
+    background-color: #c0392b;
+    /* Color cuando se pasa el ratón por encima */
 }
 
 /* Texto de carga */
 .loading-text {
     font-size: 1rem;
-    /* Tamaño de fuente medio */
     color: #95a5a6;
-    /* Gris suave */
     margin-top: 0.5rem;
-    /* Separación superior */
     font-style: italic;
-    /* Añadimos estilo itálico para suavidad */
 }
 
 
@@ -82,7 +91,5 @@ body {
 
 .button:hover {
     background-color: #2980b9;
-    /* Oscurecer el color en hover */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    /* Sombra suave en hover */
 }
