@@ -5,7 +5,7 @@ import UserDAO from "/src/daos/UserDAO";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { user, loginGoogleWithPopUp, logout, observeAuthState, loading } =
+  const { user, loginGoogleWithPopUp, observeAuthState } =
     useAuthStore();
 
   const navigate = useNavigate();
@@ -14,49 +14,27 @@ const Login = () => {
     observeAuthState();
   }, [observeAuthState]);
 
+  useEffect(() => {
+    if (user) {
+      const newUser = {
+        email: user.email,
+        name: user.displayName,
+        photo: user.photoURL,
+      };
+      UserDAO.createUser(newUser);
+      navigate("/world");
+    }
+  }, [user, navigate]);
 
   const handleLogin = useCallback(() => {
-    //navigate("/world");
-    loginGoogleWithPopUp().then((result)=>{
-
-      console.log(result);
-      
-     
-        const newUser = {
-          email: user.email,
-          name: user.displayName,
-          photo: user.photoURL,
-        };
-        UserDAO.createUser(newUser);
-        
-      
-    })
-
-  }, [loginGoogleWithPopUp, user, UserDAO]);
-
-  const handleLogout = useCallback(() => {
-    logout();
-  }, [logout]);
-
-  if (loading) {
-    return <p className="loading-text">Cargando...</p>;
-  }
+    loginGoogleWithPopUp();
+  }, [loginGoogleWithPopUp]);
 
   return (
     <div className="container-login">
-      {user ? (
-        <>
-          <p className="welcome-text">Bienvenido, {user.displayName}</p>
-          <button className="button-logout" onClick={handleLogout}>
-            Cerrar sesión
-          </button>
-        </>
-      ) : (
         <button onClick={handleLogin}>Iniciar sesión</button>
-      )}
     </div>
   );
 };
-
 
 export default Login;

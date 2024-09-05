@@ -12,17 +12,9 @@ const provider = new GoogleAuthProvider();
 
 const useAuthStore = create((set) => ({
   user: null,
-  loading: true,
 
   loginGoogleWithPopUp: async () => {
-    await signInWithPopup(auth, provider).then((result)=>{
-      if (result){
-        return result;
-      }else{
-        return null;
-      }
-      
-    })
+    await signInWithPopup(auth, provider)
     .catch((error) => {
       console.log(error);
     });
@@ -39,7 +31,6 @@ const useAuthStore = create((set) => ({
   },
 
   observeAuthState: () => {
-    set({ loading: true });
     onAuthStateChanged(auth, (user) => {
       if (user) {
         set({ user, loading: false });
