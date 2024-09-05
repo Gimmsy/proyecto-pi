@@ -15,7 +15,14 @@ const useAuthStore = create((set) => ({
   loading: true,
 
   loginGoogleWithPopUp: async () => {
-    await signInWithPopup(auth, provider)
+    await signInWithPopup(auth, provider).then((result)=>{
+      if (result){
+        return result;
+      }else{
+        return null;
+      }
+      
+    })
     .catch((error) => {
       console.log(error);
     });
