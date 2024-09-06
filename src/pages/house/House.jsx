@@ -5,29 +5,21 @@ import Login from "../login/Login";
 const House = () => {
     const houseRef = useRef(null);
 
-    useFrame((state, delta) => {
-        houseRef.current.rotation.y += 1 * delta;
-        console.log(houseRef);
-    })
+    useFrame((state) => {
+        const time = state.clock.getElapsedTime();
+        const cosValue = Math.cos(time);
+        if (houseRef.current) {
+            houseRef.current.rotation.y = cosValue;
+            houseRef.current.rotation.x = cosValue * 1; 
+        }
+
+    });
 
     return (
-        <group ref={houseRef} name="house" scale={[1, 2, 3]}>
-            <mesh
-                name="roof"
-                position-y={1}
-                rotation-y={Math.PI * 0.25}
-                scale={1.5}
-            >
-                <coneGeometry args={[1, 1, 4]} />
-                <meshStandardMaterial wireframe={false} color={0xFFC300} />
-            </mesh>
-            <mesh
-                name="structure"
-            >
-                <boxGeometry args={[1, 1, 1]} />
-                <meshStandardMaterial wireframe={false} color="#6c3483" />
-            </mesh>
-        </group>
+        <mesh ref={houseRef} scale={[3, 2, 2]} position={[0, 0, -1]}>
+            <sphereGeometry args={[1, 32, 32]} /> 
+            <meshPhongMaterial color="#e74c3c" />
+        </mesh>
     );
 };
 
