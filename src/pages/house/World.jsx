@@ -17,7 +17,7 @@ const World = () => {
   }, [logout, navigate]);
 
   const camerasettings = {
-    positions: [2, 2, 5],
+    positions: [0, 0, 15],
     fov: 75,
   };
   return (
@@ -26,7 +26,7 @@ const World = () => {
         Cerrar sesión
       </button>
       <h1 className="tittle">Hello World</h1>
-      <Canvas camera={camerasettings}>
+      <Canvas camera={camerasettings}  style={ {width: '100vw', height: '100vh'} }>
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 0, 10]} intensity={1.5} castShadow />
         <House />
