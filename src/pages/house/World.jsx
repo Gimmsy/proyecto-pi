@@ -1,5 +1,4 @@
 /* eslint-disable react/no-unknown-property */
-import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import React, { useCallback } from "react";
 import House from "./House";
@@ -18,7 +17,7 @@ const World = () => {
   }, [logout, navigate]);
 
   const camerasettings = {
-    positions: [2, 0, 5],
+    positions: [2, 2, 5],
     fov: 75,
   };
   return (
@@ -28,9 +27,8 @@ const World = () => {
       </button>
       <h1 className="tittle">Hello World</h1>
       <Canvas camera={camerasettings}>
-        <OrbitControls enablePan={false} />
-        <ambientLight intensity={1.5} />
-        <directionalLight position={[0, 10, 10]} intensity={5} />
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[5, 0, 10]} intensity={1.5} castShadow />
         <House />
       </Canvas>
     </React.Fragment>
