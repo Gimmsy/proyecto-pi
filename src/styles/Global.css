@@ -6,15 +6,25 @@
     --color-quaternary: #8DDCDB;
     --color-quinary: #7F5FD9;
     --color-senary: #A0B6D9;
+    --color-quaternary: #c3cfe2; /* Define el color que desees */
 }
 
-body {
-    font-family: 'Montserrat', sans-serif;
-    background-color: var(--color-quaternary);
-    /* Fondo claro */
-    color: var(--color-secondary);
-    /* Color de texto principal */
-}
+body, html, #root {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .ocean-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensure it is behind other content */
+  }
 
 h1,
 h2,

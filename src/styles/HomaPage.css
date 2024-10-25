@@ -8,16 +8,15 @@
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(to bottom,--color-quaternary, #c3cfe2);
+    background: linear-gradient(to bottom, var(--color-quaternary), #c3cfe2);
     /* Fondo degradado */
     height: 40vh;
-    display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .overlay {
-    background-color: rgba(0, 0, 0, 0.5);
+    background: linear-gradient(to bottom, var(--color-senary), #A0B6D9);
     /* Fondo semitransparente */
     padding: 20px;
     border-radius: 10px;

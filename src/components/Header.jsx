@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <header className="header">
             <div className="logo">
-                <img src="/assets/images/logo.png" alt="Logo AquaViva" />
+                <img src="/assets/image/logopintado.png" alt="Logo AquaViva" />
                 <span className="company-name">AquaViva</span>
             </div>
             <nav>

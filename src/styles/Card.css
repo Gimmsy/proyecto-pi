@@ -7,6 +7,11 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.2s ease-in-out;
+    width: 300px; /* Ancho fijo para todas las tarjetas */
+    height: 400px; /* Altura fija para todas las tarjetas */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .card:hover {
@@ -21,6 +26,7 @@
 
 .card-content {
     padding: 15px;
+    flex-grow: 1; /* Permite que el contenido crezca para llenar el espacio disponible */
 }
 
 .card h2 {
@@ -35,15 +41,16 @@
 }
 
 .card-button {
-    background-color:var(--color-primary);
+    background-color: var(--color-primary);
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.2s;
+    align-self: flex-end; /* Alinea el botón al final del contenido */
 }
 
 .card-button:hover {
-    background-color:var(--color-senary);
+    background-color: var(--color-senary);
 }
