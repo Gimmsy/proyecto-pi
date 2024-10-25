@@ -1,0 +1,50 @@
+/* src/styles/Global.css */
+:root {
+    --color-primary: #5FB4D9;
+    --color-secondary: #5F68D9;
+    --color-tertiary: #5F8ED9;
+    --color-quaternary: #8DDCDB;
+    --color-quinary: #7F5FD9;
+    --color-senary: #A0B6D9;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--color-quaternary);
+    /* Fondo claro */
+    color: var(--color-secondary);
+    /* Color de texto principal */
+}
+
+h1,
+h2,
+h3 {
+    color: var(--color-primary);
+    /* Color de los encabezados */
+}
+
+button {
+    background-color: var(--color-primary);
+    /* Color de fondo del botón */
+    color: white;
+    /* Color del texto del botón */
+}
+
+button:hover {
+    background-color: var(--color-secondary);
+    /* Color al pasar el mouse */
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/assets/fonts/Montserrat-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/assets/fonts/Montserrat-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
