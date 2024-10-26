@@ -2,7 +2,7 @@
 
 .home-container {
     text-align: center;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     /* Puedes cambiar la fuente a otra que prefieras */
 }
 
@@ -10,7 +10,7 @@
 .hero-section {
     background: linear-gradient(to bottom,--color-quaternary, #c3cfe2);
     /* Fondo degradado */
-    height: 40vh;
+    height: 50vh;
     display: flex;
     justify-content: center;
     align-items: center;

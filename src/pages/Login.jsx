@@ -1,6 +1,6 @@
-import "./Login.css";
+import "../styles/Login.css";
 import { useCallback, useEffect } from "react";
-import useAuthStore from "../../store/use-auth-store";
+import useAuthStore from "../store/use-auth-store";
 import UserDAO from "/src/daos/UserDAO";
 import { useNavigate } from "react-router-dom";
 
