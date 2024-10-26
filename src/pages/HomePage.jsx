@@ -14,19 +14,19 @@ const HomePage = () => {
                 <Card
                     title="Contaminación del agua"
                     description="Breve descripción o algo llamativo para llamar la atención"
-                    imageUrl="/assets/images/contaminacion-agua.jpg"
+                    imageUrl="/assets/image/contaminacion.png"
                     buttonLabel="Ver más"
                 />
                 <Card
                     title="Escasez del agua"
                     description="Breve descripción del tema"
-                    imageUrl="/assets/images/escasez-agua.jpg"
+                    imageUrl="/assets/image/escasez.png"
                     buttonLabel="Ver más"
                 />
                 <Card
                     title="Acidificación de los océanos"
                     description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                    imageUrl="/assets/images/acidificacion-oceanos.jpg"
+                    imageUrl="/assets/image/acidificacion.png"
                     buttonLabel="Ver más"
                 />
             </section>
