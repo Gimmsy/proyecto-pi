@@ -1,8 +1,38 @@
 .google-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-    /* Espaciado entre el ícono y el texto */
-    vertical-align: middle;
-    /* Alinear verticalmente con el texto */
-}
+    width: 18px;         /* Tamaño proporcional a las letras */
+    height: 18px;        /* Tamaño proporcional a las letras */
+    margin-right: 8px;   /* Espaciado entre el ícono y el texto */
+    vertical-align: middle;  /* Alinear verticalmente con el texto */
+  }
+  
+  .login-button {
+    display: inline-flex;   /* Asegura que el ícono y el texto se alineen correctamente */
+    align-items: center;    /* Alinea el ícono verticalmente con el texto */
+    font-size: 16px;        /* Ajusta el tamaño de fuente del botón */
+    padding: 8px 12px;
+    background-color:none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px; 
+  }
+  
+  .login-button img {
+    display: inline-block;
+  }
+  
+  .user-photo {
+    width: 40px;    /* Ajusta el tamaño de la imagen del usuario */
+    height: 40px;
+    border-radius: 50%;   /* Hace la imagen circular */
+    margin-right: 10px;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+
+  .account-menu {
+    padding: 10px;    
+  }
