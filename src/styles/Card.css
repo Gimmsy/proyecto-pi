@@ -1,5 +1,3 @@
-/* Card.css */
-
 .card {
     background: white;
     border: 1px solid var(--color-secondary);
@@ -7,11 +5,12 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.2s ease-in-out;
-    width: 300px; /* Ancho fijo para todas las tarjetas */
-    height: 400px; /* Altura fija para todas las tarjetas */
+    width: 100%; /* Cambiar a ancho del 100% */
+    max-width: 280px; /* Ancho máximo para tarjetas */
+    height: 350px; /* Altura fija para todas las tarjetas */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .card:hover {
@@ -43,7 +42,7 @@
 
 .card-button-container {
     display: flex;
-    justify-content: flex-end; /* Alinea el botón a la derecha */
+    justify-content: center; /* Alinea el botón a la derecha */
     padding: 15px;
 }
 
@@ -59,4 +58,38 @@
 
 .card-button:hover {
     background-color: var(--color-senary);
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .card {
+        height: auto; /* Ajusta la altura de la tarjeta */
+        margin: 10px; /* Espacio entre tarjetas en pantallas más pequeñas */
+    }
+
+    .card h2 {
+        font-size: 1.1rem; /* Reduce el tamaño de la fuente en pantallas más pequeñas */
+    }
+
+    .card p {
+        font-size: 0.9rem; /* Reduce el tamaño de la fuente en pantallas más pequeñas */
+    }
+
+    .card-button {
+        padding: 8px 16px; /* Ajusta el tamaño del botón */
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        margin: 5px; /* Espacio entre tarjetas en pantallas pequeñas */
+    }
+
+    .card h2 {
+        font-size: 1rem; /* Reduce aún más el tamaño de la fuente */
+    }
+
+    .card p {
+        font-size: 0.8rem; /* Reduce aún más el tamaño de la fuente */
+    }
 }
