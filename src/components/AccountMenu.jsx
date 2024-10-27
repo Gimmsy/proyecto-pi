@@ -1,7 +1,9 @@
 // src/components/AccountMenu.jsx
 import React from "react";
 import useAuthStore from "../store/use-auth-store";
-import googleIcon from "../assets/image/google-icon.png"
+import { GoogleOutlined } from "@ant-design/icons";
+import "../styles/AccountMenu.css";
+ 
 const AccountMenu = () => {
   const { user, loginGoogleWithPopUp, logout } = useAuthStore();
 
@@ -15,7 +17,7 @@ const AccountMenu = () => {
         </div>
       ) : (
         <button onClick={loginGoogleWithPopUp} className="login-button">
-          <img src={googleIcon} alt="Iniciar sesión" className="google-icon" />
+          <img src="/assets/image/google-icon.png" alt="Iniciar sesión" className="google-icon" />
           Iniciar sesión con Google
         </button>
       )}

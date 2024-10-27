@@ -17,7 +17,7 @@ const Terrain = () => {
       <Plane
         rotation={[-Math.PI / 2, 0, 0]}
         position={[0, -3, 0]}
-        args={[64, 64, 256, 256]} // Reducir el número de segmentos
+        args={[64, 64, 256, 256]}
       >
         <meshStandardMaterial
           attach="material"
@@ -38,7 +38,7 @@ const OceanBackground = () => {
     <div className="ocean-background">
       <Canvas>
         <fog attach="fog" args={["white", 0, 26]} />
-        <OrbitControls autoRotate={false} /> {/* Desactivar auto-rotate */}
+        <OrbitControls autoRotate={true} /> {/* Desactivar auto-rotate */}
         <ambientLight intensity={0.3} /> {/* Reducir la intensidad de la luz ambiental */}
         <pointLight intensity={1} position={[7, 5, 1]} /> {/* Reducir la intensidad de la luz puntual */}
         <Sky sunPosition={[7, 5, 1]} />

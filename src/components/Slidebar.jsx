@@ -6,9 +6,9 @@ import "../styles/Slidebar.css";
 
 const Sidebar = () => {
   return (
-    <div className="sidebar">
+    <div className="sidebar horizontal">
       <div className="sidebar-header">
-        <img src="/assets/images/logo.png" alt="Logo AquaViva" className="logo" />
+        <img src="/assets/image/logopintado.png" alt="Logo AquaViva" className="logo" />
         <h1>AquaViva</h1>
       </div>
       

@@ -1,50 +1,68 @@
-.sidebar {
-    width: 250px;
-    /* Ancho de la barra lateral */
-    height: 100vh;
-    /* Altura completa de la ventana */
-    background-color: #5FB4D9;
-    /* Color de fondo */
-    color: white;
-    /* Color del texto */
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-}
+@font-face {
+    font-family: 'Montserrat'; /* Nombre de la fuente */
+    src: url('../assets/fonts/Montserrat-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
 
-.sidebar-header {
+@font-face {
+    font-family: 'Montserrat'; /* Nombre de la fuente */
+    src: url('../assets/fonts/Montserrat-bold.ttf') format('truetype'); /* Ruta a la fuente bold */
+    font-weight: bold; /* Peso bold para la fuente bold */
+    font-style: normal; /* Estilo normal */
+  }
+  
+  body {
+    font-family: 'Montserrat', sans-serif; /* Usa la fuente Montserrat en todo el cuerpo */
+  }
+
+.sidebar {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
-    /* Espacio debajo del encabezado */
-}
-
-.logo {
-    width: 50px;
-    /* Ajusta según el tamaño de tu logo */
+    justify-content: space-between;
+    background-color: #e6e6e6d3;
+    padding: 10px;
+    width: 100%;
     height: auto;
-    /* Mantiene la proporción del logo */
+  }
+  
+  .sidebar.horizontal {
+    flex-direction: row;
+  }
+  
+  .sidebar-header {
+    width: 100px; 
+    display: flex;
+    align-items: center;
+  }
+  
+  .sidebar-header .logo {
+    width: 80px;
+    height: auto;
     margin-right: 10px;
-    /* Espacio entre el logo y el texto */
-}
-
-.sidebar-nav {
-    flex-grow: 1;
-    /* Permite que el nav ocupe el espacio restante */
-}
-
-.sidebar-item {
-    color: white;
-    /* Color de los enlaces */
+  }
+  
+  .sidebar-nav {
+    display: flex;
+    gap: 50px;
+    margin-left: auto;
+  }
+  
+  .sidebar-item {
     text-decoration: none;
-    /* Quita el subrayado */
-    padding: 10px 15px;
-    /* Espaciado alrededor de los enlaces */
-    display: block;
-    /* Hace que el enlace ocupe toda la línea */
-}
-
-.sidebar-item:hover {
-    background-color: #5F68D9;
-    /* Color al pasar el mouse */
-}
+    color: #007BFF;
+    padding: 10px;
+    font-size: 18px;
+    transition: color 0.3s ease, text-decoration 0.3s ease; 
+  }
+  
+  .sidebar-item:hover {
+    color: #8e31a8;           
+    text-decoration: underline;  
+  }
+  
+  .account-menu {
+    display: flex;
+    align-items: center;
+  }
+  
