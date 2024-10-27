@@ -6,30 +6,33 @@ import Sliderbar from "../components/Slidebar";
 const HomePage = () => {
     return (
         <><Sliderbar />
-        <div className="home-container">
-            <header className="hero-section">
-                <div className="overlay">
-                    <h1 className="hero-title">Bienvenido a Nuestro Mundo: Explorando los Problemas Ambientales</h1>
-                </div>
-            </header>
-            <section className="cards-section">
-                <Card
-                    title="Contaminación del agua"
-                    description="Breve descripción o algo llamativo para llamar la atención"
-                    imageUrl="/assets/image/contaminacion-agua.jpg"
-                    buttonLabel="Ver más" />
-                <Card
-                    title="Escasez del agua"
-                    description="Breve descripción del tema"
-                    imageUrl="/assets/image/escasez-agua.jpg"
-                    buttonLabel="Ver más" />
-                <Card
-                    title="Acidificación de los océanos"
-                    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                    imageUrl="/assets/image/acidificacion-oceanos.jpg"
-                    buttonLabel="Ver más" />
-            </section>
-        </div></>
+            <div className="home-container">
+                <header className="hero-section">
+                    <div class="hero-section">
+                        <div class="hero-title">
+                            <span>BIENVENIDOS A NUESTRO MUNDO</span>
+                            <span>EXPLORANDO LOS PROBLEMAS AMBIENTALES</span>
+                        </div>
+                    </div>
+                </header>
+                <section className="cards-section">
+                    <Card
+                        title="Contaminación del agua"
+                        description="Breve descripción o algo llamativo para llamar la atención"
+                        imageUrl="/assets/image/contaminacion-agua.jpg"
+                        buttonLabel="Ver más" />
+                    <Card
+                        title="Escasez del agua"
+                        description="Breve descripción del tema"
+                        imageUrl="/assets/image/escasez-agua.jpg"
+                        buttonLabel="Ver más" />
+                    <Card
+                        title="Acidificación de los océanos"
+                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                        imageUrl="/assets/image/acidificacion-oceanos.jpg"
+                        buttonLabel="Ver más" />
+                </section>
+            </div></>
     );
 };
 
