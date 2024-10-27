@@ -1,0 +1,36 @@
+/* src/styles/Header.css */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #1e88e5;
+    /* Color azul como ejemplo */
+    color: white;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 40px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.company-name {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    margin-left: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+nav ul li {
+    cursor: pointer;
+}
