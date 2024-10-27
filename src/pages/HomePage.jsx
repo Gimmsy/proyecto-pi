@@ -1,9 +1,11 @@
 import React from "react";
 import Card from "../components/Card";
 import "../styles/HomePage.css";
+import Sliderbar from "../components/Slidebar";
 
 const HomePage = () => {
     return (
+        <><Sliderbar />
         <div className="home-container">
             <header className="hero-section">
                 <div className="overlay">
@@ -15,22 +17,19 @@ const HomePage = () => {
                     title="Contaminación del agua"
                     description="Breve descripción o algo llamativo para llamar la atención"
                     imageUrl="/assets/image/contaminacion-agua.jpg"
-                    buttonLabel="Ver más"
-                />
+                    buttonLabel="Ver más" />
                 <Card
                     title="Escasez del agua"
                     description="Breve descripción del tema"
                     imageUrl="/assets/image/escasez-agua.jpg"
-                    buttonLabel="Ver más"
-                />
+                    buttonLabel="Ver más" />
                 <Card
                     title="Acidificación de los océanos"
                     description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
                     imageUrl="/assets/image/acidificacion-oceanos.jpg"
-                    buttonLabel="Ver más"
-                />
+                    buttonLabel="Ver más" />
             </section>
-        </div>
+        </div></>
     );
 };
 

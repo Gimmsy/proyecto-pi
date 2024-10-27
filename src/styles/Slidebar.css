@@ -1,0 +1,50 @@
+.sidebar {
+    width: 250px;
+    /* Ancho de la barra lateral */
+    height: 100vh;
+    /* Altura completa de la ventana */
+    background-color: #5FB4D9;
+    /* Color de fondo */
+    color: white;
+    /* Color del texto */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    /* Espacio debajo del encabezado */
+}
+
+.logo {
+    width: 50px;
+    /* Ajusta según el tamaño de tu logo */
+    height: auto;
+    /* Mantiene la proporción del logo */
+    margin-right: 10px;
+    /* Espacio entre el logo y el texto */
+}
+
+.sidebar-nav {
+    flex-grow: 1;
+    /* Permite que el nav ocupe el espacio restante */
+}
+
+.sidebar-item {
+    color: white;
+    /* Color de los enlaces */
+    text-decoration: none;
+    /* Quita el subrayado */
+    padding: 10px 15px;
+    /* Espaciado alrededor de los enlaces */
+    display: block;
+    /* Hace que el enlace ocupe toda la línea */
+}
+
+.sidebar-item:hover {
+    background-color: #5F68D9;
+    /* Color al pasar el mouse */
+}

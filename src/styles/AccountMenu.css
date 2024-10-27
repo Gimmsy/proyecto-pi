@@ -1,0 +1,8 @@
+.google-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    /* Espaciado entre el ícono y el texto */
+    vertical-align: middle;
+    /* Alinear verticalmente con el texto */
+}
