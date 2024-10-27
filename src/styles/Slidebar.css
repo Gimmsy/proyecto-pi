@@ -1,3 +1,21 @@
+@font-face {
+    font-family: 'Montserrat'; /* Nombre de la fuente */
+    src: url('../assets/fonts/Montserrat-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+@font-face {
+    font-family: 'Montserrat'; /* Nombre de la fuente */
+    src: url('../assets/fonts/Montserrat-bold.ttf') format('truetype'); /* Ruta a la fuente bold */
+    font-weight: bold; /* Peso bold para la fuente bold */
+    font-style: normal; /* Estilo normal */
+  }
+  
+  body {
+    font-family: 'Montserrat', sans-serif; /* Usa la fuente Montserrat en todo el cuerpo */
+  }
+
 .sidebar {
     display: flex;
     align-items: center;
@@ -13,19 +31,20 @@
   }
   
   .sidebar-header {
+    width: 100px; 
     display: flex;
     align-items: center;
   }
   
   .sidebar-header .logo {
-    width: 50px;
+    width: 80px;
     height: auto;
     margin-right: 10px;
   }
   
   .sidebar-nav {
     display: flex;
-    gap: 20px;
+    gap: 50px;
     margin-left: auto;
   }
   

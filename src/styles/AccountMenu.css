@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'Montserrat'; /* Nombre de la fuente */
+  src: url('../assets/fonts/Montserrat-regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat'; /* Nombre de la fuente */
+  src: url('../assets/fonts/Montserrat-bold.ttf') format('truetype'); /* Ruta a la fuente bold */
+  font-weight: bold; /* Peso bold para la fuente bold */
+  font-style: normal; /* Estilo normal */
+}
+
+
 .google-icon {
     width: 18px;         /* Tamaño proporcional a las letras */
     height: 18px;        /* Tamaño proporcional a las letras */
