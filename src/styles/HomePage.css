@@ -1,0 +1,98 @@
+.home-container {
+    text-align: center;
+    font-family: 'Monsetrrat', sans-serif;
+    /* Puedes cambiar la fuente a otra que prefieras */
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(to bottom,
+            rgba(95, 180, 217, 0.9),
+            /* Color superior con algo de transparencia */
+            rgba(195, 207, 226, 0.9),
+            /* Intermedio suave */
+            rgba(195, 207, 226, 0.9)
+            /* Color inferior */
+        );
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    /* Asegúrate de que el texto contraste bien */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    /* Sombra para mejorar la legibilidad del texto */
+}
+
+.hero-title span {
+    display: block;
+    /* Cada línea ocupa toda la anchura, haciendo un salto de línea */
+}
+
+.overlay {
+    background: linear-gradient(to bottom, var(--color-senary), #A0B6D9);
+    /* Fondo semitransparente */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.hero-title {
+    color: white;
+    font-size: 2.5rem;
+    /* Aumenta el tamaño de las letras */
+    font-weight: bold;
+    /*text-align: center;*/
+    margin: 0;
+    line-height: 1.2;
+    /* Ajusta el espacio entre líneas para mejor legibilidad */
+}
+
+/* Tamaño adaptativo para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+        /* Reduce el tamaño en tablets y móviles */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+        /* Tamaño aún menor en pantallas pequeñas */
+    }
+}
+
+/* Cards Section */
+.cards-section {
+    display: flex;
+    flex-wrap: wrap;
+    /* Permite que las tarjetas se dispongan en múltiples líneas */
+    justify-content: center;
+    /* Centra las tarjetas en la sección */
+    gap: 1rem;
+    /* Espacio entre tarjetas */
+    padding: 2rem;
+}
+
+/* Ajustes Responsivos para las tarjetas */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem; /* Reduce el tamaño en tablets y móviles */
+    }
+    .cards-section {
+        gap: 0.5rem;
+        /* Menos espacio entre tarjetas en pantallas medianas */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem; /* Tamaño aún menor en pantallas pequeñas */
+    }
+    .cards-section {
+        gap: 0.3rem;
+        /* Espacio aún menor entre tarjetas en pantallas pequeñas */
+        padding: 1rem;
+        /* Menos padding en pantallas pequeñas */
+    }
+}
