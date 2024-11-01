@@ -18,7 +18,7 @@ const AccountMenu = () => {
       ) : (
         <button onClick={loginGoogleWithPopUp} className="login-button">
           <img src="/assets/image/google-icon.png" alt="Iniciar sesión" className="google-icon" />
-          Iniciar sesión con Google
+          Log in
         </button>
       )}
     </div>

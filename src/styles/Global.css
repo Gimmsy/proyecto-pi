@@ -1,34 +1,41 @@
 /* src/styles/Global.css */
+
 :root {
-    --color-primary: #5FB4D9;
+    --color-primary: #2489b4fc;
     --color-secondary: #5F68D9;
     --color-tertiary: #5F8ED9;
     --color-quaternary: #8DDCDB;
     --color-quinary: #7F5FD9;
     --color-senary: #A0B6D9;
-    --color-quaternary: #c3cfe2; /* Define el color que desees */
+    --color-quaternary: #c3cfe2;
+    /* Define el color que desees */
 }
 
-body, html, #root {
+body,
+html,
+#root {
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
-  }
-  
-  .ocean-background {
+}
+
+.ocean-background {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Ensure it is behind other content */
-  }
+    z-index: -1;
+    /* Ensure it is behind other content */
+}
 
 h1,
 h2,
-h3 {
+h3, p {
+    font-family: 'Montserrat', sans-serif;
     color: var(--color-primary);
     /* Color de los encabezados */
 }
@@ -57,4 +64,101 @@ button:hover {
     src: url('/assets/fonts/Montserrat-Bold.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
+}
+
+/* Responsividad */
+
+/* Tablets y dispositivos pequeños */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .cards-section {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+/* Teléfonos móviles */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    .cards-section {
+        gap: 0.5rem;
+    }
+
+    .card {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+
+    button {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.6rem;
+    }
+}/* Dispositivos de hasta 1024px (laptops y tablets) */
+@media (max-width: 1024px) {
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.75rem;
+    }
+    .cards-section {
+        flex-direction: column; /* Alinear tarjetas en columna */
+        padding: 1rem;
+    }
+}
+
+/* Dispositivos de hasta 768px (tablets en modo vertical) */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    h2 {
+        font-size: 1.5rem;
+    }
+    .card {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Dispositivos de hasta 480px (teléfonos móviles) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+        padding: 1rem;
+    }
+    h2 {
+        font-size: 1.2rem;
+    }
+    .cards-section {
+        gap: 0.5rem;
+    }
+    .card {
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 0.85rem;
+    }
+    button {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.6rem;
+    }
 }
