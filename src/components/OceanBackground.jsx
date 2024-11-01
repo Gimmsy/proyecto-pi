@@ -17,7 +17,7 @@ const Terrain = () => {
       <Plane
         rotation={[-Math.PI / 2, 0, 0]}
         position={[0, -3, 0]}
-        args={[64, 64, 256, 256]}
+        args={[64, 64, 64, 64]} // Reducir el número de segmentos
       >
         <meshStandardMaterial
           attach="material"
@@ -36,9 +36,17 @@ const Terrain = () => {
 const OceanBackground = () => {
   return (
     <div className="ocean-background">
-      <Canvas>
+      <Canvas
+        camera={{ position: [0, 0, 10] }}
+        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+        gl={{ antialias: true }} // Habilitar antialiasing
+        onCreated={({ gl }) => {
+          gl.setPixelRatio(window.devicePixelRatio);
+          gl.setSize(window.innerWidth, window.innerHeight);
+        }}
+      >
         <fog attach="fog" args={["white", 0, 26]} />
-        <OrbitControls autoRotate={true} /> {/* Desactivar auto-rotate */}
+        <OrbitControls autoRotate={true} autoRotateSpeed={2} /> {/* Ajustar la velocidad de auto-rotate */}
         <ambientLight intensity={0.3} /> {/* Reducir la intensidad de la luz ambiental */}
         <pointLight intensity={1} position={[7, 5, 1]} /> {/* Reducir la intensidad de la luz puntual */}
         <Sky sunPosition={[7, 5, 1]} />
