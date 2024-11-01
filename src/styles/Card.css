@@ -1,16 +1,16 @@
 .card {
     background: white;
     border: 1px solid var(--color-secondary);
-    border-radius: 10px;
+    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.2s ease-in-out;
     width: 100%; /* Cambiar a ancho del 100% */
-    max-width: 280px; /* Ancho máximo para tarjetas */
-    height: 350px; /* Altura fija para todas las tarjetas */
+    max-width: 300px; /* Ancho máximo para tarjetas */
+    height: 400px; /* Altura fija para todas las tarjetas */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
 }
 
 .card:hover {
