@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 .card {
     background: white;
+    font-family: "Montserrat", sans-serif;
     border: 1px solid var(--color-secondary);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -24,7 +27,7 @@
 }
 
 .card-content {
-    padding: 15px;
+    padding: 11px;
     flex-grow: 1; /* Permite que el contenido crezca para llenar el espacio disponible */
 }
 
@@ -35,7 +38,7 @@
 }
 
 .card p {
-    font-size: 1rem;
+    font-size: 0.92rem;
     color: #666;
     text-align: left; /* Alinea el texto a la izquierda */
 }
@@ -43,7 +46,7 @@
 .card-button-container {
     display: flex;
     justify-content: center; /* Alinea el botón a la derecha */
-    padding: 15px;
+    padding: 10px;
 }
 
 .card-button {
