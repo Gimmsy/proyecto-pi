@@ -52,7 +52,7 @@ const Welcometext = () => {
         <>
             <Text3D
                 ref={textRef}
-                font={"/public/assets/fonts/baby-bear.json"}
+                font={"/assets/fonts/baby-bear.json"}
                 bevelEnabled
                 bevelSize={0.00003}
                 bevelThickness={0.02}
