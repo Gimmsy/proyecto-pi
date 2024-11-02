@@ -4,9 +4,9 @@ import * as THREE from "three";
 import { Plane, OrbitControls, Sky } from "@react-three/drei";
 
 const Terrain = () => {
-  const height = useLoader(THREE.TextureLoader, "./textures/elevation.png");
-  const normals = useLoader(THREE.TextureLoader, "./textures/normals.png");
-  const colors = useLoader(THREE.TextureLoader, "./textures/colors.png");
+  const height = useLoader(THREE.TextureLoader, "/textures/elevation.png");
+  const normals = useLoader(THREE.TextureLoader, "/textures/normals.png");
+  const colors = useLoader(THREE.TextureLoader, "/textures/colors.png");
 
   console.log("Height Map:", height);
   console.log("Normals Map:", normals);
@@ -18,6 +18,8 @@ const Terrain = () => {
         rotation={[-Math.PI / 2, 0, 0]}
         position={[0, -3, 0]}
         args={[64, 64, 64, 64]} // Reducir el número de segmentos
+        castShadow
+        receiveShadow
       >
         <meshStandardMaterial
           attach="material"
@@ -37,18 +39,21 @@ const OceanBackground = () => {
   return (
     <div className="ocean-background">
       <Canvas
+        shadows
         camera={{ position: [0, 0, 10] }}
         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
         gl={{ antialias: true }} // Habilitar antialiasing
         onCreated={({ gl }) => {
           gl.setPixelRatio(window.devicePixelRatio);
           gl.setSize(window.innerWidth, window.innerHeight);
+          gl.shadowMap.enabled = true; // Habilitar sombras
+          gl.shadowMap.type = THREE.PCFSoftShadowMap; // Tipo de sombra
         }}
       >
         <fog attach="fog" args={["white", 0, 26]} />
         <OrbitControls autoRotate={true} autoRotateSpeed={2} /> {/* Ajustar la velocidad de auto-rotate */}
         <ambientLight intensity={0.3} /> {/* Reducir la intensidad de la luz ambiental */}
-        <pointLight intensity={1} position={[7, 5, 1]} /> {/* Reducir la intensidad de la luz puntual */}
+        <pointLight intensity={1} position={[7, 5, 1]} castShadow /> {/* Reducir la intensidad de la luz puntual */}
         <Sky sunPosition={[7, 5, 1]} />
         <Suspense fallback={null}>
           <Terrain />
