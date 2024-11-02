@@ -1,6 +1,6 @@
 import { Html, Text3D } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Vector3 } from "three";
 import * as THREE from 'three';
 
@@ -37,6 +37,16 @@ const Welcometext = () => {
     const handlePointerUp = () => {
         setIsClicked(false);
     };
+
+    useEffect(() => {
+        return () => {
+            if (textRef.current) {
+                // Liberar recursos de geometría y material
+                textRef.current.geometry.dispose();
+                textRef.current.material.dispose();
+            }
+        };
+    }, []);
 
     return (
         <>
