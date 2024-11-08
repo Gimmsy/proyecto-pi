@@ -12,6 +12,7 @@ const HomePage = () => {
             <Canvas>
                 <Welcometext />
             </Canvas>
+            <hr /> {/* Agregar línea horizontal */}
             <section className="cards-section">
                 <Card
                     title="Contaminación del agua"
