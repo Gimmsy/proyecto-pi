@@ -1,16 +1,18 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import OceanBackground from "./components/OceanBackground";
+import InfoPage from "./pages/InfoPage";
+
 import './styles/Global.css';
 
 const App = () => {
     return (
         <div>
-            <OceanBackground />
+           
             <Router>
                 <Routes>
-                    <Route path="/" element={<HomePage />} />
+                    <Route path="/home" element={<HomePage />} />
+                    <Route path="/info" element={<InfoPage />} />
                 </Routes>
             </Router>
         </div>

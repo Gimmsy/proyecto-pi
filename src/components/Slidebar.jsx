@@ -13,10 +13,10 @@ const Sidebar = () => {
       </div>
       
       <nav className="sidebar-nav">
-        <Link to="/home" className="sidebar-item">Inicio</Link>
-        <Link to="/resources" className="sidebar-item">Recursos Adicionales</Link>
-        <Link to="/info" className="sidebar-item">Información</Link>
-        <Link to="/trivia" className="sidebar-item">Trivia</Link>
+      <a href="/home" className="sidebar-item">Inicio</a>
+                <a href="/resources" className="sidebar-item">Recursos Adicionales</a>
+                <a href="/info" className="sidebar-item">Información</a>
+                <a href="/trivia" className="sidebar-item">Trivia</a>
       </nav>
 
       <div className="account-menu">
