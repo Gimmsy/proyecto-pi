@@ -6,8 +6,8 @@ const Card = ({ title, description, imageUrl, buttonLabel }) => {
     const navigate = useNavigate();
 
     const handleViewMore = () => {
-        // Redirige a la página de información y recarga completamente
-        window.location.href = "/info";
+        // Navega a /info sin recargar la página
+        navigate("/info");
     };
     return (
         <div className="card">
@@ -17,7 +17,9 @@ const Card = ({ title, description, imageUrl, buttonLabel }) => {
                 <p>{description}</p>
             </div>
             <div className="card-button-container">
-                <button className="card-button">{buttonLabel}</button>
+                <button className="card-button" onClick={handleViewMore}>
+                    {buttonLabel}
+                </button>
             </div>
         </div>
     );

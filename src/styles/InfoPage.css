@@ -1,90 +1,94 @@
-/* InfoPage Styles */
+/* Estilos principales para InfoPage */
 .info-page-container {
     display: flex;
     justify-content: center;
-    padding: 20px;
-    background-color: #e6f7ff; /* Fondo azul claro */
+    align-items: center;
+    height: 100vh;
 }
 
 .info-page-content {
     display: flex;
     gap: 20px;
-    max-width: 1200px;
-    width: 100%;
+    width: 50%;
+    max-width: 600px;
+    font-family: "Montserrat", sans-serif;
 }
 
-/* MainTopic Styles */
+/* Estilo para el recuadro principal (similar a .card) */
 .main-topic-container {
-    flex: 3;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    overflow: hidden;
-}
-
-.main-topic-title {
-    font-size: 24px;
-    color: #007acc; /* Color de título */
-}
-
-.main-topic-image {
-    width: 100%;
-    height: auto;
+    background: white;
+    border: 1px solid var(--color-secondary);
     border-radius: 8px;
-    margin-top: 10px;
-}
-
-.main-topic-content {
-    max-height: 300px;
-    overflow-y: auto;
-    margin-top: 15px;
-}
-
-/* SecundaryTopic Styles */
-.secondary-topics-container {
-    flex: 1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+    width: 100%;
+    max-width: 300px;
+    height: 400px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: center;
+    padding: 15px;
+    text-align: left;
 }
 
+.main-topic-container:hover {
+    transform: scale(1.05);
+}
+
+.main-topic-container img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Estilo para el contenedor de los recuadros secundarios */
+.secondary-topic-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 40%;
+}
+
+/* Estilo para los recuadros secundarios (cards más pequeños) */
 .secondary-topic-card {
-    background-color: white;
-    border-radius: 10px;
+    background: white;
+    border: 1px solid var(--color-secondary);
+    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 15px;
+    padding: 10px;
     cursor: pointer;
-    text-align: center;
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .secondary-topic-card:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
 }
 
-.secondary-topic-image {
+.secondary-topic-card img {
     width: 100%;
-    height: auto;
+    height: 100px;
+    object-fit: cover;
     border-radius: 8px;
-    margin-bottom: 10px;
 }
 
-.secondary-topic-title {
-    font-size: 18px;
-    color: #007acc;
+.secondary-topic-card h3 {
+    font-size: 1.2rem;
+    margin-top: 8px;
 }
 
-/* Responsive adjustments */
+/* Media Queries para hacerlas responsivas */
 @media (max-width: 768px) {
     .info-page-content {
-        flex-direction: column;
-        align-items: center;
+        width: 80%;
     }
 
-    .secondary-topics-container {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
+    .main-topic-container,
+    .secondary-topic-card {
+        max-width: 100%;
     }
 }

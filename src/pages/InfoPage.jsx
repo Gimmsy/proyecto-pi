@@ -1,6 +1,4 @@
 import React, { Suspense, useEffect, useState } from "react";
-import MainTopic from "../components/MainTopic";
-import SecundaryTopic from "../components/SecundaryTopic";
 import Sliderbar from "../components/Slidebar";
 import { Canvas } from "@react-three/fiber";
 import Crab from "../components/Crab";
@@ -24,7 +22,7 @@ const InfoPage = () => {
                 "La acidificación de los océanos es un proceso causado por la absorción de CO2 en el agua, lo cual reduce su pH y afecta negativamente a los ecosistemas marinos.",
             sensibilizacion:
                 "Reducir las emisiones de CO2 es esencial para proteger la biodiversidad marina y mantener el equilibrio de los océanos.",
-            imagen: "assets/image/sensibilizacion-acidificacion-agua.jpg",
+            imagen: "/assets/image/sensibilizacion-acidificacion-agua.jpg",
         },
         escasez: {
             titulo: "Escasez de agua",
@@ -44,7 +42,6 @@ const InfoPage = () => {
     }, [temaSeleccionado]);
 
     return (
-
         <>
             <Sliderbar />
             <Canvas style={{ width: '100%', height: '100vh' }} camera={{ position: [0, 1, 3], fov: 75 }}>
@@ -54,21 +51,46 @@ const InfoPage = () => {
                 <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade />
                 <OrbitControls />
                 <Suspense fallback={null}>
-                <Crab />
+                    <Crab />
                 </Suspense>
             </Canvas>
+
             {/* <div className="info-page-container">
-            <div className="info-page-content">
-                <MainTopic tema={temas[temaSeleccionado]} />
-                <SecundaryTopic
-                    temas={temas}
-                    temaSeleccionado={temaSeleccionado}
-                    onTemaSelect={setTemaSeleccionado}
-                />
-            </div>
-        </div> */}
+                <div className="info-page-content">
+                    <MainTopic tema={temas[temaSeleccionado]} />
+                    <SecundaryTopic
+                        temas={temas}
+                        temaSeleccionado={temaSeleccionado}
+                        onTemaSelect={setTemaSeleccionado}
+                    />
+                </div>
+            </div> */}
         </>
     );
 };
+
+const MainTopic = ({ tema }) => (
+    <div className="main-topic-container">
+        <h2>{tema.titulo}</h2>
+        <img src={tema.imagen} alt={tema.titulo} style={{ width: '100%', borderRadius: '8px' }} />
+        <p>{tema.descripcion}</p>
+        <p><em>{tema.sensibilizacion}</em></p>
+    </div>
+);
+
+const SecundaryTopic = ({ temas, onTemaSelect }) => (
+    <div className="secondary-topic-container">
+        {Object.keys(temas).map((key) => (
+            <div
+                key={key}
+                className="secondary-topic-card"
+                onClick={() => onTemaSelect(key)}
+            >
+                <img src={temas[key].imagen} alt={temas[key].titulo} style={{ width: '100%', borderRadius: '8px' }} />
+                <h3>{temas[key].titulo}</h3>
+            </div>
+        ))}
+    </div>
+);
 
 export default InfoPage;
