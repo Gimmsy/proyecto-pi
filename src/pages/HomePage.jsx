@@ -4,15 +4,17 @@ import "../styles/HomePage.css";
 import Sliderbar from "../components/Slidebar";
 import { Canvas } from "@react-three/fiber";
 import Welcometext from "../components/WelcomeText";
+import OceanBackground from "../components/OceanBackground";
+
 
 const HomePage = () => {
     return (
         <>
             <Sliderbar />
+            <OceanBackground />
             <Canvas>
                 <Welcometext />
             </Canvas>
-            <hr /> {/* Agregar línea horizontal */}
             <section className="cards-section">
                 <Card
                     title="Contaminación del agua"
