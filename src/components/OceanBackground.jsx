@@ -17,7 +17,7 @@ const Terrain = () => {
       <Plane
         rotation={[-Math.PI / 2, 0, 0]}
         position={[0, -3, 0]}
-        args={[64, 64, 64, 64]} // Reducir el número de segmentos
+        args={[64, 64, 64, 64]}
         castShadow
         receiveShadow
       >
@@ -28,8 +28,7 @@ const Terrain = () => {
           metalness={0.2}
           normalMap={normals}
           displacementMap={height}
-          displacementScale={1} // Reducir la escala de desplazamiento
-        />
+          displacementScale={1}
       </Plane>
     </group>
   );
@@ -42,7 +41,7 @@ const OceanBackground = () => {
         shadows
         camera={{ position: [0, 0, 10] }}
         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-        gl={{ antialias: true }} // Habilitar antialiasing
+        gl={{ antialias: true }}
         onCreated={({ gl }) => {
           gl.setPixelRatio(window.devicePixelRatio);
           gl.setSize(window.innerWidth, window.innerHeight);
@@ -51,11 +50,11 @@ const OceanBackground = () => {
         }}
       >
         <fog attach="fog" args={["white", 0, 26]} />
-        <OrbitControls autoRotate={true} autoRotateSpeed={2} /> {/* Ajustar la velocidad de auto-rotate */}
-        <ambientLight intensity={0.3} /> {/* Reducir la intensidad de la luz ambiental */}
-        <pointLight intensity={1} position={[7, 5, 1]} castShadow /> {/* Reducir la intensidad de la luz puntual */}
+        <OrbitControls autoRotate={true} autoRotateSpeed={2} />
+        <ambientLight intensity={0.3} /> 
+        <pointLight intensity={1} position={[7, 5, 1]} castShadow />
         <Sky sunPosition={[7, 5, 1]} />
-        <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade /> {/* Agregar estrellas */}
+        <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade /> {/* Agrega estrellas */}
         <Suspense fallback={null}>
           <Terrain />
         </Suspense>
