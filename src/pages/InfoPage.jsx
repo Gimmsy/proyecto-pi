@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import MainTopic from "../components/MainTopic";
 import SecundaryTopic from "../components/SecundaryTopic";
 import Sliderbar from "../components/Slidebar";
+import { Canvas } from "@react-three/fiber";
+import Crab from "../components/Crab";
+import { OrbitControls, Sky, Stars } from "@react-three/drei";
 
 const InfoPage = () => {
     const [temaSeleccionado, setTemaSeleccionado] = useState("contaminacion");
@@ -41,10 +44,20 @@ const InfoPage = () => {
     }, [temaSeleccionado]);
 
     return (
-        
+
         <>
-        <Sliderbar />
-        <div className="info-page-container">
+            <Sliderbar />
+            <Canvas style={{ width: '100%', height: '100vh' }} camera={{ position: [0, 1, 3], fov: 75 }}>
+                <ambientLight intensity={1} />
+                <spotLight position={[10, 10, 10]} angle={0.15} intensity={0.5} />
+                <Sky distance={450000} sunPosition={[100, 20, 100]} inclination={0} azimuth={0.05} />
+                <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade />
+                <OrbitControls />
+                <Suspense fallback={null}>
+                <Crab />
+                </Suspense>
+            </Canvas>
+            {/* <div className="info-page-container">
             <div className="info-page-content">
                 <MainTopic tema={temas[temaSeleccionado]} />
                 <SecundaryTopic
@@ -53,7 +66,7 @@ const InfoPage = () => {
                     onTemaSelect={setTemaSeleccionado}
                 />
             </div>
-        </div>
+        </div> */}
         </>
     );
 };
