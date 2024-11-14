@@ -16,6 +16,7 @@ const InfoPage = () => {
       sensibilizacion:
         "Es crucial tomar conciencia sobre el uso responsable del agua y evitar arrojar desechos en ríos, lagos y mares para preservar este recurso vital.",
       imagen: "/assets/image/sensibilizacion-contaminacion-agua.jpg",
+      link: "",
     },
     acidificacion: {
       titulo: "Acidificación de los océanos",
@@ -24,6 +25,7 @@ const InfoPage = () => {
       sensibilizacion:
         "Reducir las emisiones de CO2 es esencial para proteger la biodiversidad marina y mantener el equilibrio de los océanos.",
       imagen: "/assets/image/sensibilizacion-acidificacion-agua.jpg",
+      link: "",
     },
     escasez: {
       titulo: "Escasez de agua",
@@ -32,6 +34,7 @@ const InfoPage = () => {
       sensibilizacion:
         "Es fundamental conservar el agua y buscar soluciones sostenibles para asegurar su disponibilidad para futuras generaciones.",
       imagen: "/assets/image/sensibilizacion-escasez-agua.jpg",
+      link: "/WaterCycle",
     },
   };
 
@@ -100,6 +103,7 @@ const MainTopic = ({ tema }) => (
     <p>
       <em>{tema.sensibilizacion}</em>
     </p>
+    <a href={tema.link}>Modelo Interactivo</a>
   </div>
 );
 
