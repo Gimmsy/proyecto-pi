@@ -16,6 +16,7 @@ const InfoPage = () => {
       sensibilizacion:
         "Es crucial tomar conciencia sobre el uso responsable del agua y evitar arrojar desechos en ríos, lagos y mares para preservar este recurso vital.",
       imagen: "/assets/image/sensibilizacion-contaminacion-agua.jpg",
+      link: "",
     },
     acidificacion: {
       titulo: "Acidificación de los océanos",
@@ -24,14 +25,16 @@ const InfoPage = () => {
       sensibilizacion:
         "Reducir las emisiones de CO2 es esencial para proteger la biodiversidad marina y mantener el equilibrio de los océanos.",
       imagen: "/assets/image/sensibilizacion-acidificacion-agua.jpg",
+      link: "",
     },
     escasez: {
       titulo: "Escasez de agua",
       descripcion:
-        "La escasez de agua es la falta de acceso a agua potable suficiente para satisfacer las necesidades básicas de la población.",
+        "La escasez de agua es la falta de acceso a agua potable suficiente para satisfacer las necesidades básicas de la población. La conservación y gestión adecuada del agua no solo ayudan a combatir la escasez, sino que también permiten que el ciclo del agua siga funcionando de manera eficiente.",
       sensibilizacion:
-        "Es fundamental conservar el agua y buscar soluciones sostenibles para asegurar su disponibilidad para futuras generaciones.",
+        "A continuación, podrás ver un modelo interactivo del ciclo del agua que te permitirá explorar sus distintos procesos.",
       imagen: "/assets/image/sensibilizacion-escasez-agua.jpg",
+      link: "/WaterCycle",
     },
   };
 
@@ -100,11 +103,13 @@ const MainTopic = ({ tema }) => (
     <p>
       <em>{tema.sensibilizacion}</em>
     </p>
+    <a href={tema.link}>Modelo Interactivo</a>
   </div>
 );
 
 const SecundaryTopic = ({ temas, onTemaSelect }) => (
   <div className="secondary-topic-container">
+    <h2 className="secondary-topic-title">Otros temas de interés</h2>
     {Object.keys(temas).map((key) => (
       <div
         key={key}

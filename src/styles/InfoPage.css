@@ -6,7 +6,8 @@
     width: 60vw; /* Ajusta el ancho según necesites */
     height: 60vh; /* Ajusta la altura según necesites */
     margin: 0 auto; /* Centra el contenedor horizontalmente */
-    background-color: white;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
 
     position: absolute;
     top: 50%;
@@ -15,14 +16,14 @@
 }
 
 .info-page-buttons {
-    width: 40%; /* Ocupa el 30% restante del ancho */
+    width: 40%; 
     padding: 20px; /* Opcional: agrega padding interno */
 }
 
 .info-page-content {
     display: flex;
     gap: 20px;
-    width: 60%;
+    width:65%;
     font-family: "Montserrat", sans-serif;
     padding: 20px; /* Opcional: agrega padding interno */
 }
@@ -43,6 +44,7 @@
     align-items: center;
     padding: 15px;
     text-align: left;
+    margin-right: 20px;    
 }
 
 .main-topic-container:hover {
@@ -61,12 +63,19 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 100%;
+    width: 100%;    
 }
+
+.secondary-topic-title {
+    font-size: 24px;  /* Tamaño del texto */
+    font-weight: bold; /* Hace el texto más negrita */
+    color: var(--color-primary);  /* Color del texto */
+    margin-bottom: 15px;  /* Espacio debajo del título */
+  }
 
 /* Estilo para los recuadros secundarios (cards más pequeños) */
 .secondary-topic-card {
-    background: white;
+    background: rgb(255, 255, 255);
     border: 1px solid var(--color-secondary);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
