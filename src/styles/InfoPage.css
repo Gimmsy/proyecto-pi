@@ -1,4 +1,12 @@
 /* Estilos principales para InfoPage */
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/assets/fonts/Montserrat-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Estilos principales para InfoPage */
 .info-page-container {
     display: flex;
     justify-content: center;
