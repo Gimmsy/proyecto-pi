@@ -75,11 +75,13 @@ const InfoPage = () => {
       <div className="info-page-container">
         <div className="info-page-content">
           <MainTopic tema={temas[temaSeleccionado]} />
-          <SecundaryTopic
-            temas={temas}
-            temaSeleccionado={temaSeleccionado}
-            onTemaSelect={setTemaSeleccionado}
-          />
+        </div>
+        <div className="info-page-button">
+        <SecundaryTopic
+          temas={temas}
+          temaSeleccionado={temaSeleccionado}
+          onTemaSelect={setTemaSeleccionado}
+        />
         </div>
       </div>
     </>
