@@ -51,7 +51,7 @@ const OceanBackground = () => {
         }}
       >
         <fog attach="fog" args={["white", 0, 26]} />
-        <OrbitControls autoRotate={true} autoRotateSpeed={2} /> {/* Ajustar la velocidad de auto-rotate */}
+        <OrbitControls autoRotate={true} autoRotateSpeed={1} /> {/* Ajustar la velocidad de auto-rotate */}
         <ambientLight intensity={0.3} /> {/* Reducir la intensidad de la luz ambiental */}
         <pointLight intensity={1} position={[7, 5, 1]} castShadow /> {/* Reducir la intensidad de la luz puntual */}
         <Sky sunPosition={[7, 5, 1]} />
