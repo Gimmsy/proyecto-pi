@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, useGLTF } from '@react-three/drei';
+import { OrbitControls, Sky, Stars, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
 // Componente para el modelo del cangrejo
@@ -9,7 +9,7 @@ const Crab = (props) => {
   const { nodes, materials } = useGLTF('/models-3d/Crab.glb');
 
   // Pre-cargar el modelo para evitar tiempos de espera
- 
+
 
   // Definir las partes del modelo
   const meshData = [
@@ -45,31 +45,27 @@ const CrabScene = () => {
     <div className="crab-background">
       <Canvas
         shadows
-        camera={{ position: [0, 2, 6], fov: 60 }}
-        style={{ width: '100%', height: '400px' }}
+        camera={{ position: [0, 0, 10] }}
+        style={{ top: 0, left: 0, width: '100%', height: '1024px' }}
         gl={{
           antialias: true,
           powerPreference: 'high-performance', // Priorizar el rendimiento
           pixelRatio: Math.min(1.5, window.devicePixelRatio), // Limitar el ratio de píxeles
         }}
         onCreated={({ gl }) => {
-          gl.shadowMap.enabled = true;
+          gl.setPixelRatio(window.devicePixelRatio);
+          gl.setSize(window.innerWidth, window.innerHeight);
+          gl.shadowMap.enabled = true; // Habilitar sombras
           gl.shadowMap.type = THREE.PCFSoftShadowMap;
         }}
       >
-        <fog attach="fog" args={['#d6e0f0', 5, 20]} /> {/* Agregar niebla */}
-        <ambientLight intensity={0.25} /> {/* Luz ambiental */}
-        <directionalLight
-          position={[10, 10, 10]}
-          intensity={1}
-          castShadow
-          shadow-mapSize-width={1024} // Resolución de sombras
-          shadow-mapSize-height={1024}
-        />
+        <ambientLight intensity={2} /> {/* Reducir la intensidad de la luz ambiental */}
+        <pointLight intensity={0.1} position={[7, 5, 1]} castShadow /> {/* Reducir la intensidad de la luz puntual */}
+        <Sky sunPosition={[7, 5, 1]} />
+        <Stars radius={50} depth={20} count={5000} factor={4} saturation={0} fade /> {/* Agregar estrellas */}
         <OrbitControls autoRotate autoRotateSpeed={1} /> {/* Control de la cámara */}
-
         <Suspense fallback={null}>
-          <Crab scale={[0.8, 0.8, 0.8]} /> {/* Escalar el modelo */}
+          <Crab scale={[0.4, 0.4, 0.4]} position={[-5, -5, 5]} /> {/* Escalar el modelo */}
         </Suspense>
       </Canvas>
     </div>
