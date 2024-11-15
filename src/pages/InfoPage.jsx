@@ -1,9 +1,7 @@
-import React, { Suspense, useEffect, useState } from "react";
-import Sliderbar from "../components/Slidebar";
-import { Canvas } from "@react-three/fiber";
-import Crab from "../components/Crab";
-import { OrbitControls, Sky, Stars } from "@react-three/drei";
+import React, { useEffect, useState } from "react";
+import Sliderbar from "../components/Slidebar"; // Asegúrate de que la ruta es correcta
 import "../styles/InfoPage.css";
+import Scene from "../components/Scene";
 
 const InfoPage = () => {
   const [temaSeleccionado, setTemaSeleccionado] = useState("contaminacion");
@@ -25,7 +23,7 @@ const InfoPage = () => {
       sensibilizacion:
         "Reducir las emisiones de CO2 es esencial para proteger la biodiversidad marina y mantener el equilibrio de los océanos.",
       imagen: "/assets/image/sensibilizacion-acidificacion-agua.jpg",
-      link: "",
+      link: "/ocean",
     },
     escasez: {
       titulo: "Escasez de agua",
@@ -48,43 +46,17 @@ const InfoPage = () => {
   return (
     <>
       <Sliderbar />
-
-      <Canvas
-        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}
-        camera={{ position: [0, 1, 3], fov: 75 }}
-      >
-        <ambientLight intensity={1} />
-        <spotLight position={[10, 10, 10]} angle={0.15} intensity={0.5} />
-        <Sky
-          distance={450000}
-          sunPosition={[100, 20, 100]}
-          inclination={0}
-          azimuth={0.05}
-        />
-        <Stars
-          radius={100}
-          depth={50}
-          count={5000}
-          factor={4}
-          saturation={0}
-          fade
-        />
-        <OrbitControls />
-        <Suspense fallback={null}>
-          <Crab />
-        </Suspense>
-      </Canvas>
-
+      <Scene />
       <div className="info-page-container">
         <div className="info-page-content">
           <MainTopic tema={temas[temaSeleccionado]} />
         </div>
         <div className="info-page-button">
-        <SecundaryTopic
-          temas={temas}
-          temaSeleccionado={temaSeleccionado}
-          onTemaSelect={setTemaSeleccionado}
-        />
+          <SecundaryTopic
+            temas={temas}
+            temaSeleccionado={temaSeleccionado}
+            onTemaSelect={setTemaSeleccionado}
+          />
         </div>
       </div>
     </>
