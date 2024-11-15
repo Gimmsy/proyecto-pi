@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/assets/fonts/Montserrat-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .sidebar {
     width: 250px;
     /* Ancho de la barra lateral */
@@ -48,4 +55,3 @@
     background-color: #5F68D9;
     /* Color al pasar el mouse */
 }
-

@@ -3,33 +3,48 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    width: 70vw; /* Ajusta el ancho según necesites */
+    height: 75vh; /* Ajusta la altura según necesites */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.info-page-buttons {
+    width: 40%; 
+    padding: 20px; /* Opcional: agrega padding interno */
 }
 
 .info-page-content {
     display: flex;
     gap: 20px;
-    width: 50%;
-    max-width: 600px;
+    width:65%;
     font-family: "Montserrat", sans-serif;
+    padding: 20px; /* Opcional: agrega padding interno */
 }
 
 /* Estilo para el recuadro principal (similar a .card) */
 .main-topic-container {
-    background: white;
+    background: rgb(255, 255, 255);
     border: 1px solid var(--color-secondary);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.2s ease-in-out;
     width: 100%;
-    max-width: 300px;
+    max-width: none;
     height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 15px;
     text-align: left;
+    margin-right: 20px;    
 }
 
 .main-topic-container:hover {
@@ -47,13 +62,20 @@
 .secondary-topic-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    width: 40%;
+    gap: 8px;
+    width: 100%;    
 }
+
+.secondary-topic-title {
+    font-size: 20px;  /* Tamaño del texto */
+    font-weight: bold; /* Hace el texto más negrita */
+    color: var(--color-primary);  /* Color del texto */
+    margin-bottom: 15px;  /* Espacio debajo del título */
+  }
 
 /* Estilo para los recuadros secundarios (cards más pequeños) */
 .secondary-topic-card {
-    background: white;
+    background: rgb(255, 255, 255);
     border: 1px solid var(--color-secondary);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -63,6 +85,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    max-width: none; 
 }
 
 .secondary-topic-card:hover {
@@ -84,11 +108,11 @@
 /* Media Queries para hacerlas responsivas */
 @media (max-width: 768px) {
     .info-page-content {
-        width: 80%;
+        width: 70%;
     }
 
     .main-topic-container,
     .secondary-topic-card {
-        max-width: 100%;
+        max-width: 90%;
     }
 }
