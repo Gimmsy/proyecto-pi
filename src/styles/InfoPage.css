@@ -1,47 +1,29 @@
 /* Estilos principales para InfoPage */
-@font-face {
-    font-family: 'Montserrat';
-    src: url('/assets/fonts/Montserrat-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-/* Estilos principales para InfoPage */
 .info-page-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60vw;
-    /* Ajusta el ancho según necesites */
-    height: 60vh;
-    /* Ajusta la altura según necesites */
+    width: 55vw; /* Reducir el ancho para compactar */
+    height: 55vh; /* Reducir la altura para compactar */
     margin: 0 auto;
-    /* Centra el contenedor horizontalmente */
     background-color: rgb(255, 255, 255);
     border-radius: 15px;
-
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 60%; /* Mover más a la derecha */
     transform: translate(-50%, -50%);
 }
 
-.info-page-buttons {
-    width: 40%;
-    padding: 20px;
-    /* Opcional: agrega padding interno */
-}
-
+/* Configuración de columnas */
 .info-page-content {
     display: flex;
-    gap: 20px;
-    width: 65%;
+    gap: 10px; /* Reducir el espacio entre columnas */
+    width: 100%;
     font-family: "Montserrat", sans-serif;
-    padding: 20px;
-    /* Opcional: agrega padding interno */
+    padding: 10px; /* Reducir padding para compactar */
 }
 
-/* Estilo para el recuadro principal (similar a .card) */
+/* Primera columna - Columna izquierda */
 .main-topic-container {
     background: rgb(255, 255, 255);
     border: 1px solid var(--color-secondary);
@@ -49,87 +31,31 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.2s ease-in-out;
-    width: 100%;
-    max-width: none;
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
+    width: 48%; /* Ajustar tamaño para dejar espacio */
+    height: 100%;
+    padding: 10px; /* Reducir padding para compactar */
     text-align: left;
-    margin-right: 20px;
 }
 
-.main-topic-container:hover {
-    transform: scale(1.05);
-}
-
-.main-topic-container img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-/* Estilo para el contenedor de los recuadros secundarios */
+/* Segunda columna - Columna derecha con dos filas */
 .secondary-topic-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 5px; /* Reducir espacio entre filas */
+    width: 48%; /* Ajustar tamaño para dejar espacio */
 }
 
-.secondary-topic-title {
-    font-size: 24px;
-    /* Tamaño del texto */
-    font-weight: bold;
-    /* Hace el texto más negrita */
-    color: var(--color-primary);
-    /* Color del texto */
-    margin-bottom: 15px;
-    /* Espacio debajo del título */
-}
-
-/* Estilo para los recuadros secundarios (cards más pequeños) */
+/* Estilo para los recuadros secundarios */
 .secondary-topic-card {
     background: rgb(255, 255, 255);
     border: 1px solid var(--color-secondary);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 10px;
+    padding: 5px; /* Reducir padding interno */
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: none;
-}
-
-.secondary-topic-card:hover {
-    transform: scale(1.05);
-}
-
-.secondary-topic-card img {
-    width: 100%;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.secondary-topic-card h3 {
-    font-size: 1.2rem;
-    margin-top: 8px;
-}
-
-/* Media Queries para hacerlas responsivas */
-@media (max-width: 768px) {
-    .info-page-content {
-        width: 80%;
-    }
-
-    .main-topic-container,
-    .secondary-topic-card {
-        max-width: 100%;
-    }
 }
