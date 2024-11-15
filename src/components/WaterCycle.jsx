@@ -1,35 +1,57 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
+import { Html } from "@react-three/drei";
 
 const WaterCycle = (props) => {
     const groupRef = useRef();
     const [hovered, setHovered] = useState(false);
     const [clicked, setClicked] = useState(false);
+    const [rotationSpeed, setRotationSpeed] = useState(0.001);
     const { nodes, materials, animations } = useGLTF('models-3d/CicloA.glb');
+
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.key === "ArrowUp") {
+                setRotationSpeed((prevSpeed) => prevSpeed + 0.001); // Aumentar velocidad de rotación
+                console.log("Aumentar velocidad");
+            }
+            if (event.key === "ArrowDown") {
+                setRotationSpeed((prevSpeed) => Math.max(prevSpeed - 0.001, 0)); // Reducir velocidad de rotación
+                console.log("Reducir velocidad");
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown); // Limpiar evento
+        };
+    }, []);
 
     // Rotación automática
     useFrame(() => {
         if (groupRef.current) {
-            groupRef.current.rotation.y += 0.001; // Ajusta la velocidad de rotación
+            groupRef.current.rotation.y += rotationSpeed; // Ajusta la velocidad de rotación
         }
     });
+
+    const handleWheel = (event) => {
+        if (groupRef.current) {
+            const scaleFactor = event.deltaY > 0 ? 0.9 : 1.1; // Zoom in (scroll up) o zoom out (scroll down)
+            groupRef.current.scale.set(
+                groupRef.current.scale.x * scaleFactor,
+                groupRef.current.scale.y * scaleFactor,
+                groupRef.current.scale.z * scaleFactor
+            );
+            console.log("Escalando el objeto");
+        }
+    };
 
     // Función para manejar el clic
     const handleClick = () => {
         setClicked(!clicked);
         console.log("Objeto clicado");
-    };
-
-    // Función para manejar el hover
-    const handlePointerOver = () => {
-        setHovered(true);
-        console.log("Mouse sobre el objeto");
-    };
-
-    const handlePointerOut = () => {
-        setHovered(false);
-        console.log("Mouse fuera del objeto");
     };
 
     return (
@@ -53,7 +75,7 @@ const WaterCycle = (props) => {
 
             {/* Luz puntual para iluminar un área específica */}
             <pointLight position={[10, 10, 10]} intensity={0.5} />
-            <group ref={groupRef} {...props} dispose={null} castShadow>
+            <group ref={groupRef} {...props} dispose={null} castShadow onWheel={handleWheel} tabIndex={0}>
                 <group name="Scene">
                     <group name="RootNode0">
                         <group name="geo84">
@@ -61,6 +83,17 @@ const WaterCycle = (props) => {
                             <group name="water_cycle_b86" />
                             <group name="water_cycle_c89" />
                         </group>
+                        <Html 
+                        center 
+                        distanceFactor={0.2} 
+                        transform
+                        style={{
+                            fontSize: "10pt"
+                        }}>
+                            <div style={{ color: "black ", padding: "10px", borderRadius: "5px" }}>
+                                <h1>Ciclo del Agua</h1>
+                            </div>
+                        </Html>
                         <group name="skeletal1">
                             <skinnedMesh
                                 name="arrow191"
@@ -68,8 +101,6 @@ const WaterCycle = (props) => {
                                 material={materials.Material_5}
                                 skeleton={nodes.arrow191.skeleton}
                                 onClick={handleClick}  // Agregamos evento de clic
-                                onPointerOver={handlePointerOver}  // Evento de hover
-                                onPointerOut={handlePointerOut}  // Evento de salir del hover
 
                             />
                             <skinnedMesh
@@ -78,8 +109,7 @@ const WaterCycle = (props) => {
                                 material={materials.Material_6}
                                 skeleton={nodes.arrow292.skeleton}
                                 onClick={handleClick}
-                                onPointerOver={handlePointerOver}
-                                onPointerOut={handlePointerOut}
+
                             />
                             <skinnedMesh
                                 name="arrow393"
@@ -93,8 +123,7 @@ const WaterCycle = (props) => {
                                 material={materials.Material_8}
                                 skeleton={nodes.arrow494.skeleton}
                                 onClick={handleClick}
-                                onPointerOver={handlePointerOver}
-                                onPointerOut={handlePointerOut}
+
                             />
                             <skinnedMesh
                                 name="arrow595"
@@ -102,8 +131,7 @@ const WaterCycle = (props) => {
                                 material={materials.Material_9}
                                 skeleton={nodes.arrow595.skeleton}
                                 onClick={handleClick}
-                                onPointerOver={handlePointerOver}
-                                onPointerOut={handlePointerOut}
+
                             />
                             <skinnedMesh
                                 name="cloud90"
@@ -111,8 +139,7 @@ const WaterCycle = (props) => {
                                 material={materials.Material_4}
                                 skeleton={nodes.cloud90.skeleton}
                                 onClick={handleClick}
-                                onPointerOver={handlePointerOver}
-                                onPointerOut={handlePointerOut}
+
                             />
                             <skinnedMesh
                                 name="Mesh_0"
@@ -120,8 +147,6 @@ const WaterCycle = (props) => {
                                 material={materials.Material_0}
                                 skeleton={nodes.Mesh_0.skeleton}
                                 onClick={handleClick}
-                                onPointerOver={handlePointerOver}
-                                onPointerOut={handlePointerOut}
                                 material-color={clicked ? "brown" : "white"}  // Cambia color al clic
                             />
                             <skinnedMesh
@@ -130,8 +155,7 @@ const WaterCycle = (props) => {
                                 material={materials.Material_1}
                                 skeleton={nodes.Mesh_1.skeleton}
                                 onClick={handleClick}
-                                onPointerOver={handlePointerOver}
-                                onPointerOut={handlePointerOut}
+
                             />
                             <skinnedMesh
                                 name="side_water_stream87"
@@ -139,8 +163,7 @@ const WaterCycle = (props) => {
                                 material={materials.Material_2}
                                 skeleton={nodes.side_water_stream87.skeleton}
                                 onClick={handleClick}
-                                onPointerOver={handlePointerOver}
-                                onPointerOut={handlePointerOut}
+
                             />
                             <skinnedMesh
                                 name="water_body88"
@@ -148,8 +171,7 @@ const WaterCycle = (props) => {
                                 material={materials.Material_3}
                                 skeleton={nodes.water_body88.skeleton}
                                 onClick={handleClick}
-                                onPointerOver={handlePointerOver}
-                                onPointerOut={handlePointerOut}
+
                             />
                             <primitive object={nodes.Root2} />
                         </group>
