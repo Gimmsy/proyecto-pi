@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useGLTF } from "@react-three/drei";
+import { Sky, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 
@@ -9,6 +9,7 @@ const WaterCycle = (props) => {
     const [clicked, setClicked] = useState(false);
     const [rotationSpeed, setRotationSpeed] = useState(0.001);
     const { nodes, materials, animations } = useGLTF('models-3d/CicloA.glb');
+
 
     useEffect(() => {
         const handleKeyDown = (event) => {
@@ -53,7 +54,6 @@ const WaterCycle = (props) => {
         setClicked(!clicked);
         console.log("Objeto clicado");
     };
-
     return (
         <>
             {/* Luz ambiental para iluminar toda la escena */}
@@ -73,9 +73,11 @@ const WaterCycle = (props) => {
                 shadow-camera-bottom={-10}
             />
 
+
             {/* Luz puntual para iluminar un área específica */}
             <pointLight position={[10, 10, 10]} intensity={0.5} />
             <group ref={groupRef} {...props} dispose={null} castShadow onWheel={handleWheel} tabIndex={0}>
+
                 <group name="Scene">
                     <group name="RootNode0">
                         <group name="geo84">
@@ -83,13 +85,28 @@ const WaterCycle = (props) => {
                             <group name="water_cycle_b86" />
                             <group name="water_cycle_c89" />
                         </group>
-                        <Html 
-                        center 
-                        distanceFactor={0.2} 
-                        transform
-                        style={{
-                            fontSize: "10pt"
-                        }}>
+
+                        <Sky
+                            sunPosition={[0, 0.05, -1]}
+                            inclination={0.2}
+                            azimuth={90}
+                            mieCoefficient={0.005}
+                            elevation={1}
+                            mieDirectionalG={0.8}
+                            rayleigh={8}
+                            turbidity={2}
+                            exposure={0.5}
+                            scale={0.5}
+                        />
+
+
+                        <Html
+                            center
+                            distanceFactor={0.2}
+                            transform
+                            style={{
+                                fontSize: "10pt"
+                            }}>
                             <div style={{ color: "black ", padding: "10px", borderRadius: "5px" }}>
                                 <h1>Ciclo del Agua</h1>
                             </div>
@@ -178,6 +195,7 @@ const WaterCycle = (props) => {
                     </group>
                 </group>
             </group>
+
         </>
     );
 };
