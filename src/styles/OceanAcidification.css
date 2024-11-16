@@ -1,26 +1,172 @@
-.modelo-interactivo-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-.modelo-interactivo-content {
-    width: 70%;
-    height: 70%;
-}
-
-.modelo-close-button {
+/* Contenedor principal */
+.home-container {
     position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* Contenedor de los botones */
+.button-container {
+    position: absolute;
+    top: 70%;
+    left: 20%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    z-index: 2;
+}
+
+/* Estilo base de los botones */
+.button-container button {
+    padding: 12px 24px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: 500;
     color: white;
+    background: linear-gradient(135deg, #2a8bdb 0%, #1e6ca8 100%);
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(42, 139, 219, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto hover */
+.button-container button:hover {
+    background: linear-gradient(135deg, #1e6ca8 0%, #155785 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(42, 139, 219, 0.3);
+}
+
+/* Efecto active */
+.button-container button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(42, 139, 219, 0.2);
+}
+
+/* Efecto de onda al hacer click */
+.button-container button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.button-container button:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+/* Animación de la onda */
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+
+    20% {
+        transform: scale(25, 25);
+        opacity: 0.3;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(40, 40);
+    }
+}
+
+/* Estilo cuando el botón está activo (sección seleccionada) */
+.button-container button.active {
+    background: linear-gradient(135deg, #155785 0%, #0d3b5c 100%);
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+    .button-container {
+        flex-direction: column;
+        gap: 12px;
+        top: unset;
+        bottom: 5%;
+        left: 50%;
+    }
+
+    .button-container button {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+}
+
+/* Estilo del contenedor de información */
+.info-container {
+    position: absolute;
+    top: 10%;
+    left: 70%;
+    transform: translateX(-50%);
+    background-color: rgba(248, 248, 248, 0.9);
+    color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    width: 40%;
+    max-width: 600px;
+    text-align: center;
+    max-height: 70vh;
+    overflow-y: auto;
+    z-index: 2;
+    box-sizing: border-box;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Nuevos estilos para la sección de "¿Sabías qué...?" */
+.sabias-que {
+    background-color: rgba(42, 139, 219, 0.1);
+    border-left: 4px solid #2a8bdb;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 0 8px 8px 0;
+}
+
+.sabias-que p {
+    margin: 0;
+    color: #333;
+}
+
+.sabias-que strong {
+    color: #2a8bdb;
+    font-weight: 600;
+}
+
+/* Estilos para subtítulos */
+h3 {
+    color: #2a8bdb;
+    margin: 25px 0 15px 0;
+    font-size: 1.2em;
+}
+
+/* Ajustes para mejorar la legibilidad del contenido extendido */
+.extended-info p {
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+.extended-info ul {
+    margin-bottom: 25px;
+}
+
+.extended-info li {
+    margin-bottom: 12px;
+    line-height: 1.6;
 }
