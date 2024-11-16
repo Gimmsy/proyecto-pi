@@ -14,7 +14,7 @@ const InfoPage = () => {
       sensibilizacion:
         "Es crucial tomar conciencia sobre el uso responsable del agua y evitar arrojar desechos en ríos, lagos y mares para preservar este recurso vital.",
       imagen: "/assets/image/sensibilizacion-contaminacion-agua.jpg",
-      link: "",
+      link: "/waterPollution",
     },
     acidificacion: {
       titulo: "Acidificación de los océanos",

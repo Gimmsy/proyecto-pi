@@ -5,6 +5,7 @@ import InfoPage from "./pages/InfoPage";
 import './styles/Global.css';
 import WaterCycle from "./pages/Cycle";
 import OceanAcidification from "./pages/OceanAcidification";
+import WaterPollution from "./pages/Waterpollution";
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
                     <Route path="/info" element={<InfoPage />} />
                     <Route path="/waterCycle" element={<WaterCycle />} />
                     <Route path="/ocean" element={<OceanAcidification/>} />
+                    <Route path="/waterPollution" element={<WaterPollution/>} />
                      {/* Redirigir automáticamente a /home cuando se accede a la raíz */}
                      <Route path="*" element={<Navigate to="/home" replace />} />
                 </Routes>
