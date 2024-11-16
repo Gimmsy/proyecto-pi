@@ -13,6 +13,7 @@ const OceanAcidification = () => {
         <Canvas
           className="canvas-3d"
           camera={{ position: [0, 0, 10], fov: 75 }}
+          style={{ position: "absolute", top: 0, left: 0, width: "", height: "150%" }}
           shadows
         >
           <Crab scale={[0.4, 0.4, 0.4]} />
