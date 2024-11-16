@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useGLTF } from "@react-three/drei";
+import { Sky, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 
@@ -9,6 +9,7 @@ const WaterCycle = (props) => {
     const [clicked, setClicked] = useState(false);
     const [rotationSpeed, setRotationSpeed] = useState(0.001);
     const { nodes, materials, animations } = useGLTF('models-3d/CicloA.glb');
+
 
     useEffect(() => {
         const handleKeyDown = (event) => {
@@ -53,7 +54,6 @@ const WaterCycle = (props) => {
         setClicked(!clicked);
         console.log("Objeto clicado");
     };
-
     return (
         <>
             {/* Luz ambiental para iluminar toda la escena */}
@@ -73,9 +73,38 @@ const WaterCycle = (props) => {
                 shadow-camera-bottom={-10}
             />
 
+            <Html
+                style={{ position: "absolute", top: "20px", left: "20px" }}>
+                <div style={{
+                    position: "fixed",
+                    backgroundColor: "rgba(255, 255, 255, 0.8)",
+                    padding: "10px",
+                    borderRadius: "5px",
+                    top: "-500px",
+                    left: "-1000px",
+                    background: "rgba(255, 255, 255, 0.8)",
+                    boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
+                    zIndex: 1000,
+                    width: "250px",
+                    fontSize: "18px"
+                }}>
+
+                    <h3>Instrucciones</h3>
+                    <p><strong>Nota como cambia el color de la tierra </strong> Da Click encima</p>
+                    <p><strong>Rueda del ratón:</strong> Zoom in / Zoom out</p>
+                    <p><strong>Tecla ↑:</strong> Aumentar velocidad de rotación</p>
+                    <p><strong>Tecla ↓:</strong> Reducir velocidad de rotación</p>
+                </div>
+            </Html>
+
+
             {/* Luz puntual para iluminar un área específica */}
             <pointLight position={[10, 10, 10]} intensity={0.5} />
-            <group ref={groupRef} {...props} dispose={null} castShadow onWheel={handleWheel} tabIndex={0}>
+            <group ref={groupRef} {...props} dispose={null} castShadow onWheel={handleWheel} tabIndex={0} position={[0, 0, 0]}>
+
+                {/* Instrucciones para el usuario */}
+
+
                 <group name="Scene">
                     <group name="RootNode0">
                         <group name="geo84">
@@ -83,13 +112,28 @@ const WaterCycle = (props) => {
                             <group name="water_cycle_b86" />
                             <group name="water_cycle_c89" />
                         </group>
-                        <Html 
-                        center 
-                        distanceFactor={0.2} 
-                        transform
-                        style={{
-                            fontSize: "10pt"
-                        }}>
+
+                        <Sky
+                            sunPosition={[0, 0.05, -1]}
+                            inclination={0.2}
+                            azimuth={90}
+                            mieCoefficient={0.005}
+                            elevation={1}
+                            mieDirectionalG={0.8}
+                            rayleigh={8}
+                            turbidity={2}
+                            exposure={0.5}
+                            scale={0.5}
+                        />
+
+
+                        <Html
+                            center
+                            distanceFactor={0.2}
+                            transform
+                            style={{
+                                fontSize: "10pt"
+                            }}>
                             <div style={{ color: "black ", padding: "10px", borderRadius: "5px" }}>
                                 <h1>Ciclo del Agua</h1>
                             </div>
@@ -178,6 +222,7 @@ const WaterCycle = (props) => {
                     </group>
                 </group>
             </group>
+
         </>
     );
 };
