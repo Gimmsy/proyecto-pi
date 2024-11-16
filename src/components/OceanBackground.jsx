@@ -29,6 +29,7 @@ const Terrain = () => {
           normalMap={normals}
           displacementMap={height}
           displacementScale={1}
+        />
       </Plane>
     </group>
   );
@@ -50,7 +51,7 @@ const OceanBackground = () => {
         }}
       >
         <fog attach="fog" args={["white", 0, 26]} />
-        <OrbitControls autoRotate={true} autoRotateSpeed={2} />
+        <OrbitControls autoRotate={true} autoRotateSpeed={1} />
         <ambientLight intensity={0.3} /> 
         <pointLight intensity={1} position={[7, 5, 1]} castShadow />
         <Sky sunPosition={[7, 5, 1]} />
