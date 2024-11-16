@@ -5,7 +5,7 @@ const OceanText = () => {
     return (
         <>
             {/* Texto 3D sobre el modelo */}
-            <Center top left position={[18.5, 8, 0]}>
+            <Center top left position={[18.5, 9, 0]}>
                 <Text3D
                     font={"/assets/fonts/baby-bear.json"}
                     bevelEnabled
@@ -18,9 +18,9 @@ const OceanText = () => {
                 >
                     ACIDIFICACIÓN DE LOS OCEANOS
                     <meshStandardMaterial
-                        color={new THREE.Color(0.30, 0.68, 0.98)}
-                        metalness={0.7} // Reducir para evitar brillo excesivo
-                        roughness={0.4}
+                        color={new THREE.Color(0.38, 0.68, 0.98)}
+                        metalness={2} // Reducir para evitar brillo excesivo
+                        roughness={0.06}
                     />
                 </Text3D>
             </Center>
