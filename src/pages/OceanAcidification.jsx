@@ -4,6 +4,8 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import Crab from "../components/Crab";
 import "../styles/OceanAcidification.css";
+import OceanText from "../components/OceanText";
+import Staging from "../components/Staging";
 
 const OceanAcidification = () => {
   return (
@@ -11,15 +13,27 @@ const OceanAcidification = () => {
       <Sliderbar />
       <div className="home-container">
         <Canvas
-          className="canvas-3d"
+          className="canvas-3d-container"
           camera={{ position: [0, 0, 10], fov: 75 }}
-          style={{ position: "absolute", top: 0, left: 0, width: "", height: "150%" }}
           shadows
         >
-          <Crab scale={[0.4, 0.4, 0.4]} />
-          <OrbitControls autoRotate autoRotateSpeed={1} enableZoom={true} />
-          <ambientLight intensity={1} />
-          <directionalLight position={[10, 10, 10]} intensity={1} castShadow />
+          <OceanText />
+          <Crab scale={[0.3, 0.25, 0.3]} />
+          <OrbitControls
+            enableZoom={true}
+            minDistance={20}
+            maxDistance={20}
+            target={[0, 0, 0]}
+          />
+          <ambientLight
+            intensity={1}
+          />
+          <directionalLight
+            position={[10, 10, 10]}
+            intensity={1}
+            castShadow
+          />
+          <Staging/>
         </Canvas>
       </div>
     </>

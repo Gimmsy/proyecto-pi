@@ -23,7 +23,7 @@ const Crab = (props) => {
 
   // Guardar colores originales de los materiales
   useEffect(() => {
-    meshRefs.current.forEach((mesh, index) => {
+    meshRefs.current.forEach((mesh) => {
       if (mesh) {
         const material = mesh.material;
         material.userData.originalColor = material.color.getHex(); // Guardar color original
@@ -63,19 +63,7 @@ const Crab = (props) => {
     };
   }, []);
 
-  // // Evento de rueda del mouse para hacer zoom
-  // const handleWheel = (event) => {
-  //   if (groupRef.current) {
-  //     const scaleFactor = event.deltaY > 0 ? 0.9 : 1.1;
-  //     groupRef.current.scale.set(
-  //       groupRef.current.scale.x * scaleFactor,
-  //       groupRef.current.scale.y * scaleFactor,
-  //       groupRef.current.scale.z * scaleFactor
-  //     );
-  //   }
-  // };
-
-  // Rotación automática
+  // Rotar el grupo
   useFrame(() => {
     if (groupRef.current) {
       groupRef.current.rotation.y += rotationSpeed;
@@ -87,7 +75,6 @@ const Crab = (props) => {
       {...props}
       ref={groupRef}
       dispose={null}
-      // onWheel={handleWheel}
       onClick={handleClick}
     >
       {meshData.map((mesh, index) => (
