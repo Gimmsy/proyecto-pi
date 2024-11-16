@@ -73,10 +73,37 @@ const WaterCycle = (props) => {
                 shadow-camera-bottom={-10}
             />
 
+            <Html
+                position={[ 0.25, 0, -0.27]}
+                style={{ position: "absolute", top: "20px", left: "20px" }}>
+                <div style={{
+                    backgroundColor: "rgba(255, 255, 255, 0.8)",
+                    padding: "10px",
+                    borderRadius: "5px",
+                    position: "fixed",
+                    top: "0px",
+                    left: "10px",
+                    background: "rgba(255, 255, 255, 0.8)",
+                    boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
+                    zIndex: 1000,
+                    width: "250px",
+                }}>
+
+                    <h3>Instrucciones</h3>
+                    <p><strong>Nota como cambia el color de la tierra </strong> Da Click encima</p>
+                    <p><strong>Rueda del ratón:</strong> Zoom in / Zoom out</p>
+                    <p><strong>Tecla ↑:</strong> Aumentar velocidad de rotación</p>
+                    <p><strong>Tecla ↓:</strong> Reducir velocidad de rotación</p>
+                </div>
+            </Html>
+
 
             {/* Luz puntual para iluminar un área específica */}
             <pointLight position={[10, 10, 10]} intensity={0.5} />
-            <group ref={groupRef} {...props} dispose={null} castShadow onWheel={handleWheel} tabIndex={0}>
+            <group ref={groupRef} {...props} dispose={null} castShadow onWheel={handleWheel} tabIndex={0} position={[0, 0, 0]}>
+
+                {/* Instrucciones para el usuario */}
+
 
                 <group name="Scene">
                     <group name="RootNode0">
