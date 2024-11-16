@@ -17,13 +17,22 @@ const OceanAcidification = () => {
       <Sliderbar />
       <div className="home-container">
         <div className="button-container">
-          <button onClick={() => handleButtonClick("acidificacion")}>
+          <button
+            onClick={() => handleButtonClick("acidificacion")}
+            className={activeSection === "acidificacion" ? "active" : ""}
+          >
             ¿Qué es la acidificación de los océanos?
           </button>
-          <button onClick={() => handleButtonClick("sensibilizacion")}>
+          <button
+            onClick={() => handleButtonClick("sensibilizacion")}
+            className={activeSection === "sensibilizacion" ? "active" : ""}
+          >
             Sensibilización
           </button>
-          <button onClick={() => handleButtonClick("tips")}>
+          <button
+            onClick={() => handleButtonClick("tips")}
+            className={activeSection === "tips" ? "active" : ""}
+          >
             Tips
           </button>
         </div>
