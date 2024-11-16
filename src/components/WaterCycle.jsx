@@ -74,19 +74,19 @@ const WaterCycle = (props) => {
             />
 
             <Html
-                position={[ 0.25, 0, -0.27]}
                 style={{ position: "absolute", top: "20px", left: "20px" }}>
                 <div style={{
+                    position: "fixed",
                     backgroundColor: "rgba(255, 255, 255, 0.8)",
                     padding: "10px",
                     borderRadius: "5px",
-                    position: "fixed",
-                    top: "0px",
-                    left: "10px",
+                    top: "-500px",
+                    left: "-1000px",
                     background: "rgba(255, 255, 255, 0.8)",
                     boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
                     zIndex: 1000,
                     width: "250px",
+                    fontSize: "18px"
                 }}>
 
                     <h3>Instrucciones</h3>
