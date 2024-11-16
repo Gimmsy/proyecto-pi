@@ -5,7 +5,7 @@ const OceanText = () => {
     return (
         <>
             {/* Texto 3D sobre el modelo */}
-            <Center top left position={[18.5, 9, 0]}>
+            <Center top left position={[17.8, 9, 0]}>
                 <Text3D
                     font={"/assets/fonts/baby-bear.json"}
                     bevelEnabled
@@ -13,7 +13,7 @@ const OceanText = () => {
                     bevelThickness={0.2}
                     height={0.2}
                     lineHeight={0.2}
-                    letterSpacing={0.2}
+                    letterSpacing={0.01}
                     size={2}
                 >
                     ACIDIFICACIÓN DE LOS OCEANOS

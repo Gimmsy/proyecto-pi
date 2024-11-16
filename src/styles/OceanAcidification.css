@@ -112,8 +112,8 @@
 /* Estilo del contenedor de información */
 .info-container {
     position: absolute;
-    top: 10%;
-    left: 70%;
+    top: 8%;
+    left: 80%;
     transform: translateX(-50%);
     background-color: rgba(248, 248, 248, 0.9);
     color: #333;

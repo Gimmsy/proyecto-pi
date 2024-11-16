@@ -43,7 +43,6 @@ const OceanAcidification = () => {
               {activeSection === "sensibilizacion" && "Sensibilización"}
               {activeSection === "tips" && "Tips"}
             </h2>
-
             {activeSection === "acidificacion" && (
               <div className="extended-info">
                 <p>
@@ -77,7 +76,6 @@ const OceanAcidification = () => {
                 </p>
               </div>
             )}
-
             {activeSection === "sensibilizacion" && (
               <div className="extended-info">
                 <div className="sabias-que">
@@ -140,16 +138,16 @@ const OceanAcidification = () => {
         )}
         <Canvas
           className="canvas-3d-container"
-          camera={{ position: [0, 0, 10], fov: 75 }}
+          camera={{ position: [0, 0, 25], fov: 75 }}
           shadows
         >
           <OceanText />
           <Crab scale={[0.3, 0.3, 0.3]} />
           <OrbitControls
             enableZoom={true}
-            minDistance={25}
-            maxDistance={25}
-            target={[6, 1, -8]}
+            minDistance={15}
+            maxDistance={35}
+            target={[10, 0, 0]}
           />
           <ambientLight
             intensity={1}
