@@ -3,7 +3,7 @@ import React from "react";
 import useAuthStore from "../store/use-auth-store";
 import { GoogleOutlined } from "@ant-design/icons";
 import "../styles/AccountMenu.css";
- 
+
 const AccountMenu = () => {
   const { user, loginGoogleWithPopUp, logout } = useAuthStore();
 
