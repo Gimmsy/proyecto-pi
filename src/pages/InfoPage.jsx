@@ -45,7 +45,7 @@ const InfoPage = () => {
 
   return (
     <>
-      <Sliderbar />
+      <Sliderbar /> 
       <Scene />
       <div className="info-page-container">
         <div className="info-page-content">
@@ -65,7 +65,7 @@ const InfoPage = () => {
 
 const MainTopic = ({ tema }) => (
   <div className="main-topic-container">
-    <h2>{tema.titulo}</h2>
+    <h2 className="left-aligned">{tema.titulo}</h2>
     <img
       src={tema.imagen}
       alt={tema.titulo}
@@ -75,7 +75,9 @@ const MainTopic = ({ tema }) => (
     <p>
       <em>{tema.sensibilizacion}</em>
     </p>
-    <a href={tema.link}>Modelo Interactivo</a>
+    <a href={tema.link} className="interactive-button">
+      Modelo Interactivo
+    </a>
   </div>
 );
 

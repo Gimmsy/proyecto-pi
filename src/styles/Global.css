@@ -1,13 +1,14 @@
 /* src/styles/Global.css */
 
 :root {
-    --color-primary: #2489b4fc;
+    --color-primary: #1475E3;
     --color-secondary: #5F68D9;
     --color-tertiary: #5F8ED9;
-    --color-quaternary: #8DDCDB;
-    --color-quinary: #7F5FD9;
+    --color-quaternary: #B0F5FF;
+    --color-alert: #9649E3;
     --color-senary: #A0B6D9;
     --color-quaternary: #c3cfe2;
+    --color-black: #1A1A1A;
     /* Define el color que desees */
 }
 
@@ -34,12 +35,14 @@ html,
 
 h1,
 h2,
-h3, p {
+h3 {
     font-family: 'Montserrat', sans-serif;
     color: var(--color-primary);
     /* Color de los encabezados */
 }
-
+p{  font-family: 'Montserrat', sans-serif;
+    color: var(--color-black);
+    /* Color de los encabezados */}
 button {
     background-color: var(--color-primary);
     /* Color de fondo del botón */
