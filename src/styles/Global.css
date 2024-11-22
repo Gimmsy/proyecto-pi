@@ -1,5 +1,9 @@
 /* src/styles/Global.css */
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
     --color-primary: #1475E3;
     --color-secondary: #5F68D9;
@@ -20,7 +24,7 @@ html,
     padding: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow-y: auto; /* Permite el scroll vertical */
 }
 
 .ocean-background {
@@ -40,9 +44,13 @@ h3 {
     color: var(--color-primary);
     /* Color de los encabezados */
 }
-p{  font-family: 'Montserrat', sans-serif;
+
+p {
+    font-family: 'Montserrat', sans-serif;
     color: var(--color-black);
-    /* Color de los encabezados */}
+    /* Color de los encabezados */
+}
+
 button {
     background-color: var(--color-primary);
     /* Color de fondo del botón */
@@ -108,7 +116,9 @@ button:hover {
         font-size: 0.8rem;
         padding: 0.3rem 0.6rem;
     }
-}/* Dispositivos de hasta 1024px (laptops y tablets) */
+}
+
+/* Dispositivos de hasta 1024px (laptops y tablets) */
 @media (max-width: 1024px) {
     h1 {
         font-size: 2rem;

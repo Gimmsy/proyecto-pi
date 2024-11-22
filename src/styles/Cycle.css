@@ -2,7 +2,7 @@
   .home-container {
     display: flex;
     flex-direction: column;
-    height: 100vh; /* Hace que ocupe toda la altura disponible */
+    height: auto; /* Hace que ocupe toda la altura disponible */
     width: 100%;
   }
   
