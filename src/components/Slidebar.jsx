@@ -11,12 +11,12 @@ const Sidebar = () => {
 
   return (
     <div className={`sidebar ${isOpen ? "open" : ""}`}>
-      <div className="sidebar-header flex items-center justify-between p-4">
-        <img src="/assets/image/logopintado.png" alt="Logo AquaViva" className="logo w-20 h-auto mr-4" />
-        <h1 className="text-xl font-bold">AquaViva</h1>
-        <button className="hamburger text-2xl bg-none border-none cursor-pointer md:hidden" onClick={toggleMenu}>
+        <button className="hamburger text-2xl bg-primary text-white rounded md:hidden p-2 mr-4" onClick={toggleMenu}>
           ☰
         </button>
+      <div className="sidebar-header flex items-center justify-between p-12">
+        <img src="/assets/image/logopintado.png" alt="Logo AquaViva" className="logo w-20 h-auto mr-4" />
+        <h1 className="text-xl font-bold">AquaViva</h1>
       </div>
 
       <nav className={`sidebar-nav ${isOpen ? "show" : ""} flex flex-col md:flex-row p-4 md:p-0`}>
