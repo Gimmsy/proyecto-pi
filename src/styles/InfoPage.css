@@ -1,4 +1,4 @@
-/* Estilos principales para InfoPage */
+/* Estilos principales para InfoPage  */
 .info-page-container {
     display: flex;
     justify-content: center;
@@ -105,21 +105,6 @@
     font-size: 1.2rem;
     margin-top: 8px;
 }
-.interactive-button {
-    padding: 10px 20px;
-    margin-top: 10px;
-    font-size: 16px;
-    color: white;
-    background-color: var(--color-primary);
-    width: 30%;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
   .interactive-button:hover {
     background-color: var(--color-quaternary);
   }

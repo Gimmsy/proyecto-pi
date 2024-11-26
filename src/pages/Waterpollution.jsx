@@ -11,7 +11,7 @@ const WaterPollution = () => {
     <Sliderbar />
       <Canvas
         shadows
-        style={{ width: "100%", height: "100vh" }}
+        style={{ width: "100%", height: "100%" }}
         camera={{ position: [0, 5, 10], fov: 75 }} // Ajusta la posición de la cámara aquí
       >
         <ambientLight intensity={1} />
