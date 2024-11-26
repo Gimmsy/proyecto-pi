@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Sliderbar from "../components/Slidebar"; // Asegúrate de que la ruta es correcta
-import "../styles/InfoPage.css";
 import Scene from "../components/Scene";
 
 const InfoPage = () => {
@@ -45,13 +44,13 @@ const InfoPage = () => {
 
   return (
     <>
-      <Sliderbar /> 
+      <Sliderbar />
       <Scene />
-      <div className="info-page-container">
-        <div className="info-page-content">
+      <div className="info-page-container flex justify-center items-center w-3/4 h-3/4 bg-white rounded-lg absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <div className="info-page-content flex gap-5 w-2/3 h-5/6 font-sans p-4">
           <MainTopic tema={temas[temaSeleccionado]} />
         </div>
-        <div className="info-page-button">
+        <div className="info-page-buttons w-1/3 p-5 border-l border-primary">
           <SecundaryTopic
             temas={temas}
             temaSeleccionado={temaSeleccionado}
@@ -64,38 +63,38 @@ const InfoPage = () => {
 };
 
 const MainTopic = ({ tema }) => (
-  <div className="main-topic-container">
-    <h2 className="left-aligned">{tema.titulo}</h2>
+  <div className="main-topic-container bg-white rounded-lg overflow-hidden w-full flex flex-col p-4 text-left mr-5">
+    <h2 className="text-left">{tema.titulo}</h2>
     <img
       src={tema.imagen}
       alt={tema.titulo}
-      style={{ width: "100%", borderRadius: "8px" }}
+      className="w-full h-64 object-cover rounded-lg"
     />
     <p>{tema.descripcion}</p>
     <p>
       <em>{tema.sensibilizacion}</em>
     </p>
-    <a href={tema.link} className="interactive-button">
+    <a href={tema.link} className="bg-primary w-64 text-white px-4 py-2 rounded-md mt-4 text-center transition-colors hover:bg-quaternary">
       Modelo Interactivo
     </a>
   </div>
 );
 
 const SecundaryTopic = ({ temas, onTemaSelect }) => (
-  <div className="secondary-topic-container">
-    <h2 className="secondary-topic-title">Otros temas de interés</h2>
+  <div className="secondary-topic-container flex flex-col gap-2 w-full">
+    <h2 className="secondary-topic-title text-xl font-bold text-primary mb-4">Otros temas de interés</h2>
     {Object.keys(temas).map((key) => (
       <div
         key={key}
-        className="secondary-topic-card"
+        className="secondary-topic-card bg-white border border-quaternary rounded-lg shadow-md p-4 cursor-pointer transition-transform transform hover:scale-105 flex flex-col items-center w-full"
         onClick={() => onTemaSelect(key)}
       >
         <img
           src={temas[key].imagen}
           alt={temas[key].titulo}
-          style={{ width: "100%", borderRadius: "8px" }}
+          className="w-full h-24 object-cover rounded-lg"
         />
-        <h3>{temas[key].titulo}</h3>
+        <h3 className="text-lg mt-2">{temas[key].titulo}</h3>
       </div>
     ))}
   </div>
