@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import Sliderbar from "../components/Slidebar";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import Crab from "../components/Crab";
 import OceanText from "../components/OceanText";
 import Staging from "../components/Staging";
+import Umbrella from "../components/Umbrella";
+import Beach from "../components/Beach";
+import { Physics } from "@react-three/rapier";
 
 const OceanAcidification = () => {
   const [activeSection, setActiveSection] = useState(null);
@@ -140,23 +142,25 @@ const OceanAcidification = () => {
           camera={{ position: [0, 0, 25], fov: 75 }}
           shadows
         >
-          <OceanText />
-          <Crab scale={[0.3, 0.3, 0.3]} />
-          <OrbitControls
-            enableZoom={true}
-            minDistance={15}
-            maxDistance={35}
-            target={[10, 0, 0]}
-          />
-          <ambientLight
-            intensity={1}
-          />
-          <directionalLight
-            position={[10, 10, 10]}
-            intensity={1}
-            castShadow
-          />
-          <Staging />
+          <Physics>
+            <OceanText />
+            <Beach scale={[0.8, 0.8, 0.8]} />
+            <OrbitControls
+              enableZoom={true}
+              minDistance={15}
+              maxDistance={35}
+              target={[12, 0, 0]}
+            />
+            <ambientLight
+              intensity={1}
+            />
+            <directionalLight
+              position={[10, 10, 10]}
+              intensity={1}
+              castShadow
+            />
+            <Staging />
+          </Physics>
         </Canvas>
       </div>
     </>
