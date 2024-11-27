@@ -10,7 +10,6 @@ const WaterCycle = (props) => {
     const [rotationSpeed, setRotationSpeed] = useState(0.001);
     const { nodes, materials, animations } = useGLTF('models-3d/CicloA.glb');
 
-
     useEffect(() => {
         const handleKeyDown = (event) => {
             if (event.key === "ArrowUp") {
@@ -54,6 +53,7 @@ const WaterCycle = (props) => {
         setClicked(!clicked);
         console.log("Objeto clicado");
     };
+
     return (
         <>
             {/* Luz ambiental para iluminar toda la escena */}
@@ -80,15 +80,14 @@ const WaterCycle = (props) => {
                     backgroundColor: "rgba(255, 255, 255, 0.8)",
                     padding: "10px",
                     borderRadius: "5px",
-                    top: "-500px",
-                    left: "-1000px",
+                    top: "50px",
+                    right: "500px",
                     background: "rgba(255, 255, 255, 0.8)",
                     boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
                     zIndex: 1000,
                     width: "250px",
                     fontSize: "18px"
                 }}>
-
                     <h3>Instrucciones</h3>
                     <p><strong>Nota como cambia el color de la tierra </strong> Da Click encima</p>
                     <p><strong>Rueda del ratón:</strong> Zoom in / Zoom out</p>
@@ -97,14 +96,9 @@ const WaterCycle = (props) => {
                 </div>
             </Html>
 
-
             {/* Luz puntual para iluminar un área específica */}
             <pointLight position={[10, 10, 10]} intensity={0.5} />
             <group ref={groupRef} {...props} dispose={null} castShadow onWheel={handleWheel} tabIndex={0} position={[0, 0, 0]}>
-
-                {/* Instrucciones para el usuario */}
-
-
                 <group name="Scene">
                     <group name="RootNode0">
                         <group name="geo84">
@@ -126,7 +120,6 @@ const WaterCycle = (props) => {
                             scale={0.5}
                         />
 
-
                         <Html
                             center
                             distanceFactor={0.2}
@@ -134,7 +127,7 @@ const WaterCycle = (props) => {
                             style={{
                                 fontSize: "10pt"
                             }}>
-                            <div style={{ color: "black ", padding: "10px", borderRadius: "5px" }}>
+                            <div style={{ color: "black", padding: "10px", borderRadius: "5px" }}>
                                 <h1>Ciclo del Agua</h1>
                             </div>
                         </Html>
@@ -145,7 +138,6 @@ const WaterCycle = (props) => {
                                 material={materials.Material_5}
                                 skeleton={nodes.arrow191.skeleton}
                                 onClick={handleClick}  // Agregamos evento de clic
-
                             />
                             <skinnedMesh
                                 name="arrow292"
@@ -153,7 +145,6 @@ const WaterCycle = (props) => {
                                 material={materials.Material_6}
                                 skeleton={nodes.arrow292.skeleton}
                                 onClick={handleClick}
-
                             />
                             <skinnedMesh
                                 name="arrow393"
@@ -167,7 +158,6 @@ const WaterCycle = (props) => {
                                 material={materials.Material_8}
                                 skeleton={nodes.arrow494.skeleton}
                                 onClick={handleClick}
-
                             />
                             <skinnedMesh
                                 name="arrow595"
@@ -175,7 +165,6 @@ const WaterCycle = (props) => {
                                 material={materials.Material_9}
                                 skeleton={nodes.arrow595.skeleton}
                                 onClick={handleClick}
-
                             />
                             <skinnedMesh
                                 name="cloud90"
@@ -183,7 +172,6 @@ const WaterCycle = (props) => {
                                 material={materials.Material_4}
                                 skeleton={nodes.cloud90.skeleton}
                                 onClick={handleClick}
-
                             />
                             <skinnedMesh
                                 name="Mesh_0"
@@ -199,7 +187,6 @@ const WaterCycle = (props) => {
                                 material={materials.Material_1}
                                 skeleton={nodes.Mesh_1.skeleton}
                                 onClick={handleClick}
-
                             />
                             <skinnedMesh
                                 name="side_water_stream87"
@@ -207,7 +194,6 @@ const WaterCycle = (props) => {
                                 material={materials.Material_2}
                                 skeleton={nodes.side_water_stream87.skeleton}
                                 onClick={handleClick}
-
                             />
                             <skinnedMesh
                                 name="water_body88"
@@ -215,14 +201,12 @@ const WaterCycle = (props) => {
                                 material={materials.Material_3}
                                 skeleton={nodes.water_body88.skeleton}
                                 onClick={handleClick}
-
                             />
                             <primitive object={nodes.Root2} />
                         </group>
                     </group>
                 </group>
             </group>
-
         </>
     );
 };
