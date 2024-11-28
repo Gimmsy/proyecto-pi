@@ -143,6 +143,7 @@ const OceanAcidification = () => {
           shadows
         >
           <Physics>
+            <Umbrella position={[-1, -1.6, 2]} />
             <OceanText />
             <Beach scale={[0.8, 0.8, 0.8]} />
             <OrbitControls
