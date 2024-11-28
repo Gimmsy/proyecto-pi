@@ -36,13 +36,20 @@ const OceanAcidification = () => {
           >
             Tips
           </button>
+          <button
+            onClick={() => handleButtonClick("soluciones")}
+            className={`px-6 py-3 font-sans text-base font-medium text-white bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow-md transition-all duration-300 hover:from-blue-700 hover:to-blue-900 transform ${activeSection === "soluciones" ? "bg-gradient-to-r from-blue-900 to-blue-700 shadow-inner" : ""}`}
+          >
+            Soluciones
+          </button>
         </div>
         {activeSection && (
-          <div className="info-container absolute top-8 left-4/5 transform -translate-x-1/2 bg-white bg-opacity-90 text-gray-800 p-5 rounded-lg w-2/5 max-w-lg text-center max-h-3/4 overflow-y-auto z-30 shadow-lg">
+          <div className="info-container absolute top-6/5 right-0 transform -translate-x-1/4 bg-white bg-opacity-90 text-gray-800 p-5 rounded-lg w-auto max-w-lg text-center min-h-[60vh] max-h-[70vh] overflow-y-auto scroll-smooth z-30 shadow-lg">
             <h2 className="text-2xl font-bold mb-4">
               {activeSection === "acidificacion" && "Acidificación de los Océanos"}
               {activeSection === "sensibilizacion" && "Sensibilización"}
               {activeSection === "tips" && "Tips"}
+              {activeSection === "soluciones" && "Soluciones"}
             </h2>
             {activeSection === "acidificacion" && (
               <div className="extended-info">
@@ -128,10 +135,25 @@ const OceanAcidification = () => {
                   Aquí algunos consejos para ayudar a reducir la acidificación:
                 </p>
                 <ul className="list-disc list-inside mb-5">
-                  <li className="mb-3">Reduce tu consumo de energía</li>
-                  <li className="mb-3">Utiliza transporte público o bicicleta</li>
-                  <li className="mb-3">Apoya la conservación marina</li>
-                  <li className="mb-3">Reduce, reutiliza y recicla</li>
+                  <li className="mb-3">Reduce tu consumo de energía: Utiliza bombillas LED, apaga dispositivos electrónicos cuando no los uses y mejora la eficiencia energética de tu hogar.</li>
+                  <li className="mb-3">Opta por transporte sostenible: Usa transporte público, bicicleta, o camina para disminuir las emisiones de carbono.</li>
+                  <li className="mb-3">Apoya la conservación marina: Participa en programas de limpieza de playas y apoya organizaciones que protegen ecosistemas marinos.</li>
+                  <li className="mb-3">Practica el principio de las 3R: Reduce, reutiliza y recicla para minimizar tu huella de carbono.</li>
+                  <li className="mb-3">Consume productos locales y de temporada: Reduce las emisiones asociadas al transporte de alimentos.</li>
+                </ul>
+              </div>
+            )}
+            {activeSection === "soluciones" && (
+              <div className="extended-info">
+                <p className="mb-5 text-base leading-7">
+                  Algunas soluciones para combatir la acidificación de los océanos:
+                </p>
+                <ul className="list-disc list-inside mb-5">
+                  <li className="mb-3">Reducción drástica de emisiones de CO2: Implementar políticas globales para descarbonizar la economía y limitar el calentamiento global.</li>
+                  <li className="mb-3">Protección de ecosistemas marinos: Crear y expandir áreas marinas protegidas, especialmente arrecifes de coral y manglares.</li>
+                  <li className="mb-3">Investigación y tecnología: Desarrollar técnicas de restauración marina y métodos para capturar y almacenar carbono.</li>
+                  <li className="mb-3">Educación y concientización: Informar a comunidades y gobiernos sobre el impacto de la acidificación oceánica.</li>
+                  <li className="mb-3">Innovación en energías renovables: Acelerar la transición hacia energías limpias como solar, eólica y mareomotriz.</li>
                 </ul>
               </div>
             )}
@@ -143,6 +165,7 @@ const OceanAcidification = () => {
           shadows
         >
           <Physics>
+            <Umbrella position={[-1, -1.6, 2]} />
             <OceanText />
             <Beach scale={[0.8, 0.8, 0.8]} />
             <OrbitControls

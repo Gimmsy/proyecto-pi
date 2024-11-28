@@ -1,84 +1,49 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { useFrame } from '@react-three/fiber';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { useGLTF, useAnimations } from '@react-three/drei';
 
 function Umbrella(props) {
-  const group = useRef()
-  const { nodes, materials, animations } = useGLTF('models-3d/Umbrella.glb')
-  const { actions } = useAnimations(animations, group)
+  const umbrellaRef = useRef();
+  const { nodes, materials, animations } = useGLTF('models-3d/Umbrella.glb');
+  const { actions } = useAnimations(animations, umbrellaRef);
+  const [isOpen, setIsOpen] = useState(false); // Estado para alternar entre abrir y cerrar
+
+  const toggleUmbrella = useCallback(() => {
+    setIsOpen((prev) => !prev); // Alternar estado al hacer clic
+  }, []);
+
+  useEffect(() => {
+    const actionName = 'Armature|Armature|ArmatureAction'; // Nombre exacto de la animación
+
+    if (actions[actionName]) {
+      if (isOpen) {
+        // Abrir la sombrilla
+        actions[actionName]?.fadeIn(0.5).play();
+      } else {
+        // Cerrar la sombrilla
+        const action = actions[actionName]?.fadeIn(0.5).play().reset();
+        if (action) {
+          action.paused = true;
+        }
+      }
+    }
+
+    return () => {
+      // Limpiar acciones previas para evitar solapamientos
+      actions[actionName]?.fadeOut(0.5).stop();
+    };
+  }, [actions, isOpen]);
+
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group ref={umbrellaRef} {...props} dispose={null} onClick={toggleUmbrella}>
       <group name="Scene">
-        <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={9.691}>
-          <group name="beachobjcleanermaterialmergergles">
-            <mesh
-              name="Object_12"
-              castShadow
-              receiveShadow
-              geometry={nodes.Object_12.geometry}
-              material={materials.cadeira}
-              position={[0.887, 0.344, -0.368]}
-              scale={[0.9, 0.9, 1.321]}
-            />
-            <mesh
-              name="Object_2"
-              castShadow
-              receiveShadow
-              geometry={nodes.Object_2.geometry}
-              material={materials.boia_01}
-              position={[0.996, 0.363, -0.364]}
-            />
-            <mesh
-              name="Object_3"
-              castShadow
-              receiveShadow
-              geometry={nodes.Object_3.geometry}
-              material={materials.boia_02}
-              position={[0.998, 0.359, -0.376]}
-            />
-            <mesh
-              name="Object_4"
-              castShadow
-              receiveShadow
-              geometry={nodes.Object_4.geometry}
-              material={materials.Sphere}
-              position={[0.332, 0.432, -0.366]}
-            />
-            <mesh
-              name="Object_5"
-              castShadow
-              receiveShadow
-              geometry={nodes.Object_5.geometry}
-              material={materials.sand}
-              position={[0.752, 0.046, -0.363]}
-              scale={1.123}
-            />
-            <mesh
-              name="Object_8"
-              castShadow
-              receiveShadow
-              geometry={nodes.Object_8.geometry}
-              material={materials.surf}
-              position={[0, 0, -0.203]}
-              scale={1.103}
-            />
-            <mesh
-              name="Object_9"
-              castShadow
-              receiveShadow
-              geometry={nodes.Object_9.geometry}
-              material={materials['sand.castle']}
-              position={[0.315, 0.136, -0.282]}
-            />
-          </group>
-        </group>
         <mesh
           name="Cylinder"
           castShadow
           receiveShadow
           geometry={nodes.Cylinder.geometry}
           material={materials.Color1}
-          position={[0.017, 0.098, 0.009]}
+          position={[0.014, 1.54, 0.007]}
+          scale={0.745}
         />
         <group name="Armature" position={[0, -4.012, 0]}>
           <skinnedMesh
@@ -112,7 +77,7 @@ function Umbrella(props) {
         </group>
       </group>
     </group>
-  )
+  );
 }
 
 useGLTF.preload('models-3d/Umbrella.glb');

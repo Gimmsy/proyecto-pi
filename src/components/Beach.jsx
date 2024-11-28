@@ -9,14 +9,26 @@ const Beach = (props) => {
     // Guardamos el color original para alternar después
     const originalColorObject8 = materials.surf.color.getHex();
     // Estado para cambiar colores
-    let isOriginalColor = true; // Flag para alternar colores
+    const [isObject12OriginalColor, setIsObject12OriginalColor] = useState(true);
+    const [originalObject12Color, setOriginalObject12Color] = useState(null);
 
     useEffect(() => {
         const handleKeyDown = (event) => {
             if (event.key.toLowerCase() === 'w' && object12Ref.current) {
-                const newColor = isOriginalColor ? 0xff0000 : materials.cadeira.color.getHex(); // Rojo o color original
-                object12Ref.current.material.color.set(newColor);
-                isOriginalColor = !isOriginalColor; // Cambiar flag
+                if (isObject12OriginalColor) {
+                    // Store original color if not already stored
+                    if (!originalObject12Color) {
+                        setOriginalObject12Color(materials.cadeira.color.getHex());
+                    }
+                    // Change to red
+                    object12Ref.current.material.color.set(0xff0000);
+                } else {
+                    // Revert to original color
+                    object12Ref.current.material.color.set(originalObject12Color);
+                }
+
+                // Toggle color state
+                setIsObject12OriginalColor(!isObject12OriginalColor);
             }
         };
 
@@ -24,9 +36,8 @@ const Beach = (props) => {
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, [materials.cadeira.color]);
+    }, [isObject12OriginalColor, originalObject12Color, materials.cadeira.color]);
 
-    // Evento de mouse para cambiar color del objeto 8
     const handleObject8Click = () => {
         const newColor = object8Ref.current.material.color.getHex() === originalColorObject8 ? 0xffff00 : originalColorObject8; // Alternar
         if (object8Ref.current) {
@@ -36,7 +47,6 @@ const Beach = (props) => {
     return (
         <group {...props} dispose={null}>
             <group rotation={[-Math.PI / 2, 0, 5]} scale={9.691}>
-                {/* Suelo sin rebote, solo colisionador */}
                 <RigidBody type="fixed" colliders="trimesh">
                     <mesh
                         castShadow
@@ -57,7 +67,6 @@ const Beach = (props) => {
                         position={[0.332, 2, 0.332]} // Posición elevada para que caiga
                     />
                 </RigidBody>
-                {/* Otros objetos que no rebotan (solo colisionadores) */}
                 <RigidBody type="fixed" colliders="trimesh">
                     <mesh
                         ref={object12Ref}
