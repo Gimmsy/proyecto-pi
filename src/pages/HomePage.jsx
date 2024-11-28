@@ -2,7 +2,7 @@ import React from "react";
 import Card from "../components/Card";
 import Sliderbar from "../components/Slidebar";
 import { Canvas } from "@react-three/fiber";
-import Welcometext from "../components/Welcometext";
+import WelcomeText from "../components/WelcomeText";
 import OceanBackground from "../components/OceanBackground";
 
 const HomePage = () => {
@@ -11,7 +11,7 @@ const HomePage = () => {
       <Sliderbar />
       <OceanBackground />
       <Canvas>
-        <Welcometext />
+        <WelcomeText />
       </Canvas>
       <section className="cards-section flex flex-wrap justify-center gap-4 p-8 md:flex-row">
         <Card

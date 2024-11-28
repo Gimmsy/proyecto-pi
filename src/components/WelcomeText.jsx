@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Vector3 } from "three";
 import * as THREE from 'three';
 
-const Welcometext = () => {
+const WelcomeText = () => {
     const [isClicked, setIsClicked] = useState(false);
     const textRef = useRef();
     const initialPosition = new Vector3(-23.6, -2.5, 0);
@@ -92,4 +92,4 @@ const Welcometext = () => {
     );
 };
 
-export default Welcometext;
+export default WelcomeText;
