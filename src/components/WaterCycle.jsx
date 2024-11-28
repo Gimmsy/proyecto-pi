@@ -96,6 +96,7 @@ const WaterCycle = (props) => {
                 </div>
             </Html>
 
+
             {/* Luz puntual para iluminar un área específica */}
             <pointLight position={[10, 10, 10]} intensity={0.5} />
             <group ref={groupRef} {...props} dispose={null} castShadow onWheel={handleWheel} tabIndex={0} position={[0, 0, 0]}>
@@ -107,7 +108,7 @@ const WaterCycle = (props) => {
                             <group name="water_cycle_c89" />
                         </group>
 
-                        <Sky
+                        {/*<Sky
                             sunPosition={[0, 0.05, -1]}
                             inclination={0.2}
                             azimuth={90}
@@ -130,7 +131,7 @@ const WaterCycle = (props) => {
                             <div style={{ color: "black", padding: "10px", borderRadius: "5px" }}>
                                 <h1>Ciclo del Agua</h1>
                             </div>
-                        </Html>
+                        </Html>*/}
                         <group name="skeletal1">
                             <skinnedMesh
                                 name="arrow191"

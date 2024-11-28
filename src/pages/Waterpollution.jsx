@@ -1,17 +1,15 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Sky, Stars, Html } from "@react-three/drei";
-import Isla from "../components/Isla";
-import Sliderbar from "../components/Slidebar";
+import Isla from "../components/Isla"; // Asegúrate de que la ruta es correcta
 import "../styles/WaterPollution.css"; // Importa el archivo CSS con la extensión correcta
 
 const WaterPollution = () => {
   return (
-    <div className="water-pollution"> 
-    <Sliderbar />
+    <div className="water-pollution">
       <Canvas
         shadows
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%", height: "100vh" }}
         camera={{ position: [0, 5, 10], fov: 75 }} // Ajusta la posición de la cámara aquí
       >
         <ambientLight intensity={1} />
