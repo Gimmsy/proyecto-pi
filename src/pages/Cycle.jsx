@@ -15,12 +15,6 @@ const Cycle = () => {
                     <CycleText />
                     <WaterCycle />
                     <directionalLight position={[5, 5, 5]} intensity={1} castShadow />
-                    <Sky
-                        distance={450000}
-                        sunPosition={[100, 20, 100]}
-                        inclination={0}
-                        azimuth={0.05}
-                    />
                     <Stars
                         radius={100}
                         depth={50}
@@ -29,7 +23,15 @@ const Cycle = () => {
                         saturation={0}
                         fade
                     />
-                    <OrbitControls enableZoom={false} />
+                    <Sky
+                        distance={450000}
+                        sunPosition={[100, 20, 100]}
+                        inclination={0}
+                        azimuth={0.05}
+                    />
+            
+                    
+                    <OrbitControls enableZoom={true} />
 
                 </Canvas>
             </div>
