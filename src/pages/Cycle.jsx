@@ -20,7 +20,7 @@ const RainDrop = ({ position, onCollision, removeDrop, color }) => {
         }
     };
 
-        useEffect(() => {
+    useEffect(() => {
         const currentRef = ref.current;
         currentRef.addEventListener('collide', handleCollision);
         return () => {
@@ -119,12 +119,12 @@ const Cycle = () => {
     return (
         <>
             <Sliderbar />
-            <div className="home-container flex flex-col h-screen w-full">*
-                <Canvas className="canvas-3d flex-grow w-full h-full" camera={{position: [5, 5, 5], fov: 100 }}>
+            <div className="home-container flex flex-col h-screen w-full">
+                {/* Agregar tarjetas de información sobre la escasez del agua */}
+                <Canvas className="canvas-3d flex-grow w-full h-full" camera={{ position: [5, 5, 5], fov: 100 }}>
                     <CycleText />
                     <WaterCycle />
                     <directionalLight position={[5, 5, 5]} intensity={1} castShadow />
-
                     <Sky
                         distance={450000}
                         sunPosition={[100, 20, 100]}
@@ -137,8 +137,48 @@ const Cycle = () => {
                         <Rain rainColor={rainColor} />
                     </Physics>
 
+                    {/* Tarjetas de información dentro de la escena */}
+                    <Html style={{ position: "absolute", bottom: "1px", right: "600px" }}>
+                        <div style={{
+                            backgroundColor: "rgba(255, 255, 255, 0.8)",
+                            padding: "10px",
+                            borderRadius: "5px",
+                            top: "50px",
+                            right: "500px",
+                            background: "rgba(255, 255, 255, 0.8)",
+                            boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
+                            zIndex: 1000,
+                            width: "400px",
+                            fontSize: "18px"
+                        }}>
+                            <h3>Escasez de Agua</h3>
+                            <p>El agua es un recurso vital para la vida en la Tierra, pero la disponibilidad de agua dulce está disminuyendo rápidamente debido al cambio climático y el uso excesivo. El ciclo del agua es un proceso continuo que involucra la evaporación, condensación, precipitación y escurrimiento. La preservación del ciclo del agua es crucial para evitar la escasez.</p>
+                        </div>
+                    </Html>
                 </Canvas>
             </div>
+
+            <style jsx>{`
+                .info-card {
+                    background-color: rgba(255, 255, 255, 0.8);
+                    padding: 20px;
+                    margin-bottom: 10px;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    width: 250px;
+                    
+                }
+
+                .info-card h3 {
+                    margin-top: 0;
+                    color: #333;
+                }
+
+                .info-card p {
+                    color: #555;
+                    font-size: 14px;
+                }
+            `}</style>
         </>
     );
 };
