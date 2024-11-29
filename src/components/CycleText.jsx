@@ -6,13 +6,13 @@ const CycleText = () => {
     return (
         <>
             {/* Texto 3D sobre el modelo */}
-            <Center position={[0, -0.05, 0]}scale={[0.1, 0.1, 0.1]} >
+            <Center position={[1, 5, -2]}scale={5} >
                 <Text3D
                     font={"/assets/fonts/baby-bear.json"}
                     bevelEnabled
                     bevelSize={0.03}
-                    bevelThickness={0.2}
-                    height={0.01}
+                    bevelThickness={0.06}
+                    height={0}
                     lineHeight={0.2}
                     letterSpacing={0.01}
                     size={0.2}
