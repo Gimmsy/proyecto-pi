@@ -1,19 +1,28 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Sky, Stars, Html } from "@react-three/drei";
-import Isla from "../components/Isla"; // Asegúrate de que la ruta es correcta
+import { Physics } from "@react-three/cannon";
+import Isla from "../components/Isla";
+import Sliderbar from "../components/Slidebar";
+import TitleWaterPollution from "../components/TitleWaterPollution"; // Asegúrate de ajustar la ruta según tu estructura de archivos
 import "../styles/WaterPollution.css"; // Importa el archivo CSS con la extensión correcta
 
 const WaterPollution = () => {
   return (
     <div className="water-pollution">
+      <Sliderbar />
       <Canvas
         shadows
         style={{ width: "100%", height: "100vh" }}
         camera={{ position: [0, 5, 10], fov: 75 }} // Ajusta la posición de la cámara aquí
       >
         <ambientLight intensity={1} />
-        <spotLight position={[10, 10, 10]} angle={0.15} intensity={0.5} castShadow />
+        <spotLight
+          position={[10, 10, 10]}
+          angle={0.15}
+          intensity={0.5}
+          castShadow
+        />
         <Sky
           distance={450000}
           sunPosition={[100, 20, 100]}
@@ -31,16 +40,17 @@ const WaterPollution = () => {
         <OrbitControls />
         <Suspense fallback={null}>
           <Html position={[0, 10, 0]} center>
-            <div className="title">
-              Contaminación del Agua
-            </div>
+            <div className="title">Contaminación del Agua</div>
           </Html>
           <Html position={[0, 0, 0]} center>
-            <div className="instructions">
+            <div className="instructions bg-white bg-opacity-80 p-4 rounded-lg text-center max-w-xs">
               Usa las flechas arriba y abajo para prender y apagar las luces.
             </div>
           </Html>
-          <Isla />
+          <Physics>
+            <Isla />
+            <TitleWaterPollution position={[0, 5, 0]} />
+          </Physics>
         </Suspense>
       </Canvas>
     </div>

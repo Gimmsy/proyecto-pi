@@ -1,10 +1,9 @@
-import { Center, Html, Text3D } from "@react-three/drei";
+import { Center, Text3D } from "@react-three/drei";
 import * as THREE from 'three';
 
 const OceanText = () => {
     return (
         <>
-            {/* Texto 3D sobre el modelo */}
             <Center top left position={[17.8, 9, 0]}>
                 <Text3D
                     font={"/assets/fonts/baby-bear.json"}
