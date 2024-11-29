@@ -2,6 +2,9 @@ import React, { useRef, useState, useEffect } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
+import { Physics, RigidBody } from "@react-three/rapier";
+
+
 
 const WaterCycle = (props) => {
     const groupRef = useRef();
@@ -35,7 +38,7 @@ const WaterCycle = (props) => {
 
     useEffect(() => {
         if (actions) {
-            actions["idle"]?.play(); // Cambia "Animation_0" al nombre de tu animación
+            actions["idle"]?.play(); 
             actions["idle_with_info"]?.play();
         }
     }, [actions]);
@@ -64,6 +67,53 @@ const WaterCycle = (props) => {
         setClicked(!clicked);
         console.log("Objeto clicado");
     };
+
+    // Simula las gotas de lluvia
+    {/*const Rain = () => {
+        const rainRef = useRef();
+
+        const fallSpeed = -0.009; 
+        useFrame(() => {
+            if (rainRef.current) {
+                rainRef.current.children.forEach((drop) => {
+                  const yPosition = drop.position.y;
+          
+                  // Si la gota está por debajo de un cierto valor (es decir, llegó al suelo), la reposicionamos a la parte superior
+                  if (yPosition < -10) {  // Ajusta el valor -10 según la altura de tu escena
+                    drop.position.y = Math.random() * 10 + 5;  // Reiniciar la gota en una nueva posición aleatoria arriba
+                    drop.position.x = Math.random() * 4 - 2;  // Aleatorizar la posición en X
+                    drop.position.z = Math.random() * 4 - 2;  // Aleatorizar la posición en Z
+                  } else {
+                    drop.position.y += fallSpeed;  // Mover la gota con velocidad constante
+                  }
+                });
+              }
+            });
+
+        return (
+            <group ref={rainRef} scale={[0.1, 0.1, 0.1]}>
+                {Array.from({ length: 1000 }).map((_, i) => (
+                    <RigidBody
+                        key={i}
+                        colliders="ball"
+                        position={[
+                            Math.random() * 4 - 2,
+                            Math.random() * 10 + 5,
+                            Math.random() * 4 - 2,
+                        ]}
+                        gravity={[0, 0, 0]}
+                        mass={4}
+                    >
+                        <mesh>
+                            <sphereGeometry args={[0.01, 12, 12]} />
+                            <meshStandardMaterial color="blue" transparent={true} opacity={0.8} />
+                        </mesh>
+                    </RigidBody>
+                ))}
+            </group>
+        );
+    };*/}
+
 
     return (
         <>
@@ -110,12 +160,29 @@ const WaterCycle = (props) => {
 
             {/* Luz puntual para iluminar un área específica */}
             <pointLight position={[10, 10, 10]} intensity={0.5} />
-            <group ref={groupRef} {...props} dispose={null} castShadow onWheel={handleWheel} tabIndex={0} position={[0, -0.02, 0]}>
+
+            {/*<Physics>
+                {/* Modelo con colisionador 
+                <RigidBody ref={groupRef} position={[0, -0.1, 0]} colliders="ball">
+                    <group dispose={null} onWheel={handleWheel}>
+                        <group name="Scene">
+                            <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={2.2}>
+                                <primitive object={nodes.GLTF_created_0_rootJoint} />
+                            </group>
+                        </group>
+                    </group>
+                </RigidBody>
+
+                {/* Gotas de lluvia 
+                <Rain />
+            </Physics>*/}
+
+            <group ref={groupRef} {...props} dispose={null} castShadow onWheel={handleWheel} tabIndex={0} position={[0, -0.1, 0]}>
                 <group name="Scene">
-                    <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={1.01}>
+                    <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={10}>
                         <group name="root">
                             <group name="GLTF_SceneRootNode" rotation={[Math.PI / 2, 0, 0]}>
-                                <group name="RootNode0_0" scale={0.01}>
+                                <group name="RootNode0_0" scale={0.06}>
                                     <group name="skeletal1_1">
                                         <group name="GLTF_created_0">
                                             <group name="_86_correction">
@@ -147,49 +214,49 @@ const WaterCycle = (props) => {
                                                 geometry={nodes.Object_100.geometry}
                                                 material={materials.material_3}
                                                 skeleton={nodes.Object_100.skeleton}
-                                                
+
                                             />
                                             <skinnedMesh
                                                 name="Object_103"
                                                 geometry={nodes.Object_103.geometry}
                                                 material={materials.material_4}
                                                 skeleton={nodes.Object_103.skeleton}
-                                                
+
                                             />
                                             <skinnedMesh
                                                 name="Object_106"
                                                 geometry={nodes.Object_106.geometry}
                                                 material={materials.material_5}
                                                 skeleton={nodes.Object_106.skeleton}
-                                                
+
                                             />
                                             <skinnedMesh
                                                 name="Object_109"
                                                 geometry={nodes.Object_109.geometry}
                                                 material={materials.material_6}
                                                 skeleton={nodes.Object_109.skeleton}
-                                                
+
                                             />
                                             <skinnedMesh
                                                 name="Object_112"
                                                 geometry={nodes.Object_112.geometry}
                                                 material={materials.material_7}
                                                 skeleton={nodes.Object_112.skeleton}
-                                                
+
                                             />
                                             <skinnedMesh
                                                 name="Object_115"
                                                 geometry={nodes.Object_115.geometry}
                                                 material={materials.material_8}
                                                 skeleton={nodes.Object_115.skeleton}
-                                                
+
                                             />
                                             <skinnedMesh
                                                 name="Object_118"
                                                 geometry={nodes.Object_118.geometry}
                                                 material={materials.material_9}
                                                 skeleton={nodes.Object_118.skeleton}
-                                                
+
                                             />
                                             <skinnedMesh
                                                 name="Object_91"
