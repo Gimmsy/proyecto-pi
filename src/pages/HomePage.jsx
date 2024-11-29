@@ -7,7 +7,7 @@ import OceanBackground from "../components/OceanBackground";
 
 const HomePage = () => {
   return (
-    <div className="home-container text-center font-sans min-h-screen">
+    <div className="home-container text-center font-sans min-h-screen pt-20">
       <Sliderbar />
       <OceanBackground />
       <Canvas>

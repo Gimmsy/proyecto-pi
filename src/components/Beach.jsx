@@ -26,12 +26,10 @@ const Beach = (props) => {
                     // Revert to original color
                     object12Ref.current.material.color.set(originalObject12Color);
                 }
-
                 // Toggle color state
                 setIsObject12OriginalColor(!isObject12OriginalColor);
             }
         };
-
         window.addEventListener('keydown', handleKeyDown);
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
@@ -57,14 +55,13 @@ const Beach = (props) => {
                         scale={1.123}
                     />
                 </RigidBody>
-                {/* Pelota con rebote */}
-                <RigidBody name="rbBall" colliders="ball" restitution={0.8}>
+                <RigidBody name="rbBall" colliders="ball" restitution={1}>
                     <mesh
                         castShadow
                         receiveShadow
                         geometry={nodes.Object_4.geometry}
                         material={materials.Sphere}
-                        position={[0.332, 2, 0.332]} // Posición elevada para que caiga
+                        position={[0.22, 2, 0.332]} // Posición elevada para que caiga
                     />
                 </RigidBody>
                 <RigidBody type="fixed" colliders="trimesh">
@@ -96,7 +93,6 @@ const Beach = (props) => {
                         position={[0.998, 0.359, -0.376]}
                     />
                 </RigidBody>
-                {/* Otros objetos del modelo */}
                 <RigidBody type="fixed" colliders="trimesh">
                     <mesh
                         ref={object8Ref}
