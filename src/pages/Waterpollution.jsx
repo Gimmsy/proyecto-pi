@@ -5,6 +5,8 @@ import { Physics } from "@react-three/cannon";
 import Isla from "../components/Isla";
 import Sliderbar from "../components/Slidebar";
 import TitleWaterPollution from "../components/TitleWaterPollution"; // Asegúrate de ajustar la ruta según tu estructura de archivos
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import "../styles/WaterPollution.css"; // Importa el archivo CSS con la extensión correcta
 
 const WaterPollution = () => {
@@ -17,12 +19,7 @@ const WaterPollution = () => {
         camera={{ position: [0, 5, 10], fov: 75 }} // Ajusta la posición de la cámara aquí
       >
         <ambientLight intensity={1} />
-        <spotLight
-          position={[10, 10, 10]}
-          angle={0.15}
-          intensity={0.5}
-          castShadow
-        />
+        <spotLight position={[10, 10, 10]} angle={0.15} intensity={0.5} castShadow />
         <Sky
           distance={450000}
           sunPosition={[100, 20, 100]}
@@ -40,11 +37,13 @@ const WaterPollution = () => {
         <OrbitControls />
         <Suspense fallback={null}>
           <Html position={[0, 10, 0]} center>
-            <div className="title">Contaminación del Agua</div>
+            <div className="title">
+              Contaminación del Agua
+            </div>
           </Html>
           <Html position={[0, 0, 0]} center>
             <div className="instructions bg-white bg-opacity-80 p-4 rounded-lg text-center max-w-xs">
-              Usa las flechas arriba y abajo para prender y apagar las luces.
+              Usa las flechas <FontAwesomeIcon icon={faArrowUp} /> y <FontAwesomeIcon icon={faArrowDown} /> para prender y apagar las luces.
             </div>
           </Html>
           <Physics>
