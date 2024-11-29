@@ -17,7 +17,7 @@ const OceanAcidification = () => {
     <>
       <Sliderbar />
       <div className="absolute flex items-center justify-center w-screen h-screen overflow-hidden">
-        <div className="button-container absolute top-3/4 left-1/5 transform -translate-x-1/2 flex gap-5 z-30">
+        <div className="button-container absolute top-3/4 left-1/3 transform -translate-x-1/2 flex gap-5 z-30">
           <button
             onClick={() => handleButtonClick("acidificacion")}
             className={`px-6 py-3 font-sans text-base font-medium text-white bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow-md transition-all duration-300 hover:from-blue-700 hover:to-blue-900 transform ${activeSection === "acidificacion" ? "bg-gradient-to-r from-blue-900 to-blue-700 shadow-inner" : ""}`}
@@ -42,6 +42,12 @@ const OceanAcidification = () => {
           >
             Soluciones
           </button>
+          <button
+            onClick={() => handleButtonClick("instrucciones")}
+            className={`px-6 py-3 font-sans text-base font-medium text-white bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow-md transition-all duration-300 hover:from-blue-700 hover:to-blue-900 transform ${activeSection === "instrucciones" ? "bg-gradient-to-r from-blue-900 to-blue-700 shadow-inner" : ""}`}
+          >
+            Instrucciones
+          </button>
         </div>
         {activeSection && (
           <div className="info-container absolute top-6/5 right-0 transform -translate-x-1/4 bg-white bg-opacity-90 text-gray-800 p-5 rounded-lg w-auto max-w-lg text-center min-h-[60vh] max-h-[70vh] overflow-y-auto scroll-smooth z-30 shadow-lg">
@@ -50,6 +56,7 @@ const OceanAcidification = () => {
               {activeSection === "sensibilizacion" && "Sensibilización"}
               {activeSection === "tips" && "Tips"}
               {activeSection === "soluciones" && "Soluciones"}
+              {activeSection === "instrucciones" && "Instrucciones"}
             </h2>
             {activeSection === "acidificacion" && (
               <div className="extended-info">
@@ -154,6 +161,18 @@ const OceanAcidification = () => {
                   <li className="mb-3">Investigación y tecnología: Desarrollar técnicas de restauración marina y métodos para capturar y almacenar carbono.</li>
                   <li className="mb-3">Educación y concientización: Informar a comunidades y gobiernos sobre el impacto de la acidificación oceánica.</li>
                   <li className="mb-3">Innovación en energías renovables: Acelerar la transición hacia energías limpias como solar, eólica y mareomotriz.</li>
+                </ul>
+              </div>
+            )}
+            {activeSection === "instrucciones" && (
+              <div className="extended-info">
+                <p className="mb-5 text-base leading-7">
+                  Interacciones disponibles en el modelo:
+                </p>
+                <ul className="list-disc list-inside mb-5">
+                  <li className="mb-3">Sombrilla: Haz clic para activar/desactivar.</li>
+                  <li className="mb-3">Tabla de surf: Haz clic para cambiar de color.</li>
+                  <li className="mb-3">Tecla W: Presiona para cambiar el color de la silla.</li>
                 </ul>
               </div>
             )}

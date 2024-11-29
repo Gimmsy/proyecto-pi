@@ -7,7 +7,7 @@ import * as THREE from 'three';
 const WelcomeText = () => {
     const [isClicked, setIsClicked] = useState(false);
     const textRef = useRef();
-    const initialPosition = new Vector3(-23.6, -2.5, 0);
+    const initialPosition = new Vector3(-23.6, -3.8, 0);
     const offset = useRef(new Vector3(0, 0, 0));
 
     useFrame(() => {
@@ -73,12 +73,13 @@ const WelcomeText = () => {
                 center
                 distanceFactor={5.5}
                 style={{
-                    font: "Monserrat",
+                    font: "Monsetrrat",
                     display: "flex",
                     whiteSpace: "nowrap",
                     justifyContent: "center",
                     textAlign: "center",
-                    fontSize: "20px",
+                    fontSize: "50px",
+                    position: "fixed",
                     margin: 0,
                     padding: 0,
                 }}
