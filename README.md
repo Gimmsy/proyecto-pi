@@ -1,3 +1,5 @@
+Hola este es un cambio en el readme 
+
 <<<<<<< HEAD
 # proyecto-pi
 =======
