@@ -10,8 +10,8 @@ import Video from "../components/shortageWater/VideoWater"
 
 const RainDrop = ({ position, onCollision, removeDrop, color }) => {
     const [ref] = useSphere(() => ({
-        mass: 1,
-        position,
+        mass: 0.1,
+        position ,
         args: [0.05], // tamaño de la esfera
     }));
 
@@ -123,11 +123,11 @@ const Cycle = () => {
             <Sliderbar />
             <div className="home-container flex flex-col h-screen w-full" style={{ height: "200vh" }}>
                 {/* Agregar tarjetas de información sobre la escasez del agua */}
-                <Canvas className="canvas-3d flex-grow w-full h-full" camera={{ position: [0, 6, 12], fov: 75 }} >
+                <Canvas className="canvas-3d flex-grow w-full h-full" camera={{ position: [0, 4, 12], fov: 75 }} >
                     <CycleText />
 
                     <group>
-                        <Video position={[0, 0, -5]} scale={[10, 5, 1]} />
+                        <Video position={[0, 0, 0]} scale={[10, 5, 1]} camera={{ position: [0, 0, 0], fov: 75 }} />
                     </group>
 
                     <WaterCycle />
@@ -144,28 +144,45 @@ const Cycle = () => {
                         <Rain rainColor={rainColor} />
                     </Physics>
 
-                    {/* Tarjetas de información dentro de la escena */}
-                    <Html style={{ width: "200px", height: "100px", position: "fixed"}}>
+                    <Html position="absolute" >
                         <div style={{
-                            position: [-6, 7.5, -1.5],
-                            top: "1px", // Coloca el div 10px desde la parte superior
-                            left: "1px", // Lo coloca 10px desde el borde izquierdo
-                            transform: "translateX(-50%)", // Centrar el div
+                            transform: "translate(20%, 60%)", // Centrar el div
                             backgroundColor: "rgba(255, 255, 255, 0.8)",
                             padding: "40px",
                             borderRadius: "5px",
-                            top: "10px",
                             right: "500px",
                             background: "rgba(255, 255, 255, 0.8)",
                             boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
                             zIndex: 1000,
                             width: "600px",
-                            fontSize: "18px"
+                            fontSize: "20px"
                         }}>
                             <h3>Escasez de Agua</h3>
                             <p>El agua es un recurso vital para la vida en la Tierra, pero la disponibilidad de agua dulce está disminuyendo rápidamente debido al cambio climático y el uso excesivo. El ciclo del agua es un proceso continuo que involucra la evaporación, condensación, precipitación y escurrimiento. La preservación del ciclo del agua es crucial para evitar la escasez.</p>
                         </div>
                     </Html>
+
+                    <Html position="absolute">
+                        <div style={{
+                            transform: "translate(20%, 250%)", // Centrar el div
+                            backgroundColor: "rgba(255, 255, 255, 0.8)",
+                            padding: "40px",
+                            borderRadius: "5px",
+                            right: "500px",
+                            background: "rgba(255, 255, 255, 0.8)",
+                            boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
+                            zIndex: 1000,
+                            width: "600px",
+                            fontSize: "20px"
+                        }}>
+                            <h3>Instrucciones</h3>
+                            <p><strong>Nota como cambia el color de la tierra </strong> Da Click encima</p>
+                            <p><strong>Rueda del ratón:</strong> Zoom in / Zoom out</p>
+                            <p><strong>Tecla ↑:</strong> Aumentar velocidad de rotación</p>
+                            <p><strong>Tecla ↓:</strong> Reducir velocidad de rotación</p>
+                        </div>
+                    </Html>
+
                 </Canvas>
             </div>
 

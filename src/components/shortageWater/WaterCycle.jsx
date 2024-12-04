@@ -82,37 +82,13 @@ const WaterCycle = (props) => {
                 shadow-camera-top={10}
                 shadow-camera-bottom={-10}
             />
-
-            <Html
-                style={{ position: "absolute", top: "20px", left: "20px" }}>
-                <div style={{
-                    position: "fixed",
-                    backgroundColor: "rgba(255, 255, 255, 0.8)",
-                    padding: "10px",
-                    borderRadius: "5px",
-                    top: "50px",
-                    right: "750px",
-                    background: "rgba(255, 255, 255, 0.8)",
-                    boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
-                    zIndex: 1000,
-                    width: "250px",
-                    fontSize: "18px"
-                }}>
-                    <h3>Instrucciones</h3>
-                    <p><strong>Nota como cambia el color de la tierra </strong> Da Click encima</p>
-                    <p><strong>Rueda del ratón:</strong> Zoom in / Zoom out</p>
-                    <p><strong>Tecla ↑:</strong> Aumentar velocidad de rotación</p>
-                    <p><strong>Tecla ↓:</strong> Reducir velocidad de rotación</p>
-                </div>
-            </Html>
-
-
+            
             {/* Luz puntual para iluminar un área específica */}
             <pointLight position={[10, 10, 10]} intensity={0.5} />
 
-            <group ref={groupRef} {...props} dispose={null} castShadow onWheel={handleWheel} tabIndex={0} position={[0, 4, 0]}>
+            <group ref={groupRef} {...props} dispose={null} castShadow onWheel={handleWheel} tabIndex={0} position={[3, 2.5, 0]}>
                 <group name="Scene">
-                    <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={4}>
+                    <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={6}>
                         <group name="root">
                             <group name="GLTF_SceneRootNode" rotation={[Math.PI / 2, 0, 0]}>
                                 <group name="RootNode0_0" scale={0.06}>

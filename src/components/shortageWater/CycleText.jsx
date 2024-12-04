@@ -2,11 +2,11 @@ import { Center, Html, Text3D } from "@react-three/drei";
 import * as THREE from 'three';
 
 const CycleText = () => {
-    
+
     return (
         <>
             {/* Texto 3D sobre el modelo */}
-            <Center position={[0, 7.5, -1.5]}scale={3} >
+            <Center position={[3.8, 7, -1.5]} scale={3} >
                 <Text3D
                     font={"/assets/fonts/baby-bear.json"}
                     bevelEnabled
