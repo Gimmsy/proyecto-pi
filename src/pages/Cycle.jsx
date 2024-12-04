@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import Sliderbar from "../components/Slidebar";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Sky, Html } from "@react-three/drei";
-import WaterCycle from "../components/WaterCycle";
-import CycleText from "../components/CycleText";
 import { Physics, useBox, useSphere } from '@react-three/cannon';
+
+import Sliderbar from "../components/Slidebar";
+import WaterCycle from "../components/shortageWater/WaterCycle";
+import CycleText from "../components/shortageWater/CycleText";
+import Video from "../components/shortageWater/VideoWater"
 
 const RainDrop = ({ position, onCollision, removeDrop, color }) => {
     const [ref] = useSphere(() => ({
@@ -119,10 +121,15 @@ const Cycle = () => {
     return (
         <>
             <Sliderbar />
-            <div className="home-container flex flex-col h-screen w-full">
+            <div className="home-container flex flex-col h-screen w-full" style={{ height: "200vh" }}>
                 {/* Agregar tarjetas de información sobre la escasez del agua */}
-                <Canvas className="canvas-3d flex-grow w-full h-full" camera={{ position: [5, 5, 5], fov: 100 }}>
+                <Canvas className="canvas-3d flex-grow w-full h-full" camera={{ position: [0, 6, 12], fov: 75 }} >
                     <CycleText />
+
+                    <group>
+                        <Video position={[0, 0, -5]} scale={[10, 5, 1]} />
+                    </group>
+
                     <WaterCycle />
                     <directionalLight position={[5, 5, 5]} intensity={1} castShadow />
                     <Sky
@@ -138,17 +145,21 @@ const Cycle = () => {
                     </Physics>
 
                     {/* Tarjetas de información dentro de la escena */}
-                    <Html style={{ position: "absolute", bottom: "1px", right: "600px" }}>
+                    <Html style={{ width: "200px", height: "100px", position: "fixed"}}>
                         <div style={{
+                            position: [-6, 7.5, -1.5],
+                            top: "1px", // Coloca el div 10px desde la parte superior
+                            left: "1px", // Lo coloca 10px desde el borde izquierdo
+                            transform: "translateX(-50%)", // Centrar el div
                             backgroundColor: "rgba(255, 255, 255, 0.8)",
-                            padding: "10px",
+                            padding: "40px",
                             borderRadius: "5px",
-                            top: "50px",
+                            top: "10px",
                             right: "500px",
                             background: "rgba(255, 255, 255, 0.8)",
                             boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
                             zIndex: 1000,
-                            width: "400px",
+                            width: "600px",
                             fontSize: "18px"
                         }}>
                             <h3>Escasez de Agua</h3>
@@ -158,7 +169,7 @@ const Cycle = () => {
                 </Canvas>
             </div>
 
-            <style jsx>{`
+            <style >{`
                 .info-card {
                     background-color: rgba(255, 255, 255, 0.8);
                     padding: 20px;
