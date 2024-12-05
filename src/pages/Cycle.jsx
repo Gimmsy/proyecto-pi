@@ -11,7 +11,7 @@ import Video from "../components/shortageWater/VideoWater"
 const RainDrop = ({ position, onCollision, removeDrop, color }) => {
     const [ref] = useSphere(() => ({
         mass: 0.1,
-        position ,
+        position,
         args: [0.05], // tamaño de la esfera
     }));
 
@@ -123,7 +123,7 @@ const Cycle = () => {
             <Sliderbar />
             <div className="home-container flex flex-col h-screen w-full" style={{ height: "200vh" }}>
                 {/* Agregar tarjetas de información sobre la escasez del agua */}
-                <Canvas className="canvas-3d flex-grow w-full h-full" camera={{ position: [0, 4, 12], fov: 75 }} >
+                <Canvas className="canvas-3d flex-grow w-full h-full" camera={{ position: [0, 0, 10], fov: 75 }} >
                     <CycleText />
 
                     <group>
@@ -146,7 +146,7 @@ const Cycle = () => {
 
                     <Html position="absolute" >
                         <div style={{
-                            transform: "translate(20%, 60%)", // Centrar el div
+                            transform: "translate(20%, 330%)", // Centrar el div
                             backgroundColor: "rgba(255, 255, 255, 0.8)",
                             padding: "40px",
                             borderRadius: "5px",
@@ -154,26 +154,27 @@ const Cycle = () => {
                             background: "rgba(255, 255, 255, 0.8)",
                             boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
                             zIndex: 1000,
-                            width: "600px",
+                            width: "700px",
                             fontSize: "20px"
                         }}>
-                            <h3>Escasez de Agua</h3>
                             <p>El agua es un recurso vital para la vida en la Tierra, pero la disponibilidad de agua dulce está disminuyendo rápidamente debido al cambio climático y el uso excesivo. El ciclo del agua es un proceso continuo que involucra la evaporación, condensación, precipitación y escurrimiento. La preservación del ciclo del agua es crucial para evitar la escasez.</p>
                         </div>
                     </Html>
+                    
 
                     <Html position="absolute">
                         <div style={{
-                            transform: "translate(20%, 250%)", // Centrar el div
+                            transform: "translate(50%, 660%)", // Centrar el div
                             backgroundColor: "rgba(255, 255, 255, 0.8)",
-                            padding: "40px",
+                            padding: "20px",
                             borderRadius: "5px",
                             right: "500px",
                             background: "rgba(255, 255, 255, 0.8)",
                             boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
                             zIndex: 1000,
-                            width: "600px",
-                            fontSize: "20px"
+                            width: "400px",
+                            fontSize: "18px",
+
                         }}>
                             <h3>Instrucciones</h3>
                             <p><strong>Nota como cambia el color de la tierra </strong> Da Click encima</p>
@@ -183,8 +184,59 @@ const Cycle = () => {
                         </div>
                     </Html>
 
-                </Canvas>
-            </div>
+                    {/* Imagen en la escena */}
+                    <Html position="absolute">
+                        <div style={{
+                            transform: "translate(40%, 66%)",
+                            top: "10px",
+                            left: "10px",
+                            width: "300px",
+                            height: "39px",
+                            zIndex: -1,
+                            scale: [8]
+                        }}>
+                            <img src="/assets/image/Tierra1.jpg" alt="Descripción de la imagen"
+                                style={{
+                                    objectFit: "cover",
+                                }} />
+
+                            {/* Aquí va el texto sobre la imagen */}
+                            <div style={{
+                                position: "absolute", // Posiciona el texto de manera absoluta dentro del contenedor
+                                top: "50%", // Centra verticalmente el texto
+                                left: "50%", // Centra horizontalmente el texto
+                                transform: "translate(-50%, -50%)", // Ajuste fino para centrar
+                                color: "white", // Color del texto
+                                fontSize: "10px", // Tamaño del texto
+                                fontFamily: "'BabyBear', sans-serif",
+                                textShadow: "2px 2px 5px rgba(0, 0, 0, 0.8)", // Sombra para hacerlo más visible
+                                zIndex: 1, // Asegura que el texto esté encima de la imagen
+                                whiteSpace: "nowrap",
+                                fontWeight: "bold",
+                            }}>
+                                <span style={{ display: "block" }}>El Agua</span>
+                                <span>Un Recurso Escaso en un Mundo Sediento</span>
+                            </div>
+                            <div style={{
+                                position: "absolute", // Posiciona el texto de manera absoluta dentro del contenedor
+                                top: "120%", // Centra verticalmente el texto
+                                left: "50%", // Centra horizontalmente el texto
+                                transform: "translate(-50%, -50%)", // Ajuste fino para centrar
+                                color: "white", // Color del texto
+                                fontSize: "3.5px", // Tamaño del texto
+                                fontFamily: "'BabyBear', sans-serif",
+                                textShadow: "2px 2px 5px rgba(0, 0, 0, 0.8)", // Sombra para hacerlo más visible
+                                zIndex: 1, // Asegura que el texto esté encima de la imagen
+                                whiteSpace: "nowrap",
+                                fontWeight: "bold",
+                            }}>
+                                <span style={{ display: "block" }}>Las fuentes de agua dulce se ven cada vez más amenazadas por la contaminación, el mal uso y el cambio climático. </span>
+                                <span>A continuación aprenderemos un poco más sobre como cuidar este recurso.</span>
+                            </div>
+                        </div>
+                    </Html>
+                </Canvas >
+            </div >
 
             <style >{`
                 .info-card {
