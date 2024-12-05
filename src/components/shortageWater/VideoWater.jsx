@@ -21,7 +21,7 @@ const Video = () => {
     return (
         <Html position="absolute">
             <div style={{
-                transform: "translate(15%, 270%)",
+                transform: "translate(15%, 260%)",
                 top: "20%",
                 left: "10%",
                 zIndex: 1000,
