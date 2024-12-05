@@ -6,7 +6,7 @@ const CycleText = () => {
     return (
         <>
             {/* Texto 3D sobre el modelo */}
-            <Center position={[3.8, 7, -1.5]} scale={3} >
+            <Center position={[6, 1, -2]} scale={3} >
                 <Text3D
                     font={"/assets/fonts/baby-bear.json"}
                     bevelEnabled
@@ -19,7 +19,7 @@ const CycleText = () => {
                 >
                     CICLO DEL AGUA
                     <meshStandardMaterial
-                        color={new THREE.Color(0.1, 0.2, 0.5)}
+                        color={new THREE.Color(0.078, 0.459, 0.89)}
                         metalness={0.5} // Reducir para evitar brillo excesivo
                         roughness={0.6}
                     />

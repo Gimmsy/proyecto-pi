@@ -1,4 +1,3 @@
-
 import { Html } from "@react-three/drei";
 import { useCallback, useState, useRef } from "react";
 
@@ -20,13 +19,13 @@ const Video = () => {
 
 
     return (
-        <Html position="absolute" style={{ pointerEvents: "none" }}>
+        <Html position="absolute">
             <div style={{
-                transform: "translate(25%, 145%)",
+                transform: "translate(15%, 270%)",
                 top: "20%",
                 left: "10%",
                 zIndex: 1000,
-                width: "1500px", // Ajusta el tamaño según necesites
+                width: "1000px", // Ajusta el tamaño según necesites
                 height: "auto",
                 cursor: "pointer",
                 textAlign: "center",
@@ -54,3 +53,4 @@ const Video = () => {
 
 
 export default Video;
+
