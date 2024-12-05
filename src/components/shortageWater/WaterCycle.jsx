@@ -86,9 +86,9 @@ const WaterCycle = (props) => {
             {/* Luz puntual para iluminar un área específica */}
             <pointLight position={[10, 10, 10]} intensity={0.5} />
 
-            <group ref={groupRef} {...props} dispose={null} castShadow onWheel={handleWheel} tabIndex={0} position={[2, -2, 0]}>
+            <group ref={groupRef} {...props} dispose={null} castShadow onWheel={handleWheel} tabIndex={0} position={[2.2, -1.6, 0]}>
                 <group name="Scene">
-                    <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={5.6}>
+                    <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={5.4}>
                         <group name="root">
                             <group name="GLTF_SceneRootNode" rotation={[Math.PI / 2, 0, 0]}>
                                 <group name="RootNode0_0" scale={0.06}>
