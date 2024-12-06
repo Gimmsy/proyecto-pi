@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
-import Sliderbar from "../components/Slidebar";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Sky, Html } from "@react-three/drei";
-import WaterCycle from "../components/WaterCycle";
-import CycleText from "../components/CycleText";
 import { Physics, useBox, useSphere } from '@react-three/cannon';
+import Sliderbar from "../components/Slidebar";
+import WaterCycle from "../components/shortageWater/WaterCycle";
+import CycleText from "../components/shortageWater/CycleText";
+import Video from "../components/shortageWater/VideoWater";
 
 const RainDrop = ({ position, onCollision, removeDrop, color }) => {
     const [ref] = useSphere(() => ({
-        mass: 1,
+        mass: 0.1,
         position,
         args: [0.05], // tamaño de la esfera
     }));
@@ -119,10 +120,16 @@ const Cycle = () => {
     return (
         <>
             <Sliderbar />
-            <div className="home-container flex flex-col h-screen w-full">
+
+            <div className="home-container flex flex-col h-screen w-full" style={{ height: "200vh" }}>
                 {/* Agregar tarjetas de información sobre la escasez del agua */}
-                <Canvas className="canvas-3d flex-grow w-full h-full" camera={{ position: [5, 5, 5], fov: 100 }}>
+                <Canvas className="canvas-3d flex-grow w-full h-full" camera={{ position: [0, 0, 10], fov: 75 }} >
                     <CycleText />
+
+                    <group>
+                        <Video position={[0, 0, 0]} scale={[10, 5, 1]} camera={{ position: [0, 0, 0], fov: 75 }} />
+                    </group>
+
                     <WaterCycle />
                     <directionalLight position={[5, 5, 5]} intensity={1} castShadow />
                     <Sky
@@ -137,48 +144,128 @@ const Cycle = () => {
                         <Rain rainColor={rainColor} />
                     </Physics>
 
-                    {/* Tarjetas de información dentro de la escena */}
-                    <Html style={{ position: "absolute", bottom: "1px", right: "600px" }}>
+                    <Html position="absolute" >
                         <div style={{
+                            transform: "translate(30%, 270%)", // Centrar el div
                             backgroundColor: "rgba(255, 255, 255, 0.8)",
-                            padding: "10px",
+                            padding: "40px",
                             borderRadius: "5px",
-                            top: "50px",
                             right: "500px",
-                            background: "rgba(255, 255, 255, 0.8)",
-                            boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
+                            background: "none",
                             zIndex: 1000,
-                            width: "400px",
-                            fontSize: "18px"
+                            width: "700px",
+                            fontSize: "25px",
+                            fontWeight: "bold"
+
                         }}>
-                            <h3>Escasez de Agua</h3>
                             <p>El agua es un recurso vital para la vida en la Tierra, pero la disponibilidad de agua dulce está disminuyendo rápidamente debido al cambio climático y el uso excesivo. El ciclo del agua es un proceso continuo que involucra la evaporación, condensación, precipitación y escurrimiento. La preservación del ciclo del agua es crucial para evitar la escasez.</p>
                         </div>
                     </Html>
-                </Canvas>
-            </div>
 
-            <style jsx>{`
-                .info-card {
-                    background-color: rgba(255, 255, 255, 0.8);
-                    padding: 20px;
-                    margin-bottom: 10px;
-                    border-radius: 8px;
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                    width: 250px;
-                    
-                }
 
-                .info-card h3 {
-                    margin-top: 0;
-                    color: #333;
-                }
+                    <Html position="absolute">
+                        <div style={{
+                            transform: "translate(600%, 600%)", // Centrar el div
+                            padding: "20px",
+                            borderRadius: "5px",
+                            right: "500px",
+                            zIndex: 1000,
+                            width: "300px",
+                            fontSize: "13px",
 
-                .info-card p {
-                    color: #555;
-                    font-size: 14px;
-                }
-            `}</style>
+                        }}>
+                            <h3>Instrucciones </h3>
+                            <p><strong>Nota como cambia el color de la tierra </strong> Da Click encima</p>
+                            <p><strong>Rueda del ratón:</strong> Zoom in / Zoom out</p>
+                            <p><strong>Tecla ↑:</strong> Aumentar velocidad de rotación</p>
+                            <p><strong>Tecla ↓:</strong> Reducir velocidad de rotación</p>
+                        </div>
+                    </Html>
+
+                    <Html position="absolute">
+                        <div style={{
+                            transform: "translate(195%, 1250%)", // Centrar el div
+                            padding: "20px",
+                            backgroundColor: "rgba(255, 248, 0, 1)",
+                            borderRadius: "5px",
+                            zIndex: 1000,
+                            width: "700px",
+                            fontSize: "30px",
+                            fontWeight: "bold"
+                        }}>
+                            <p>¿Estoy dispuesto(a) a cambiar hábitos para usar el agua de manera más responsable?</p>
+
+                        </div>
+                    </Html>
+                    <Html position="absolute">
+                        <div style={{
+                            transform: "translate(195%, 1020%)", // Centrar el div
+                            padding: "20px",
+                            backgroundColor: "rgba(255, 248, 0, 1)",
+                            borderRadius: "5px",
+                            zIndex: 1000,
+                            width: "700px",
+                            fontSize: "30px",
+                            fontWeight: "bold"
+                        }}>
+                            <p>¿Qué emociones surgen al pensar en un futuro con menos agua disponible para todos?</p>
+
+                        </div>
+                    </Html>
+
+                    {/* Imagen en la escena */}
+                    <Html position="absolute">
+                        <div style={{
+                            transform: "translate(40%, 66%)",
+                            top: "10px",
+                            left: "10px",
+                            width: "300px",
+                            height: "39px",
+                            zIndex: -1,
+                            scale: [8]
+                        }}>
+                            <img src="/assets/image/Tierra1.jpg" alt="Descripción de la imagen"
+                                style={{
+                                    objectFit: "cover",
+                                }} />
+
+                            {/* Aquí va el texto sobre la imagen */}
+                            <div style={{
+                                position: "absolute", // Posiciona el texto de manera absoluta dentro del contenedor
+                                top: "50%", // Centra verticalmente el texto
+                                left: "50%", // Centra horizontalmente el texto
+                                transform: "translate(-50%, -50%)", // Ajuste fino para centrar
+                                color: "white", // Color del texto
+                                fontSize: "10px", // Tamaño del texto
+                                fontFamily: "'BabyBear', sans-serif",
+                                textShadow: "2px 2px 5px rgba(0, 0, 0, 0.8)", // Sombra para hacerlo más visible
+                                zIndex: 1, // Asegura que el texto esté encima de la imagen
+                                whiteSpace: "nowrap",
+                                fontWeight: "bold",
+                            }}>
+                                <span style={{ display: "block" }}>El Agua</span>
+                                <span>Un Recurso Escaso en un Mundo Sediento</span>
+                            </div>
+                            <div style={{
+                                position: "absolute", // Posiciona el texto de manera absoluta dentro del contenedor
+                                top: "120%", // Centra verticalmente el texto
+                                left: "50%", // Centra horizontalmente el texto
+                                transform: "translate(-50%, -50%)", // Ajuste fino para centrar
+                                color: "white", // Color del texto
+                                fontSize: "3.5px", // Tamaño del texto
+                                fontFamily: "'BabyBear', sans-serif",
+                                textShadow: "2px 2px 5px rgba(0, 0, 0, 0.8)", // Sombra para hacerlo más visible
+                                zIndex: 1, // Asegura que el texto esté encima de la imagen
+                                whiteSpace: "nowrap",
+                                fontWeight: "bold",
+                            }}>
+                                <span style={{ display: "block" }}>Las fuentes de agua dulce se ven cada vez más amenazadas por la contaminación, el mal uso y el cambio climático. </span>
+                                <span>A continuación aprenderemos un poco más sobre como cuidar este recurso.</span>
+                            </div>
+                        </div>
+                    </Html>
+                </Canvas >
+            </div >
         </>
     );
 };

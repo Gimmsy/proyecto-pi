@@ -4,6 +4,7 @@ import Sliderbar from "../components/Slidebar";
 import { Canvas } from "@react-three/fiber";
 import WelcomeText from "../components/WelcomeText";
 import OceanBackground from "../components/OceanBackground";
+import { Loader } from "@react-three/drei";
 
 const HomePage = () => {
   return (
@@ -38,6 +39,7 @@ const HomePage = () => {
           buttonLabel="Ver más"
         />
       </section>
+      <Loader/>
     </div>
   );
 };

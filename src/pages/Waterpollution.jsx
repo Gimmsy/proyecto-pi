@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import "../styles/WaterPollution.css"; // Importa el archivo CSS con la extensión correcta
 
+
 const WaterPollution = () => {
   return (
     <div className="water-pollution">
