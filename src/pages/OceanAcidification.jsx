@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import Sliderbar from "../components/Slidebar";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
@@ -9,6 +9,7 @@ import Beach from "../components/Beach";
 import { Physics } from "@react-three/rapier";
 import { Perf } from "r3f-perf";
 import PostProcessing from "../components/PostProcessing";
+import Video from "../components/VideoOcean";
 
 const OceanAcidification = () => {
   const [activeSection, setActiveSection] = useState(null);
@@ -185,6 +186,7 @@ const OceanAcidification = () => {
           camera={{ position: [0, 0, 25], fov: 75 }}
           shadows
         >
+          <Suspense fallback={null}>
           <Perf position={"bottom-left"} />
           <PostProcessing />
           <Physics>
@@ -207,6 +209,8 @@ const OceanAcidification = () => {
             />
             <Staging />
           </Physics>
+          <Video name="screen" position-y={0} position-x={40} scale={15}  />
+          </Suspense>
         </Canvas>
       </div>
     </>
