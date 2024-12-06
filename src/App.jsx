@@ -18,8 +18,7 @@ const App = () => {
                     <Route path="/waterCycle" element={<WaterCycle />} />
                     <Route path="/ocean" element={<OceanAcidification/>} />
                     <Route path="/waterPollution" element={<WaterPollution/>} />
-                     {/* Redirigir automáticamente a /home cuando se accede a la raíz */}
-                     <Route path="*" element={<Navigate to="/home" replace />} />
+                    <Route path="*" element={<Navigate to="/home" replace />} />
                 </Routes>
             </Router>
         </div>

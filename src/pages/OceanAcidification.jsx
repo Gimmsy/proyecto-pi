@@ -7,6 +7,8 @@ import Staging from "../components/Staging";
 import Umbrella from "../components/Umbrella";
 import Beach from "../components/Beach";
 import { Physics } from "@react-three/rapier";
+import { Perf } from "r3f-perf";
+import PostProcessing from "../components/PostProcessing";
 
 const OceanAcidification = () => {
   const [activeSection, setActiveSection] = useState(null);
@@ -183,6 +185,8 @@ const OceanAcidification = () => {
           camera={{ position: [0, 0, 25], fov: 75 }}
           shadows
         >
+          <Perf position={"bottom-left"} />
+          <PostProcessing />
           <Physics>
             <Umbrella position={[-1, -1.6, 2]} />
             <OceanText />
