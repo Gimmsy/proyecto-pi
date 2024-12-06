@@ -5,6 +5,7 @@ import { Canvas } from "@react-three/fiber";
 import WelcomeText from "../components/WelcomeText";
 import OceanBackground from "../components/OceanBackground";
 import { Loader } from "@react-three/drei";
+import AudioComponent from "../components/AudioComponent";
 
 const HomePage = () => {
   return (
@@ -39,7 +40,12 @@ const HomePage = () => {
           buttonLabel="Ver más"
         />
       </section>
-      <Loader/>
+      <AudioComponent
+        audioSrc="/assets/audio/sea.mp3"
+        title="Sonido del Océano"
+        description="Haz clic en el icono para escuchar el sonido del océano."
+      />
+      <Loader />
     </div>
   );
 };
