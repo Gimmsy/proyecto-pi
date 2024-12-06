@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react';
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Sky, Html } from "@react-three/drei";
 import { Physics, useBox, useSphere } from '@react-three/cannon';
-
 import Sliderbar from "../components/Slidebar";
 import WaterCycle from "../components/shortageWater/WaterCycle";
 import CycleText from "../components/shortageWater/CycleText";
-import Video from "../components/shortageWater/VideoWater"
+import Video from "../components/shortageWater/VideoWater";
 
 const RainDrop = ({ position, onCollision, removeDrop, color }) => {
     const [ref] = useSphere(() => ({
