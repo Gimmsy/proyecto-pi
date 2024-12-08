@@ -1,13 +1,10 @@
-import "../styles/Login.css";
-import { useCallback, useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import useAuthStore from "../store/use-auth-store";
 import UserDAO from "/src/daos/UserDAO";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { user, loginGoogleWithPopUp, observeAuthState } =
-    useAuthStore();
-
+  const { user, loginGoogleWithPopUp, observeAuthState } = useAuthStore();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,7 +19,7 @@ const Login = () => {
         photo: user.photoURL,
       };
       UserDAO.createUser(newUser);
-      navigate("/world");
+      navigate("/home");
     }
   }, [user, navigate]);
 
@@ -32,7 +29,7 @@ const Login = () => {
 
   return (
     <div className="container-login">
-        <button onClick={handleLogin}>Iniciar sesión</button>
+      <button onClick={handleLogin}>Iniciar sesión</button>
     </div>
   );
 };

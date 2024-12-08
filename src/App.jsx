@@ -6,6 +6,7 @@ import './styles/Global.css';
 import WaterCycle from "./pages/Cycle";
 import OceanAcidification from "./pages/OceanAcidification";
 import WaterPollution from "./pages/Waterpollution";
+import Trivia from "./pages/Trivia";
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
                     <Route path="/waterCycle" element={<WaterCycle />} />
                     <Route path="/ocean" element={<OceanAcidification/>} />
                     <Route path="/waterPollution" element={<WaterPollution/>} />
+                    <Route path="/trivia" element={<Trivia/>} />
                     <Route path="*" element={<Navigate to="/home" replace />} />
                 </Routes>
             </Router>
