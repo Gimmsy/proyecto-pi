@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Card from "../components/Card";
 import Sliderbar from "../components/Slidebar";
 import { Canvas } from "@react-three/fiber";
@@ -13,7 +13,9 @@ const HomePage = () => {
       <Sliderbar />
       <OceanBackground />
       <Canvas>
-        <WelcomeText />
+        <Suspense fallback={null}>
+          <WelcomeText />
+        </Suspense>
       </Canvas>
       <section className="cards-section flex flex-wrap justify-center gap-4 p-8 md:flex-row">
         <Card
