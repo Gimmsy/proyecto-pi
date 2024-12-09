@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware"; // Para guardar el estado
+import { persist } from "zustand/middleware";
 import {
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -13,8 +13,8 @@ const provider = new GoogleAuthProvider();
 const useAuthStore = create(
   persist(
     (set) => ({
-      user: null, // Estado inicial del usuario
-      loading: true, // Estado para manejar la carga inicial
+      user: null,
+      loading: true,
 
       loginGoogleWithPopUp: async () => {
         try {
@@ -23,23 +23,31 @@ const useAuthStore = create(
           set({ user, loading: false });
         } catch (error) {
           console.error("Error al iniciar sesión con Google:", error);
+          set({ user: null, loading: false });
         }
       },
 
       logout: async () => {
         try {
           await signOut(auth);
-          set({ user: null });
+          set({ user: null, loading: false });
         } catch (error) {
           console.error("Error al cerrar sesión:", error);
         }
       },
 
       observeAuthState: () => {
-        // Listener para cambios en el estado de autenticación
-        onAuthStateChanged(auth, (user) => {
+        return onAuthStateChanged(auth, (user) => {
           if (user) {
-            set({ user, loading: false });
+            set({
+              user: {
+                uid: user.uid,
+                email: user.email,
+                displayName: user.displayName,
+                photoURL: user.photoURL
+              },
+              loading: false
+            });
           } else {
             set({ user: null, loading: false });
           }
@@ -47,13 +55,15 @@ const useAuthStore = create(
       },
     }),
     {
-      name: "auth-store", // Nombre del almacenamiento persistente
-      partialize: (state) => ({ user: state.user }), // Solo persistimos el usuario
+      name: "auth-store",
+      partialize: (state) => ({
+        user: state.user
+      }),
     }
   )
 );
 
-// Activar el listener de estado al cargar
+// Iniciar observación del estado de autenticación
 useAuthStore.getState().observeAuthState();
 
 export default useAuthStore;

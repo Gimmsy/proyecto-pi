@@ -5,22 +5,34 @@ const AccountMenu = () => {
   const { user, loginGoogleWithPopUp, logout } = useAuthStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Función para alternar el menú desplegable
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
+  };
+
+  // Función para manejar errores en la carga de la imagen
+  const handleImageError = (e) => {
+    e.target.src = "/images/default-avatar.png"; // Ruta de la imagen por defecto
+    e.target.onerror = null; // Prevenir bucles infinitos de error
   };
 
   return (
     <div className="relative">
       {user ? (
         <div className="flex items-center cursor-pointer">
-          {/* Foto de perfil que al hacer click abre el menú */}
-          <img
-            src={user.photo}
-            alt={user.name}
-            className="w-10 h-10 rounded-full mr-2 cursor-pointer"
-            onClick={toggleMenu}
-          />
-          <span>{user.name}</span>
+          {/* Foto de perfil */}
+          <div className="w-10 h-10 rounded-full overflow-hidden">
+            <img
+              src={user.photoURL || "/images/default-avatar.png"}
+              alt={user.displayName || "Usuario"}
+              onError={handleImageError}
+              className="w-full h-full object-cover"
+              onClick={toggleMenu}
+            />
+          </div>
+          {/* Nombre del usuario
+          <span className="ml-2">{user.displayName}</span> */}
+
           {/* Menú desplegable */}
           {isMenuOpen && (
             <div className="absolute top-12 right-0 bg-white border border-gray-300 rounded-lg shadow-md p-4 w-52 z-10">
@@ -35,14 +47,15 @@ const AccountMenu = () => {
           )}
         </div>
       ) : (
+        // Botón de inicio de sesión
         <button
           onClick={loginGoogleWithPopUp}
-          className="flex items-center space-x-2 py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+          className="fixed top-4 right-7 flex items-center space-x-2 py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 shadow-md"
         >
           <img
             src="/assets/image/google-icon.png"
             alt="Iniciar sesión"
-            className="w-5 h-5"
+            className="w-6 h-6 object-contain"
           />
           <span>Log in</span>
         </button>
