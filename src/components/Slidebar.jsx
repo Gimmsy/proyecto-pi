@@ -21,9 +21,9 @@ const Sidebar = () => {
       </Link>
 
       <nav className={`sidebar-nav ${isOpen ? "show" : ""} flex flex-col md:flex-row p-4 md:p-0`}>
-        <Link to="/home" className="sidebar-item text-blue-500 p-2 text-lg transition-colors duration-300 hover:text-blue-700 hover:underline">Inicio</Link>
-        <Link to="/info" className="sidebar-item text-blue-500 p-2 text-lg transition-colors duration-300 hover:text-blue-700 hover:underline">Información</Link>
-        <Link to="/trivia" className="sidebar-item text-blue-500 p-2 text-lg transition-colors duration-300 hover:text-blue-700 hover:underline">Trivia</Link>
+        <Link to="/home" className="sidebar-item text-blue-500 p-5 text-2xl transition-colors duration-300 hover:text-blue-700 hover:underline">Inicio</Link>
+        <Link to="/info" className="sidebar-item text-blue-500 p-5 text-2xl transition-colors duration-300 hover:text-blue-700 hover:underline">Información</Link>
+        <Link to="/trivia" className="sidebar-item text-blue-500 p-5 text-2xl transition-colors duration-300 hover:text-blue-700 hover:underline">Trivia</Link>
       </nav>
 
       <div className="account-menu mt-auto p-4 md:p-0">
