@@ -73,12 +73,6 @@ body {
   text-decoration: underline;
 }
 
-.account-menu {
-  margin-top: auto;
-  padding: 10px;
-  z-index: 150;
-}
-
 @media (max-width: 768px) {
   .hamburger {
     display: block;

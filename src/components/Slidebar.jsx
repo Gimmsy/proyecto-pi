@@ -26,7 +26,7 @@ const Sidebar = () => {
         <Link to="/trivia" className="sidebar-item text-blue-500 p-5 text-2xl transition-colors duration-300 hover:text-blue-700 hover:underline">Trivia</Link>
       </nav>
 
-      <div className="account-menu mt-auto p-4 md:p-0">
+      <div className="account-menu p-4 md:p-0 mr-8">
         <AccountMenu />
       </div>
     </div>
