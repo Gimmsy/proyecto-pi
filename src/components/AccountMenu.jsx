@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import useAuthStore from "../store/use-auth-store";
 
 const AccountMenu = () => {
   const { user, loginGoogleWithPopUp, logout } = useAuthStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [avatarSrc, setAvatarSrc] = useState(user?.photoURL || "/assets/image/avatar.jpg");
+  const menuRef = useRef(null);
 
   // Función para alternar el menú desplegable
   const toggleMenu = () => {
@@ -16,12 +17,26 @@ const AccountMenu = () => {
     setAvatarSrc("/assets/image/avatar.jpg"); // Ruta de la imagen por defecto
   };
 
+  // Cerrar el menú si se hace clic fuera de él
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuRef]);
+
   useEffect(() => {
     setAvatarSrc(user?.photoURL || "/assets/image/avatar.jpg");
   }, [user]);
 
   return (
-    <div className="relative">
+    <div className="relative" ref={menuRef}>
       {user ? (
         <div className="flex items-center cursor-pointer">
           {/* Foto de perfil */}
@@ -44,7 +59,7 @@ const AccountMenu = () => {
               <p className="mb-2 truncate">{user.email}</p>
               <button
                 onClick={logout}
-                className="w-full py-2 text-white bg-alert rounded-lg hover:bg-red-600"
+                className="w-full py-2 text-white bg-alert rounded-lg hover:bg-alert-2"
               >
                 Cerrar sesión
               </button>
