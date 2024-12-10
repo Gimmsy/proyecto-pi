@@ -7,7 +7,8 @@ import Sliderbar from "../components/Slidebar";
 import TitleWaterPollution from "../components/TitleWaterPollution"; // Asegúrate de ajustar la ruta según tu estructura de archivos
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
-import "../styles/WaterPollution.css"; // Importa el archivo CSS con la extensión correcta
+import "../styles/WaterPollution.css";
+import VideoOcean from "../components/OceanPollutionVideo";
 
 
 const WaterPollution = () => {
@@ -51,6 +52,7 @@ const WaterPollution = () => {
             <Isla />
             <TitleWaterPollution position={[0, 5, 0]} />
           </Physics>
+          <VideoOcean name="screen" position-y={0} position-x={40} scale={15}  />
         </Suspense>
       </Canvas>
     </div>
