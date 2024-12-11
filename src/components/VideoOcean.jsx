@@ -2,7 +2,7 @@ import { useVideoTexture } from "@react-three/drei";
 import { useCallback, useState } from "react";
 
 const Video = (props) => {
-    const texture = useVideoTexture("/public/assets/videos/video_ocean.mp4", {
+    const texture = useVideoTexture("/assets/videos/video_ocean.mp4", {
         muted: true,
         loop: true,
         start: true,

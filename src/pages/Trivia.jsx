@@ -36,7 +36,7 @@ const Trivia = () => {
 
             <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center z-10">
                 <ImageDivider
-                    imageUrl="/images/imagen-grande.jpg"
+                    imageUrl="/assets/image/puzzle.jpg"
                     rows={3}
                     cols={3}
                     difficulty="medium"
