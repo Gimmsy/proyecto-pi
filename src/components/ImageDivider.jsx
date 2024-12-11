@@ -1,134 +1,188 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, memo } from "react";
+
+const DraggablePiece = memo(({ piece, tileSize, handleDragStart, isDropped = false }) => (
+    <div
+        key={piece.id}
+        className={`bg-cover cursor-grab hover:opacity-70 transition-opacity 
+            ${isDropped ? "border-2 border-blue-500" : ""}`}
+        style={{
+            width: `${tileSize}px`,
+            height: `${tileSize}px`,
+            backgroundImage: `url(${piece.image})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+        }}
+        draggable="true"
+        onDragStart={(e) => {
+            e.dataTransfer.setData("text/plain", JSON.stringify(piece));
+            const dragImage = new Image(tileSize, tileSize);
+            dragImage.src = piece.image;
+            e.dataTransfer.setDragImage(dragImage, tileSize / 2, tileSize / 2);
+        }}
+    />
+));
 
 const ImageDivider = ({ imageUrl, rows = 3, cols = 3 }) => {
-    const [pieces, setPieces] = useState([]);
-    const [originalPieces, setOriginalPieces] = useState([]);
+    const [availablePieces, setAvailablePieces] = useState([]);
     const [droppedPieces, setDroppedPieces] = useState(Array(rows * cols).fill(null));
     const [isComplete, setIsComplete] = useState(false);
 
-    // Divide la imagen en piezas
-    useEffect(() => {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        const img = new Image();
-        img.src = imageUrl;
+    const createPieces = useCallback(async (imageUrl, rows, cols) => {
+        return new Promise((resolve) => {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+            const img = new Image();
+            img.crossOrigin = "anonymous";
+            img.src = imageUrl;
 
-        img.onload = () => {
-            const imgWidth = img.width;
-            const imgHeight = img.height;
-            const tileWidth = imgWidth / cols;
-            const tileHeight = imgHeight / rows;
+            img.onload = () => {
+                const piecesArray = [];
+                const tileWidth = img.width / cols;
+                const tileHeight = img.height / rows;
 
-            let piecesArray = [];
-            for (let row = 0; row < rows; row++) {
-                for (let col = 0; col < cols; col++) {
-                    canvas.width = tileWidth;
-                    canvas.height = tileHeight;
-                    ctx.clearRect(0, 0, tileWidth, tileHeight);
-                    ctx.drawImage(
-                        img,
-                        col * tileWidth, row * tileHeight,
-                        tileWidth, tileHeight,
-                        0, 0, tileWidth, tileHeight
-                    );
-                    const dataUrl = canvas.toDataURL();
-                    piecesArray.push({
-                        id: `piece-${row}-${col}`,
-                        image: dataUrl,
-                        originalIndex: row * cols + col
-                    });
+                for (let row = 0; row < rows; row++) {
+                    for (let col = 0; col < cols; col++) {
+                        canvas.width = tileWidth;
+                        canvas.height = tileHeight;
+
+                        ctx.drawImage(
+                            img,
+                            col * tileWidth,   // Origen X
+                            row * tileHeight,  // Origen Y
+                            tileWidth,         // Ancho de corte
+                            tileHeight,        // Alto de corte
+                            0, 0,              // Destino X, Y
+                            tileWidth,         // Ancho de destino 
+                            tileHeight         // Alto de destino
+                        );
+
+                        const dataUrl = canvas.toDataURL();
+                        piecesArray.push({
+                            id: `piece-${row}-${col}`,
+                            image: dataUrl,
+                            originalIndex: row * cols + col
+                        });
+                    }
                 }
-            }
+                resolve(piecesArray);
+            };
+        });
+    }, []);
 
-            // Mezclar piezas aleatoriamente
-            const shuffledPieces = [...piecesArray].sort(() => Math.random() - 0.5);
-            setPieces(shuffledPieces);
-            setOriginalPieces(piecesArray);
-        };
-    }, [imageUrl, rows, cols]);
-
-    // Manejar el inicio del arrastre
-    const handleDragStart = (e, piece) => {
-        e.dataTransfer.setData('text/plain', JSON.stringify(piece));
-    };
-
-    // Permitir soltar
-    const handleDragOver = (e) => {
-        e.preventDefault();
-    };
-
-    // Manejar soltar una pieza
-    const handleDrop = (e, targetIndex) => {
-        e.preventDefault();
-        const droppedPieceData = e.dataTransfer.getData('text/plain');
-        const droppedPiece = JSON.parse(droppedPieceData);
-
-        const newDroppedPieces = [...droppedPieces];
-        const newPieces = [...pieces];
-
-        // Verificar si el espacio está vacío
-        if (newDroppedPieces[targetIndex] === null) {
-            // Quitar la pieza de su posición original
-            const sourceIndex = newDroppedPieces.findIndex(piece => piece && piece.id === droppedPiece.id);
-            if (sourceIndex !== -1) {
-                newDroppedPieces[sourceIndex] = null;
-            }
-
-            // Colocar la pieza en la nueva posición
-            newDroppedPieces[targetIndex] = droppedPiece;
-
-            setDroppedPieces(newDroppedPieces);
-
-            // Verificar si el rompecabezas está completo
-            const isComplete = newDroppedPieces.every((piece, index) =>
-                piece && piece.originalIndex === index
-            );
-            setIsComplete(isComplete);
+    useEffect(() => {
+        async function loadPieces() {
+            const piecesArray = await createPieces(imageUrl, rows, cols);
+            setAvailablePieces(piecesArray.sort(() => Math.random() - 0.5));
         }
-    };
+        loadPieces();
+    }, [createPieces, imageUrl, rows, cols]);
 
-    // Reiniciar el rompecabezas
-    const resetPuzzle = () => {
-        // Mezclar piezas nuevamente
-        const shuffledPieces = [...originalPieces].sort(() => Math.random() - 0.5);
-        setPieces(shuffledPieces);
-        setDroppedPieces(Array(rows * cols).fill(null));
-        setIsComplete(false);
-    };
+    // Verificar si el puzzle está completo
+    const checkPuzzleCompletion = useCallback(() => {
+        const isCorrectlyPlaced = droppedPieces.every(
+            (piece, index) => piece && piece.originalIndex === index
+        );
+        setIsComplete(isCorrectlyPlaced);
+        return isCorrectlyPlaced;
+    }, [droppedPieces]);
+
+    // Manejar el arrastre desde piezas disponibles a recuadros
+    const handleDropToGrid = useCallback((e, targetIndex) => {
+        e.preventDefault();
+        const droppedPiece = JSON.parse(e.dataTransfer.getData("text/plain"));
+
+        setDroppedPieces(prev => {
+            const newDropped = [...prev];
+            // Solo permite colocar si el espacio está vacío
+            if (!newDropped[targetIndex]) {
+                newDropped[targetIndex] = droppedPiece;
+                // Eliminar de piezas disponibles
+                setAvailablePieces(prev => prev.filter(p => p.id !== droppedPiece.id));
+            }
+            return newDropped;
+        });
+    }, []);
+
+    // Manejar el arrastre entre recuadros
+    const handleReorderDroppedPieces = useCallback((e, targetIndex) => {
+        e.preventDefault();
+        const droppedPiece = JSON.parse(e.dataTransfer.getData("text/plain"));
+
+        setDroppedPieces(prev => {
+            const newDropped = [...prev];
+            const sourcePieceIndex = newDropped.findIndex(p => p && p.id === droppedPiece.id);
+
+            if (sourcePieceIndex !== -1 && sourcePieceIndex !== targetIndex) {
+                // Intercambiar piezas
+                [newDropped[sourcePieceIndex], newDropped[targetIndex]] =
+                    [newDropped[targetIndex], newDropped[sourcePieceIndex]];
+            }
+
+            return newDropped;
+        });
+
+        checkPuzzleCompletion();
+    }, [checkPuzzleCompletion]);
+
+    const resetPuzzle = useCallback(() => {
+        createPieces(imageUrl, rows, cols).then(piecesArray => {
+            setAvailablePieces(piecesArray.sort(() => Math.random() - 0.5));
+            setDroppedPieces(Array(rows * cols).fill(null));
+            setIsComplete(false);
+        });
+    }, [createPieces, imageUrl, rows, cols]);
+
+    const tileSize = 300 / rows;
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen">
+        <div className="flex flex-col items-center justify-center min-h-screen p-4">
             <div className="flex space-x-4">
-                {/* Piezas arrastrables */}
-                <div className="grid grid-cols-3 gap-2 w-[300px]">
-                    {pieces.map((piece) => (
-                        <div
+                {/* Piezas disponibles */}
+                <div
+                    className="grid gap-2"
+                    style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, ${tileSize}px))` }}
+                >
+                    {availablePieces.map((piece) => (
+                        <DraggablePiece
                             key={piece.id}
-                            className={`w-[100px] h-[100px] bg-cover cursor-grab 
-                ${!droppedPieces.includes(piece) ? 'block' : 'hidden'}`}
-                            style={{ backgroundImage: `url(${piece.image})` }}
-                            draggable="true"
-                            onDragStart={(e) => handleDragStart(e, piece)}
+                            piece={piece}
+                            tileSize={tileSize}
+                            handleDragStart={(e, p) => {
+                                e.dataTransfer.setData("text/plain", JSON.stringify(p));
+                            }}
                         />
                     ))}
                 </div>
 
                 {/* Área de colocación */}
                 <div
-                    className="grid grid-cols-3 gap-2 w-[300px]"
-                    onDragOver={handleDragOver}
+                    className="grid gap-2 bg-gray-100"
+                    style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, ${tileSize}px))` }}
                 >
                     {droppedPieces.map((piece, index) => (
                         <div
                             key={index}
-                            className="w-[100px] h-[100px] bg-gray-200 border-2 border-gray-400"
-                            onDrop={(e) => handleDrop(e, index)}
-                            onDragOver={handleDragOver}
+                            className={`bg-gray-300 border-2 border-gray-400 flex items-center justify-center 
+                            ${piece && piece.originalIndex === index ? "bg-green-200" : ""}`}
+                            style={{
+                                width: `${tileSize}px`,
+                                height: `${tileSize}px`
+                            }}
+                            onDrop={(e) =>
+                                piece
+                                    ? handleReorderDroppedPieces(e, index)
+                                    : handleDropToGrid(e, index)
+                            }
+                            onDragOver={(e) => e.preventDefault()}
                         >
                             {piece && (
-                                <div
-                                    className="w-full h-full bg-cover"
-                                    style={{ backgroundImage: `url(${piece.image})` }}
+                                <DraggablePiece
+                                    piece={piece}
+                                    tileSize={tileSize}
+                                    isDropped={true}
+                                    handleDragStart={(e) => {
+                                        e.dataTransfer.setData("text/plain", JSON.stringify(piece));
+                                    }}
                                 />
                             )}
                         </div>
@@ -136,20 +190,22 @@ const ImageDivider = ({ imageUrl, rows = 3, cols = 3 }) => {
                 </div>
             </div>
 
-            {/* Botón de reinicio */}
             <button
                 onClick={resetPuzzle}
-                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-700"
             >
                 Reiniciar Puzzle
             </button>
 
-            {/* Mensaje de victoria */}
             {isComplete && (
                 <div className="mt-4 text-green-600 font-bold">
-                    ¡Puzzle completado!
+                    ¡Puzzle completado correctamente!
                 </div>
             )}
+
+            <div className="mt-4 text-sm text-gray-600">
+                Progreso: {droppedPieces.filter(p => p).length} / {rows * cols} piezas
+            </div>
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import UserDAO from "/src/daos/UserDAO";
+import useAuthStore from "./use-auth-store";
 
 export const usePuzzleStore = create(
     persist(
@@ -15,7 +16,29 @@ export const usePuzzleStore = create(
             startTime: null,
 
             setUserId: (userId) => set({ userId }),
-
+            initializeUserData: async () => {
+                const { user } = useAuthStore.getState();
+                if (user) {
+                    const response = await UserDAO.getUserById(user.uid);
+                    if (response.success) {
+                        const userData = response.data;
+                        set({
+                            userId: user.uid,
+                            completedPuzzles: userData.completedPuzzles || 0,
+                            totalTime: userData.totalTime || 0,
+                            bestTime: userData.bestTime || Infinity,
+                            currentStreak: userData.currentStreak || 0,
+                            rewards: userData.rewards || 0,
+                            lastCompletedAt: userData.lastCompletedAt
+                                ? new Date(userData.lastCompletedAt)
+                                : null,
+                        });
+                    } else {
+                        console.error("Error cargando datos del usuario:", response.error);
+                        set({ userId: user.uid }); // Inicia con valores predeterminados si no hay datos.
+                    }
+                }
+            },
             startPuzzle: () => {
                 const currentTime = new Date();
                 set({ startTime: currentTime });

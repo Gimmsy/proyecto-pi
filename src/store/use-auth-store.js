@@ -7,6 +7,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth } from "../../firebase.config";
+import { usePuzzleStore } from "./use-puzzle-store";
 
 const provider = new GoogleAuthProvider();
 
@@ -21,6 +22,12 @@ const useAuthStore = create(
           const result = await signInWithPopup(auth, provider);
           const user = result.user;
           set({ user, loading: false });
+
+          // Llama a la función initializeUserData después de iniciar sesión
+          const { initializeUserData } = usePuzzleStore.getState();
+          if (initializeUserData) {
+            await initializeUserData(); // Verifica que esta línea use el nombre correcto
+          }
         } catch (error) {
           console.error("Error al iniciar sesión con Google:", error);
           set({ user: null, loading: false });
@@ -48,6 +55,7 @@ const useAuthStore = create(
               },
               loading: false
             });
+            usePuzzleStore.getState().initializeUserData();
           } else {
             set({ user: null, loading: false });
           }
