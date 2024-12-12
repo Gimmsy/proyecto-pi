@@ -6,6 +6,7 @@ import Sliderbar from "../components/Slidebar";
 import WaterCycle from "../components/shortageWater/WaterCycle";
 import CycleText from "../components/shortageWater/CycleText";
 import Video from "../components/shortageWater/VideoWater";
+import PostProcessing from "../components/PostProcessing";
 
 const RainDrop = ({ position, onCollision, removeDrop, color }) => {
     const [ref] = useSphere(() => ({
@@ -129,7 +130,7 @@ const Cycle = () => {
                     <group>
                         <Video position={[0, 0, 0]} scale={[10, 5, 1]} camera={{ position: [0, 0, 0], fov: 75 }} />
                     </group>
-
+                    <PostProcessing />
                     <WaterCycle />
                     <directionalLight position={[5, 5, 5]} intensity={1} castShadow />
                     <Sky
@@ -139,10 +140,10 @@ const Cycle = () => {
                         azimuth={0.05}
                     />
                     <OrbitControls enableZoom={true} />
-                    <Physics>
+                    {/*<Physics>
                         <Ground />
                         <Rain rainColor={rainColor} />
-                    </Physics>
+                    </Physics>*/}
 
                     <Html position="absolute" >
                         <div style={{
