@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Sky, Stars, Html } from "@react-three/drei";
 import { Physics } from "@react-three/cannon";
@@ -62,7 +62,6 @@ const WaterPollution = () => {
           fade
         />
         <OrbitControls />
-        <Suspense>
           <Html position={[0, 10, 0]} center>
             <div className="title">Contaminación del Agua</div>
           </Html>
@@ -97,7 +96,6 @@ const WaterPollution = () => {
             <TitleWaterPollution position={[0, 5, 0]} />
           </Physics>
           <VideoOcean name="screen" position-y={0} position-x={40} scale={15} />
-        </Suspense>
       </Canvas>
     </div>
   );

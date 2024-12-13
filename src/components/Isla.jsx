@@ -8,7 +8,7 @@ const Isla = (props) => {
   const { nodes, materials } = useGLTF("/models-3d/20_LightHouse.glb");
   const [emissiveIntensity, setEmissiveIntensity] = useState(1);
 
-  const texture1 = useTexture("assets/image/rock_texture.jpg");
+  const texture1 = useTexture("/assets/image/rock_texture.jpg");
 
   useFrame(() => {
     if (group.current) {
