@@ -45,7 +45,7 @@ const TitleWaterPollution = () => {
                 size={2}
             >
                 Protejamos los océanos!
-                <meshStandardMaterial color={new THREE.Color(0.35, 0.45, 0.65)} metalness={2} roughness={20} />
+                <meshStandardMaterial color={new THREE.Color(1, 1, 1)} metalness={0.5} roughness={0.5} />
             </Text3D>
             {/* Agrega luces a la escena */}
             <ambientLight intensity={0.75} />

@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeUp, faVolumeMute } from "@fortawesome/free-solid-svg-icons";
 
-const AudioComponent = ({ audioSrc, title, description }) => {
+const AudioComponent = ({ audioSrc, title, description, titleClass }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
 
@@ -17,8 +17,8 @@ const AudioComponent = ({ audioSrc, title, description }) => {
 
   return (
     <div className="audio-container flex flex-col items-center p-4">
-      <h2 className="text-2xl font-bold mb-4">{title}</h2>
-      <p className="mb-4">{description}</p>
+      <h2 className={`text-2xl font-bold mb-4 text-primary ${titleClass}`}>{title}</h2>
+      <p className="mb-4 text-quaternary">{description}</p>
       <button
         onClick={toggleAudio}
         className="bg-primary text-white px-4 py-2 rounded-md mt-4 text-center transition-colors hover:bg-quaternary"

@@ -84,7 +84,7 @@ const WelcomeText = () => {
                     padding: 0,
                 }}
             >
-                <h1 style={{ margin: 0 }}>BIENVENIDOS A NUESTRO MUNDO</h1>
+                <h1 className="text-primary" style={{ margin: 0 }}>BIENVENIDOS A NUESTRO MUNDO</h1>
             </Html>
             {/* Agrega luces a la escena */}
             <ambientLight intensity={0.75} />
