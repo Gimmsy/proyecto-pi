@@ -35,9 +35,18 @@ const CombinedGame = () => {
     ]);
 
     const [definitions] = useState([
-        { id: 2, text: "El agua se ensucia por cosas como basura, productos químicos o desechos que la gente tira." },
-        { id: 1, text: "Usar más agua de la que realmente necesitamos, como dejar el grifo abierto o malgastar agua en riego." },
-        { id: 3, text: "Usar el agua de manera más responsable para no desperdiciarla y asegurarse de que siempre haya suficiente." },
+        {
+            id: 2,
+            text: "El agua se ensucia por cosas como basura, productos químicos o desechos que la gente tira.",
+        },
+        {
+            id: 1,
+            text: "Usar más agua de la que realmente necesitamos, como dejar el grifo abierto o malgastar agua en riego.",
+        },
+        {
+            id: 3,
+            text: "Usar el agua de manera más responsable para no desperdiciarla y asegurarse de que siempre haya suficiente.",
+        },
     ]);
 
     const handleDrop = (conceptId, definitionId) => {

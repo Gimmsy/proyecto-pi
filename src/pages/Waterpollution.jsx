@@ -5,11 +5,14 @@ import { Physics } from "@react-three/cannon";
 import Isla from "../components/Isla";
 import Sliderbar from "../components/Slidebar";
 import TitleWaterPollution from "../components/TitleWaterPollution"; // Asegúrate de ajustar la ruta según tu estructura de archivos
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowUp,
+  faArrowDown,
+  faMouse,
+} from "@fortawesome/free-solid-svg-icons";
 import "../styles/WaterPollution.css";
 import VideoOcean from "../components/OceanPollutionVideo";
-
 
 const WaterPollution = () => {
   return (
@@ -21,7 +24,12 @@ const WaterPollution = () => {
         camera={{ position: [0, 5, 10], fov: 75 }} // Ajusta la posición de la cámara aquí
       >
         <ambientLight intensity={1} />
-        <spotLight position={[10, 10, 10]} angle={0.15} intensity={0.5} castShadow />
+        <spotLight
+          position={[10, 10, 10]}
+          angle={0.15}
+          intensity={0.5}
+          castShadow
+        />
         <Sky
           distance={450000}
           sunPosition={[100, 20, 100]}
@@ -39,20 +47,26 @@ const WaterPollution = () => {
         <OrbitControls />
         <Suspense fallback={null}>
           <Html position={[0, 10, 0]} center>
-            <div className="title">
-              Contaminación del Agua
-            </div>
+            <div className="title">Contaminación del Agua</div>
           </Html>
           <Html position={[0, 0, 0]} center>
-            <div className="instructions bg-white bg-opacity-80 p-4 rounded-lg text-center max-w-xs">
-              Usa las flechas <FontAwesomeIcon icon={faArrowUp} /> y <FontAwesomeIcon icon={faArrowDown} /> para prender y apagar las luces.
+            <div className="instructions bg-tertiary text-senary bg-opacity-80 p-4 rounded-lg text-center max-w-xs">
+              <p>
+                <FontAwesomeIcon icon={faMouse} /> Usa el ratón y el scroll para
+                alejar, acercar y girar el modelo.
+              </p>
+              <p>
+                Utiliza las flechas <FontAwesomeIcon icon={faArrowUp} /> y{" "}
+                <FontAwesomeIcon icon={faArrowDown} /> para encender y apagar
+                las luces.
+              </p>
             </div>
           </Html>
           <Physics>
             <Isla />
             <TitleWaterPollution position={[0, 5, 0]} />
           </Physics>
-          <VideoOcean name="screen" position-y={0} position-x={40} scale={15}  />
+          <VideoOcean name="screen" position-y={0} position-x={40} scale={15} />
         </Suspense>
       </Canvas>
     </div>
