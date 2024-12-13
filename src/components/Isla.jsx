@@ -1,14 +1,14 @@
-import React, { useRef, useState, useEffect } from "react";
-import { useFrame } from "@react-three/fiber";
-import { useGLTF, useTexture } from "@react-three/drei";
-import { useBox, usePlane } from "@react-three/cannon";
+import React, { useRef, useState, useEffect } from 'react';
+import { useFrame } from '@react-three/fiber';
+import { useGLTF, useTexture } from '@react-three/drei';
+import { useBox, usePlane } from '@react-three/cannon';
 
 const Isla = (props) => {
   const group = useRef();
-  const { nodes, materials } = useGLTF("/models-3d/20_LightHouse.glb");
+  const { nodes, materials } = useGLTF('/models-3d/20_LightHouse.glb');
   const [emissiveIntensity, setEmissiveIntensity] = useState(1);
 
-  const texture1 = useTexture("assets/image/rock_texture.jpg");
+  const texture1 = useTexture('/assets/image/rock_texture.jpg');
 
   useFrame(() => {
     if (group.current) {
@@ -18,16 +18,16 @@ const Isla = (props) => {
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.key === "ArrowUp") {
+      if (event.key === 'ArrowUp') {
         setEmissiveIntensity(2); // Prender la luz
-      } else if (event.key === "ArrowDown") {
+      } else if (event.key === 'ArrowDown') {
         setEmissiveIntensity(0); // Apagar la luz
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
@@ -83,11 +83,11 @@ const Isla = (props) => {
         shadow-camera-top={10}
         shadow-camera-bottom={-10}
       />
-      <group name="Scene">
+      <group name='Scene'>
         {/* Isla tierra */}
         <mesh
           ref={refCube}
-          name="Cube"
+          name='Cube'
           castShadow
           receiveShadow
           geometry={nodes.Cube.geometry}
@@ -97,7 +97,7 @@ const Isla = (props) => {
         />
         <mesh
           ref={refNewPlane}
-          name="NewPlane"
+          name='NewPlane'
           castShadow
           receiveShadow
           geometry={nodes.Plane.geometry}
@@ -106,8 +106,8 @@ const Isla = (props) => {
           scale={18.54}
         >
           <meshStandardMaterial
-            attach="material"
-            color="white"
+            attach='material'
+            color='white'
             transparent={true}
             opacity={0} // Ajusta la opacidad para hacer el plano completamente invisible
           />
@@ -122,14 +122,14 @@ const Isla = (props) => {
           <meshStandardMaterial map={texture1} />
         </mesh>
         <group
-          name="Cylinder"
+          name='Cylinder'
           position={[-2.186, 2.885, -4.276]}
           rotation={[0, 0.331, 0]}
           scale={[0.567, 0.315, 0.567]}
         >
           {/* las torres */}
           <mesh
-            name="Cylinder001"
+            name='Cylinder001'
             castShadow
             receiveShadow
             geometry={nodes.Cylinder001.geometry}
@@ -137,16 +137,16 @@ const Isla = (props) => {
           />
           {/* Ventanas */}
           <mesh
-            name="Cylinder001_1"
+            name='Cylinder001_1'
             castShadow
             receiveShadow
             geometry={nodes.Cylinder001_1.geometry}
-            material={materials["Material.001"]}
+            material={materials['Material.001']}
           >
             <meshStandardMaterial
-              attach="material"
-              color={materials["Material.001"].color}
-              emissive={materials["Material.001"].emissive}
+              attach='material'
+              color={materials['Material.001'].color}
+              emissive={materials['Material.001'].emissive}
               emissiveIntensity={emissiveIntensity}
               metalness={0.5}
               roughness={0.1}
@@ -154,7 +154,7 @@ const Isla = (props) => {
           </mesh>
         </group>
         <mesh
-          name="Cube005"
+          name='Cube005'
           castShadow
           receiveShadow
           geometry={nodes.Cube005.geometry}
@@ -164,7 +164,7 @@ const Isla = (props) => {
           scale={[-0.933, -0.754, -1.185]}
         />
         <mesh
-          name="Cube006"
+          name='Cube006'
           castShadow
           receiveShadow
           geometry={nodes.Cube006.geometry}
@@ -174,7 +174,7 @@ const Isla = (props) => {
           scale={[-0.713, -0.576, -0.906]}
         />
         <mesh
-          name="Cube007"
+          name='Cube007'
           castShadow
           receiveShadow
           geometry={nodes.Cube007.geometry}
@@ -184,7 +184,7 @@ const Isla = (props) => {
           scale={[-1.136, -0.918, -1.443]}
         />
         <mesh
-          name="Cube008"
+          name='Cube008'
           castShadow
           receiveShadow
           geometry={nodes.Cube008.geometry}
@@ -196,7 +196,7 @@ const Isla = (props) => {
 
         {/* el oceano */}
         <mesh
-          name="Plane"
+          name='Plane'
           castShadow
           receiveShadow
           geometry={nodes.Plane.geometry}
@@ -206,7 +206,7 @@ const Isla = (props) => {
         />
 
         <mesh
-          name="Cube017"
+          name='Cube017'
           castShadow
           receiveShadow
           geometry={nodes.Cube017.geometry}
@@ -216,7 +216,7 @@ const Isla = (props) => {
           scale={[-1.379, -1.086, -2.202]}
         />
         <mesh
-          name="Cube018"
+          name='Cube018'
           castShadow
           receiveShadow
           geometry={nodes.Cube018.geometry}
@@ -226,7 +226,7 @@ const Isla = (props) => {
           scale={[-1.162, -0.915, -1.856]}
         />
         <mesh
-          name="Cube019"
+          name='Cube019'
           castShadow
           receiveShadow
           geometry={nodes.Cube019.geometry}
@@ -236,7 +236,7 @@ const Isla = (props) => {
           scale={[-1.927, -1.518, -3.077]}
         />
         <mesh
-          name="Cube020"
+          name='Cube020'
           castShadow
           receiveShadow
           geometry={nodes.Cube020.geometry}
@@ -246,7 +246,7 @@ const Isla = (props) => {
           scale={[-1.121, -0.883, -1.79]}
         />
         <group
-          name="Area"
+          name='Area'
           position={[-1.763, 6.513, -3.487]}
           rotation={[0.19, -1.21, 1.356]}
           scale={0.725}
@@ -256,5 +256,5 @@ const Isla = (props) => {
   );
 };
 
-useGLTF.preload("/models-3d/20_LightHouse.glb");
+useGLTF.preload('/models-3d/20_LightHouse.glb');
 export default Isla;
