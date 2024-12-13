@@ -1,17 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
 import "../styles/PuzzleGame.css";
-import useAuthStore from "../store/use-auth-store"; // Asegúrate de tener el store de autenticación
-import usePuzzleStore from "../store/use-puzzle-store"; // Asegúrate de tener el store del puzzle
+import useAuthStore from "../store/use-auth-store";
+import usePuzzleStore from "../store/use-puzzle-store";
 
-const PuzzleGame = ({ imagePieces, rows, cols, onPuzzleComplete }) => {
+const PuzzleGame = ({ imagePieces, rows, cols, onPuzzleComplete, correctOrder }) => {
     const [shuffledPieces, setShuffledPieces] = useState([]);
     const pieceBoxRef = useRef(null);
 
-    const { user } = useAuthStore(); // Obtener usuario del store de autenticación
-    const { updateUserScore, score } = usePuzzleStore(); // Obtener funciones del store del puzzle
+    const { user } = useAuthStore();
+    const { score, completePuzzle, resetScore } = usePuzzleStore();
 
     useEffect(() => {
-        // Generar piezas aleatorias similar al método sortPieces()
         const generateRandomPieces = () => {
             const pieces = imagePieces.map((image, index) => ({
                 id: `Piece${index + 1}`,
@@ -59,17 +58,20 @@ const PuzzleGame = ({ imagePieces, rows, cols, onPuzzleComplete }) => {
     };
 
     const checkPuzzleCompletion = (pieces) => {
-        const isComplete = pieces.every((piece, index) =>
-            parseInt(piece.alt) === index + 1
-        );
+        // Verifica si las piezas están en el orden correcto según el correctOrder
+        const isComplete = pieces.every((piece, index) => {
+            const correctIndex = correctOrder[index];
+            return parseInt(piece['data-index']) === correctIndex;
+        });
 
         if (isComplete) {
             makeAnimationPieces();
             onPuzzleComplete(true);
 
-            // Actualizar la puntuación del usuario
+            // Actualizar la puntuación del usuario y la cantidad de puzzles completados
             if (user) {
-                updateUserScore(10); // Por ejemplo, añade 10 puntos por completar el puzzle
+                // Si el puzzle está completamente correcto, se suman 50 puntos
+                completePuzzle(50);
             }
         }
     };
@@ -96,34 +98,45 @@ const PuzzleGame = ({ imagePieces, rows, cols, onPuzzleComplete }) => {
             }));
             return newPieces;
         });
+
+        // Reiniciar el score del usuario al finalizar el puzzle
+        if (user) {
+            resetScore();
+        }
     };
 
     return (
-        <div
-            ref={pieceBoxRef}
-            className="puzzle-container"
-            style={{
-                gridTemplateColumns: `repeat(${cols}, 1fr)`,
-                gridTemplateRows: `repeat(${rows}, 1fr)`,
-            }}
-        >
-            {shuffledPieces.map((piece) => (
-                <div
-                    key={piece.id}
-                    id={piece.id}
-                    className="grid-piece"
-                    draggable
-                    onDragStart={(e) => handleDragStart(e, piece)}
-                    onDragEnd={handleDragEnd}
-                    onDragOver={handleDragOver}
-                    onDrop={(e) => handleDrop(e, piece)}
-                >
-                    <img
-                        src={piece.image}
-                        alt={piece.alt}
-                    />
-                </div>
-            ))}
+        <div>
+            <div className="score-display">
+                <p>Puntaje: {score}</p>
+            </div>
+
+            <div
+                ref={pieceBoxRef}
+                className="puzzle-container"
+                style={{
+                    gridTemplateColumns: `repeat(${cols}, 1fr)`,
+                    gridTemplateRows: `repeat(${rows}, 1fr)`,
+                }}
+            >
+                {shuffledPieces.map((piece) => (
+                    <div
+                        key={piece.id}
+                        id={piece.id}
+                        className="grid-piece"
+                        draggable
+                        onDragStart={(e) => handleDragStart(e, piece)}
+                        onDragEnd={handleDragEnd}
+                        onDragOver={handleDragOver}
+                        onDrop={(e) => handleDrop(e, piece)}
+                    >
+                        <img
+                            src={piece.image}
+                            alt={piece.alt}
+                        />
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
