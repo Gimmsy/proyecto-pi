@@ -2,9 +2,9 @@ import {
   collection,
   doc,
   getDoc,
-  deleteDoc,
   updateDoc,
-  addDoc,
+  setDoc,
+  deleteDoc
 } from "firebase/firestore";
 import { db } from "../../firebase.config";
 
@@ -33,15 +33,21 @@ class UserDAO {
   }
 
   /**
-   * Crear un nuevo usuario
+   * Crear un nuevo usuario solo si no existe
    * @param {Object} userData - Datos del usuario
    * @returns {Promise<{success: boolean, id?: string, error?: string}>}
    */
   async createUser(userData) {
     try {
-      const docRef = await addDoc(this.collectionRef, userData);
-      console.log("Documento creado con ID:", docRef.id);
-      return { success: true, id: docRef.id };
+      // Verifica si el usuario ya existe antes de crearlo
+      const userDoc = await getDoc(doc(this.collectionRef, userData.uid));
+      if (userDoc.exists()) {
+        return { success: false, error: "Usuario ya existe" };
+      }
+
+      await setDoc(doc(this.collectionRef, userData.uid), userData);
+      console.log("Documento creado con ID:", userData.uid);
+      return { success: true, id: userData.uid };
     } catch (error) {
       console.error("Error creando el documento:", error);
       return { success: false, error: error.message };

@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Loader } from "@react-three/drei";
 import Sidebar from "../components/Slidebar";
 import useAuthStore from "../store/use-auth-store";
-import ImageDivider from "../components/PuzzleGame";
 import "../styles/CombinedGame.css"; // Opcional: para estilos
+import PuzzleGame from "../components/PuzzleGame";
 
 const CombinedGame = () => {
     const { user } = useAuthStore();
@@ -39,19 +39,19 @@ const CombinedGame = () => {
         }
     };
 
-    const handleGameCompletion = async () => {
-        if (conceptsMatched && puzzleCompleted) {
-            const scoreToAdd = 100;
+    // const handleGameCompletion = async () => {
+    //     if (conceptsMatched && puzzleCompleted) {
+    //         const scoreToAdd = 100;
 
-            try {
-                await useAuthStore.getState().updateUserScore(scoreToAdd);
-                setShowFeedback(true);
-                setFeedbackMessage("¡Felicidades! Has completado todos los desafíos perfectamente.");
-            } catch (error) {
-                console.error("Error actualizando puntaje:", error);
-            }
-        }
-    };
+    //         try {
+    //             await useAuthStore.getState().updateUserScore(scoreToAdd);
+    //             setShowFeedback(true);
+    //             setFeedbackMessage("¡Felicidades! Has completado todos los desafíos perfectamente.");
+    //         } catch (error) {
+    //             console.error("Error actualizando puntaje:", error);
+    //         }
+    //     }
+    // };
 
     const isMatched = (id) => matches.includes(id);
 
@@ -133,16 +133,17 @@ const CombinedGame = () => {
                             ¡Desafía tus conocimientos!
                         </div>
                         <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-                            <ImageDivider
+                            <PuzzleGame
                                 imagePieces={imagePieces()}
                                 rows={3}
                                 cols={3}
-                                // onPuzzleComplete={(isComplete) => {
-                                //     setPuzzleCompleted(isComplete); // Corregido
-                                //     if (isComplete && conceptsMatched) {
-                                //         handleGameCompletion();
-                                //     }
-                                // }}
+                                correctOrder={[0, 3, 6, 1, 4, 7, 2, 5, 8]}
+                                onPuzzleComplete={(isComplete) => {
+                                    setPuzzleCompleted(isComplete); // Corregido
+                                    if (isComplete && conceptsMatched) {
+                                        handleGameCompletion();
+                                    }
+                                }}
                             />
                         </div>
                         <Loader />
