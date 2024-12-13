@@ -6,14 +6,15 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { auth } from "../../firebase.config";
+import { doc, updateDoc, getDoc,setDoc } from "firebase/firestore";
+import { auth, db } from "../../firebase.config";
 import { usePuzzleStore } from "./use-puzzle-store";
 
 const provider = new GoogleAuthProvider();
 
 const useAuthStore = create(
   persist(
-    (set) => ({
+    (set, get) => ({
       user: null,
       loading: true,
 
@@ -21,12 +22,34 @@ const useAuthStore = create(
         try {
           const result = await signInWithPopup(auth, provider);
           const user = result.user;
-          set({ user, loading: false });
 
-          // Llama a la función initializeUserData después de iniciar sesión
+          // Obtener datos adicionales del usuario de Firestore
+          const userDocRef = doc(db, "users", user.uid);
+          let userDoc = await getDoc(userDocRef);
+          if (!userDoc.exists()) {
+            // Crea el documento con datos iniciales para evitar errores
+            await setDoc(userDocRef, {
+              score: 0,
+              completedChallenges: 0
+            });
+            // Vuelve a obtener el documento después de crearlo
+            userDoc = await getDoc(userDocRef);
+          }
+          const userData = {
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+            score: userDoc.exists() ? userDoc.data().score || 0 : 0,
+            completedChallenges: userDoc.exists() ? userDoc.data().completedChallenges || 0 : 0
+          };
+
+          set({ user: userData, loading: false });
+
+          // Inicializar datos del usuario
           const { initializeUserData } = usePuzzleStore.getState();
           if (initializeUserData) {
-            await initializeUserData(); // Verifica que esta línea use el nombre correcto
+            await initializeUserData();
           }
         } catch (error) {
           console.error("Error al iniciar sesión con Google:", error);
@@ -43,19 +66,54 @@ const useAuthStore = create(
         }
       },
 
-      observeAuthState: () => {
-        return onAuthStateChanged(auth, (user) => {
-          if (user) {
-            set({
-              user: {
-                uid: user.uid,
-                email: user.email,
-                displayName: user.displayName,
-                photoURL: user.photoURL
-              },
-              loading: false
+      updateUserScore: async (scoreToAdd) => {
+        try {
+          const { user } = get();
+
+          if (user && user.uid) {
+            const userDocRef = doc(db, "users", user.uid);
+            await updateDoc(userDocRef, {
+              score: (user.score || 0) + scoreToAdd,
+              completedChallenges: (user.completedChallenges || 0) + 1
             });
-            usePuzzleStore.getState().initializeUserData();
+
+            // Actualizar el estado local del usuario
+            set((state) => ({
+              user: {
+                ...state.user,
+                score: (state.user?.score || 0) + scoreToAdd,
+                completedChallenges: (state.user?.completedChallenges || 0) + 1
+              }
+            }));
+          }
+        } catch (error) {
+          console.error("Error actualizando puntaje del usuario:", error);
+        }
+      },
+
+      observeAuthState: () => {
+        return onAuthStateChanged(auth, async (user) => {
+          if (user) {
+            try {
+              const userDocRef = doc(db, "users", user.uid);
+              const userDoc = await getDoc(userDocRef);
+
+              set({
+                user: {
+                  uid: user.uid,
+                  email: user.email,
+                  displayName: user.displayName,
+                  photoURL: user.photoURL,
+                  score: userDoc.exists() ? userDoc.data().score || 0 : 0,
+                  completedChallenges: userDoc.exists() ? userDoc.data().completedChallenges || 0 : 0
+                },
+                loading: false
+              });
+
+              usePuzzleStore.getState().initializeUserData();
+            } catch (error) {
+              console.error("Error obteniendo datos del usuario:", error);
+            }
           } else {
             set({ user: null, loading: false });
           }
