@@ -77,8 +77,8 @@ const useAuthStore = create(
         const { user } = get();
         if (user && user.uid) {
           const userDocRef = doc(db, "users", user.uid);
-          const maxScore = 100; // Limitar puntaje por prueba
-          const maxTotalScore = 500; // Limitar puntaje total
+          const maxScore = 500; // Limitar puntaje por prueba
+          const maxTotalScore = 100; // Limitar puntaje total
 
           const newScore = Math.min((user.score || 0) + scoreToAdd, maxScore);
           const newTotalScore = Math.min((user.totalScore || 0) + scoreToAdd, maxTotalScore);

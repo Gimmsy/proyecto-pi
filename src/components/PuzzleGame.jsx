@@ -6,9 +6,9 @@ import usePuzzleStore from "../store/use-puzzle-store";
 const PuzzleGame = ({ imagePieces, rows, cols, onPuzzleComplete, correctOrder }) => {
     const [shuffledPieces, setShuffledPieces] = useState([]);
     const pieceBoxRef = useRef(null);
-
+    const [isCompleted, setIsCompleted] = useState(false);
     const { user } = useAuthStore();
-    const { score, completePuzzle, resetScore } = usePuzzleStore();
+    const { score, completePuzzle, resetPuzzle } = usePuzzleStore();
 
     useEffect(() => {
         const generateRandomPieces = () => {
@@ -76,6 +76,13 @@ const PuzzleGame = ({ imagePieces, rows, cols, onPuzzleComplete, correctOrder })
         }
     };
 
+
+    useEffect(() => {
+        if (isCompleted) {
+            onPuzzleComplete(true); // Llama a onPuzzleComplete solo después del renderizado
+        }
+    }, [isCompleted]);
+
     const makeAnimationPieces = () => {
         const piecesElements = pieceBoxRef.current.querySelectorAll(".grid-piece");
 
@@ -101,7 +108,7 @@ const PuzzleGame = ({ imagePieces, rows, cols, onPuzzleComplete, correctOrder })
 
         // Reiniciar el score del usuario al finalizar el puzzle
         if (user) {
-            resetScore();
+            resetPuzzle();
         }
     };
 
