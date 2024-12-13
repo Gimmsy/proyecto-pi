@@ -38,6 +38,7 @@ const useAuthStore = create(
               score: 0,
               totalScore: 0,
               completedChallenges: 0,
+              puzzleCompleted: false, // Añadir información de finalización del puzzle
             });
             userDoc = await getDoc(userDocRef);
           }
@@ -53,6 +54,7 @@ const useAuthStore = create(
               score: userData.score || 0,
               totalScore: userData.totalScore || 0,
               completedChallenges: userData.completedChallenges || 0,
+              puzzleCompleted: userData.puzzleCompleted || false, // Añadir información de finalización del puzzle
             },
             loading: false,
           });
@@ -73,7 +75,7 @@ const useAuthStore = create(
       },
 
       // Actualiza puntajes y progreso en Firestore
-      updateUserProgress: async (scoreToAdd) => {
+      updateUserProgress: async (scoreToAdd, puzzleCompleted) => {
         const { user } = get();
         if (user && user.uid) {
           const userDocRef = doc(db, "users", user.uid);
@@ -89,6 +91,7 @@ const useAuthStore = create(
               score: newScore,
               totalScore: newTotalScore,
               completedChallenges: newCompletedChallenges,
+              puzzleCompleted: puzzleCompleted || user.puzzleCompleted, // Actualizar información de finalización del puzzle
             });
 
             // Actualizar estado local
@@ -98,6 +101,7 @@ const useAuthStore = create(
                 score: newScore,
                 totalScore: newTotalScore,
                 completedChallenges: newCompletedChallenges,
+                puzzleCompleted: puzzleCompleted || state.user.puzzleCompleted, // Actualizar información de finalización del puzzle
               },
             }));
           } catch (error) {
@@ -121,6 +125,7 @@ const useAuthStore = create(
                   score: userData.score || 0,
                   totalScore: userData.totalScore || 0,
                   completedChallenges: userData.completedChallenges || 0,
+                  puzzleCompleted: userData.puzzleCompleted || false, // Añadir información de finalización del puzzle
                 },
               });
             }
@@ -146,6 +151,7 @@ const useAuthStore = create(
                   score: 0,
                   totalScore: 0,
                   completedChallenges: 0,
+                  puzzleCompleted: false, // Añadir información de finalización del puzzle
                 });
                 userDoc = await getDoc(userDocRef);
               }
@@ -159,6 +165,7 @@ const useAuthStore = create(
                   score: userData.score || 0,
                   totalScore: userData.totalScore || 0,
                   completedChallenges: userData.completedChallenges || 0,
+                  puzzleCompleted: userData.puzzleCompleted || false, // Añadir información de finalización del puzzle
                 },
                 loading: false,
               });

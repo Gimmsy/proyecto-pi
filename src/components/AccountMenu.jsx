@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import useAuthStore from "../store/use-auth-store";
+import ParticipationMedal from "./ParticipationMedal";
 
 const AccountMenu = () => {
   const { user, loginGoogleWithPopUp, logout } = useAuthStore();
@@ -57,6 +58,7 @@ const AccountMenu = () => {
             <div className="absolute top-12 right-0 bg-white border border-gray-300 rounded-lg shadow-md p-4 w-52 z-10">
               <p className="mb-2 text-primary">{user.displayName}</p>
               <p className="mb-2 truncate">{user.email}</p>
+              <ParticipationMedal puzzleCompleted={user.puzzleCompleted} />
               <button
                 onClick={logout}
                 className="w-full py-2 text-white bg-alert rounded-lg hover:bg-alert-2"
@@ -70,7 +72,7 @@ const AccountMenu = () => {
         // Botón de inicio de sesión
         <button
           onClick={loginGoogleWithPopUp}
-          className="fixed top-4 right-7 flex items-center space-x-2 py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 shadow-md"
+          className="fixed top-4 right-7  flex items-center space-x-2 py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 shadow-md"
         >
           <img
             src="/assets/image/google-icon.png"
