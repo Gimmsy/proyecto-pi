@@ -187,7 +187,7 @@ const OceanAcidification = () => {
           shadows
         >
           <Suspense fallback={null}>
-          <Perf position={"bottom-left"} />
+          {/* <Perf position={"bottom-left"} /> */}
           <PostProcessing />
           <Physics>
             <Umbrella position={[-1, -1.6, 2]} />
