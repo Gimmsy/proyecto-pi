@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "@react-three/drei";
 import Sidebar from "../components/Slidebar";
@@ -12,22 +12,18 @@ const CombinedGame = () => {
     const { user } = useAuthStore();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (!user) {
-            navigate("/login");
-        }
-    }, [user, navigate]);
-
+    // Estados
     const [puzzleCompleted, setPuzzleCompleted] = useState(false);
     const [conceptsMatched, setConceptsMatched] = useState(false);
     const [currentLevel, setCurrentLevel] = useState(1);
-    const [conceptMatchScore, setConceptMatchScore] = useState(0);
-    const [totalScore, setTotalScore] = useState(0); // Nuevo estado para totalScore
-    const [matches, setMatches] = useState([]);
+    const [conceptMatchScore, setConceptMatchScore] = useState(0);  // Puntaje por coincidencias
+    const [totalScore, setTotalScore] = useState(0); // Puntaje total
+    const [matches, setMatches] = useState([]); // Coincidencias
     const [showModal, setShowModal] = useState(false);
 
-    const { score: puzzleScore, resetPuzzleScore } = usePuzzleStore();
+    const { score: puzzleScore, resetPuzzle } = usePuzzleStore();
 
+    // Conceptos y definiciones
     const [concepts] = useState([
         { id: 3, text: "Conservación del Agua", matched: false },
         { id: 1, text: "Desperdicio de Agua", matched: false },
@@ -35,24 +31,19 @@ const CombinedGame = () => {
     ]);
 
     const [definitions] = useState([
-        {
-            id: 2,
-            text: "El agua se ensucia por cosas como basura, productos químicos o desechos que la gente tira.",
-        },
-        {
-            id: 1,
-            text: "Usar más agua de la que realmente necesitamos, como dejar el grifo abierto o malgastar agua en riego.",
-        },
-        {
-            id: 3,
-            text: "Usar el agua de manera más responsable para no desperdiciarla y asegurarse de que siempre haya suficiente.",
-        },
+        { id: 2, text: "El agua se ensucia por cosas como basura, productos químicos o desechos que la gente tira." },
+        { id: 1, text: "Usar más agua de la que realmente necesitamos." },
+        { id: 3, text: "Usar el agua de manera más responsable." },
     ]);
 
     const handleDrop = (conceptId, definitionId) => {
         if (conceptId === definitionId) {
             setMatches((prev) => [...prev, conceptId]);
-            setConceptMatchScore((prevScore) => prevScore + 16.67); // Incrementar el puntaje por coincidencia
+            setConceptMatchScore((prevScore) => {
+                const newScore = Math.round((matches.length + 1) * (100 / concepts.length));  // Calcula el puntaje dinámicamente
+                console.log("Nuevo puntaje de coincidencias:", newScore); // Log para ver cómo se calcula
+                return newScore;
+            });
         }
     };
 
@@ -70,36 +61,47 @@ const CombinedGame = () => {
         "/assets/image/piece-8.jpg",
     ];
 
-    // Comprobación de coincidencias completas
+    // Efecto para verificar coincidencias
     useEffect(() => {
         if (matches.length === concepts.length) {
             setConceptsMatched(true);
         }
     }, [matches]);
 
-    const handleGameCompletion = () => {
+    // Manejo de la finalización del juego
+    const handleGameCompletion = useCallback(() => {
         if (puzzleCompleted && conceptsMatched) {
+            console.log("Puzzle Score:", puzzleScore);
+            console.log("Concept Match Score:", conceptMatchScore);
             const finalScore = Math.round(conceptMatchScore + puzzleScore);
-            setTotalScore(finalScore); // Actualizar el puntaje total
-
-            // Reiniciar el puntaje del puzzle
-            resetPuzzleScore();
-            setConceptMatchScore(0); // Reiniciar el puntaje de coincidencia
-            setMatches([]); // Limpiar las coincidencias
-            setPuzzleCompleted(false); // Reiniciar el estado de juego
-            setConceptsMatched(false); // Reiniciar la coincidencia de conceptos
-
-            // Mostrar el modal con la recompensa
+            console.log("Final Score:", finalScore);
+            setTotalScore(finalScore);
+            resetPuzzle();
+            setConceptMatchScore(0);
+            setMatches([]);
+            setPuzzleCompleted(false);
+            setConceptsMatched(false);
             setShowModal(true);
-
-            // Actualizar el puntaje del usuario en el estado global
-            useAuthStore.getState().updateUserScore(finalScore);
+            useAuthStore.getState().updateUserProgress(finalScore);
         }
-    };
+    }, [puzzleCompleted, conceptsMatched, puzzleScore, conceptMatchScore, resetPuzzle]);
 
+    // Efecto para manejar la finalización del juego
     useEffect(() => {
         handleGameCompletion();
-    }, [conceptsMatched, puzzleCompleted]);
+    }, [handleGameCompletion]);
+
+    // Efecto para reiniciar estados al cerrar el modal
+    useEffect(() => {
+        if (!showModal) {
+            setPuzzleCompleted(false);
+            setConceptsMatched(false);
+            setCurrentLevel(1);
+            setConceptMatchScore(0);
+            setMatches([]);
+            resetPuzzle();
+        }
+    }, [showModal, resetPuzzle]);
 
     if (!user) return null;
 
@@ -111,7 +113,6 @@ const CombinedGame = () => {
                     <div className="game-container h-full flex flex-col items-center justify-center">
                         <div className="challenge-message">¡Desafía tus conocimientos!</div>
                         <h1>Relaciona los conceptos con sus definiciones</h1>
-
                         <div className="concepts-and-definitions">
                             <div className="concepts">
                                 <h2>Conceptos</h2>
@@ -126,7 +127,6 @@ const CombinedGame = () => {
                                     </div>
                                 ))}
                             </div>
-
                             <div className="definitions">
                                 <h2>Definiciones</h2>
                                 {definitions.map((definition) => (
@@ -144,13 +144,12 @@ const CombinedGame = () => {
                                 ))}
                             </div>
                         </div>
-
                         {matches.length === concepts.length && (
                             <div className="success-message">
                                 ¡Has coincidido con todos los conceptos!
                                 <button
                                     className="mt-4 p-2 bg-blue-500 text-white rounded"
-                                    onClick={() => setCurrentLevel(2)}
+                                    onClick={() => setCurrentLevel(2)} // Aquí se pasa al puzzle
                                 >
                                     Ir al Puzzle
                                 </button>
@@ -158,7 +157,6 @@ const CombinedGame = () => {
                         )}
                     </div>
                 )}
-
                 {currentLevel === 2 && (
                     <div className="canvas-3d-container w-full h-full relative">
                         <div className="challenge-message">¡Desafía tus conocimientos!</div>
@@ -177,7 +175,6 @@ const CombinedGame = () => {
                     </div>
                 )}
             </div>
-
             {showModal && (
                 <GameCompletionModal
                     score={totalScore}
@@ -190,5 +187,4 @@ const CombinedGame = () => {
         </>
     );
 };
-
 export default CombinedGame;

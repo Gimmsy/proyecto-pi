@@ -1,3 +1,4 @@
+// use-puzzle-store.js
 import { create } from "zustand";
 import UserDAO from "/src/daos/UserDAO";
 import useAuthStore from "./use-auth-store";
@@ -67,4 +68,4 @@ const usePuzzleStore = create((set, get) => ({
         }),
 }));
 
-export default usePuzzleStore;
+export default usePuzzleStore; // Asegúrate de que esta línea esté presente
