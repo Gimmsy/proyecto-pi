@@ -46,7 +46,7 @@ class UserDAO {
       }
 
       await setDoc(doc(this.collectionRef, userData.uid), userData);
-      console.log("Documento creado con ID:", userData.uid);
+
       return { success: true, id: userData.uid };
     } catch (error) {
       console.error("Error creando el documento:", error);
@@ -64,7 +64,6 @@ class UserDAO {
     try {
       const userRef = doc(this.collectionRef, id);
       await updateDoc(userRef, userData);
-      console.log("Documento actualizado exitosamente");
       return { success: true };
     } catch (error) {
       console.error("Error actualizando el documento:", error);
@@ -80,10 +79,8 @@ class UserDAO {
   async deleteUser(id) {
     try {
       await deleteDoc(doc(this.collectionRef, id));
-      console.log("Documento eliminado exitosamente");
       return { success: true };
     } catch (error) {
-      console.error("Error eliminando el documento:", error);
       return { success: false, error: error.message };
     }
   }
