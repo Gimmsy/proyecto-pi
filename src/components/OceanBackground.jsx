@@ -7,11 +7,6 @@ const Terrain = () => {
   const height = useLoader(THREE.TextureLoader, "/textures/elevation.png");
   const normals = useLoader(THREE.TextureLoader, "/textures/normals.png");
   const colors = useLoader(THREE.TextureLoader, "/textures/colors.png");
-
-  console.log("Height Map:", height);
-  console.log("Normals Map:", normals);
-  console.log("Colors Map:", colors);
-
   return (
     <group>
       <Plane

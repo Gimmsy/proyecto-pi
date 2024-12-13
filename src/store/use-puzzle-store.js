@@ -1,4 +1,3 @@
-// use-puzzle-store.js
 import { create } from "zustand";
 import UserDAO from "/src/daos/UserDAO";
 import useAuthStore from "./use-auth-store";
@@ -50,10 +49,11 @@ const usePuzzleStore = create((set, get) => ({
                     score: newScore,
                     totalScore: newTotalScore,
                     completedPuzzles: currentState.completedPuzzles + 1,
+                    puzzleCompleted: true, // Marcar el puzzle como completado
                 });
 
                 // También actualizar el puntaje en useAuthStore para que ambos stores tengan la misma información
-                useAuthStore.getState().updateUserProgress(scoreToAdd);
+                useAuthStore.getState().updateUserProgress(scoreToAdd, true);
             } catch (error) {
                 console.error("Error al actualizar puntaje en Firestore:", error);
             }
@@ -68,4 +68,4 @@ const usePuzzleStore = create((set, get) => ({
         }),
 }));
 
-export default usePuzzleStore; // Asegúrate de que esta línea esté presente
+export default usePuzzleStore;

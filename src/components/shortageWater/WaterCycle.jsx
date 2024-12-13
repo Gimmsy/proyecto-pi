@@ -14,11 +14,11 @@ const WaterCycle = (props) => {
         const handleKeyDown = (event) => {
             if (event.key === "ArrowUp") {
                 setRotationSpeed((prevSpeed) => prevSpeed + 0.001); // Aumentar velocidad de rotación
-                console.log("Aumentar velocidad");
+
             }
             if (event.key === "ArrowDown") {
                 setRotationSpeed((prevSpeed) => Math.max(prevSpeed - 0.001, 0)); // Reducir velocidad de rotación
-                console.log("Reducir velocidad");
+ 
             }
         };
 
@@ -29,7 +29,7 @@ const WaterCycle = (props) => {
         };
     }, []);
     useEffect(() => {
-        console.log("Animaciones disponibles:", animations.map(a => a.name));
+
     }, [animations]);
 
     useEffect(() => {
@@ -54,14 +54,14 @@ const WaterCycle = (props) => {
                 groupRef.current.scale.y * scaleFactor,
                 groupRef.current.scale.z * scaleFactor
             );
-            console.log("Escalando el objeto");
+
         }
     };
 
     // Función para manejar el clic
     const handleClick = () => {
         setClicked(!clicked);
-        console.log("Objeto clicado");
+
     };
 
     return (
