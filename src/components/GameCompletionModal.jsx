@@ -30,6 +30,7 @@ const GameCompletionModal = ({ score, onClose }) => {
                 <MedalSVG type={medalType} />
                 <h2 className="text-2xl font-bold mt-4 text-gray-800">{title}</h2>
                 <p className="mt-4 text-gray-600">{message}</p>
+                <p className="mt-4 text-gray-600">Tu puntaje fue: <span className="font-bold">{score}</span></p>
                 <button
                     onClick={onClose}
                     className="mt-6 px-6 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition"
