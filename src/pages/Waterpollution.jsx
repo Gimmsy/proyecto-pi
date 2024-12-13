@@ -5,10 +5,11 @@ import { Physics } from "@react-three/cannon";
 import { EffectComposer, Bloom, Vignette } from "@react-three/postprocessing";
 import Isla from "../components/Isla";
 import Sliderbar from "../components/Slidebar";
-import TitleWaterPollution from "../components/TitleWaterPollution"; // Asegúrate de ajustar la ruta según tu estructura de archivos
+import TitleWaterPollution from "../components/TitleWaterPollution";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faArrowDown, faMouse, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import "../styles/WaterPollution.css";
+import PostProcessing from "../components/PostProcessing";
 import VideoOcean from "../components/OceanPollutionVideo";
 
 const WaterPollution = () => {
@@ -38,7 +39,7 @@ const WaterPollution = () => {
       <Canvas
         shadows
         style={{ width: "100%", height: "100vh" }}
-        camera={{ position: [0, 5, 10], fov: 75 }} // Ajusta la posición de la cámara aquí
+        camera={{ position: [0, 5, 10], fov: 75 }}
       >
         <ambientLight intensity={1} />
         <spotLight
@@ -62,7 +63,7 @@ const WaterPollution = () => {
           fade
         />
         <OrbitControls />
-        <Suspense fallback={null}>
+        <Suspense fallback={<Html center><div>Cargando...</div></Html>}>
           <Html position={[0, 10, 0]} center>
             <div className="title">Contaminación del Agua</div>
           </Html>
@@ -91,6 +92,7 @@ const WaterPollution = () => {
               )}
             </div>
           </Html>
+          <PostProcessing />
           <Physics>
             <Isla />
             <TitleWaterPollution position={[0, 5, 0]} />
