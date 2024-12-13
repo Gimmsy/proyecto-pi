@@ -8,7 +8,6 @@ import {
 } from "firebase/auth";
 import { doc, updateDoc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase.config";
-import { usePuzzleStore } from "./use-puzzle-store";
 
 const provider = new GoogleAuthProvider();
 
@@ -18,14 +17,15 @@ const useAuthStore = create(
       user: null,
       loading: true,
 
+      // Inicia sesión con Google
       loginGoogleWithPopUp: async () => {
-        if (get().loading) return; // Evitar múltiples clics mientras se está cargando
+        if (get().loading) return; // Prevenir múltiples intentos simultáneos
         try {
-          set({ loading: true }); // Activar estado de carga
+          set({ loading: true });
           const result = await signInWithPopup(auth, provider);
           const user = result.user;
 
-          // Obtener datos del usuario de Firestore
+          // Verificar o inicializar datos en Firestore
           const userDocRef = doc(db, "users", user.uid);
           let userDoc = await getDoc(userDocRef);
 
@@ -36,33 +36,33 @@ const useAuthStore = create(
               email: user.email,
               displayName: user.displayName,
               score: 0,
+              totalScore: 0,
               completedChallenges: 0,
             });
             userDoc = await getDoc(userDocRef);
           }
 
-          const userData = {
-            uid: user.uid,
-            email: user.email,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
-            score: userDoc.exists() ? userDoc.data().score || 0 : 0,
-            completedChallenges: userDoc.exists() ? userDoc.data().completedChallenges || 0 : 0,
-          };
+          const userData = userDoc.data();
 
-          set({ user: userData, loading: false });
-
-          const { initializeUserData } = usePuzzleStore.getState();
-          if (initializeUserData) {
-            await initializeUserData();
-          }
-
+          set({
+            user: {
+              uid: user.uid,
+              email: user.email,
+              displayName: user.displayName,
+              photoURL: user.photoURL,
+              score: userData.score || 0,
+              totalScore: userData.totalScore || 0,
+              completedChallenges: userData.completedChallenges || 0,
+            },
+            loading: false,
+          });
         } catch (error) {
           console.error("Error al iniciar sesión con Google:", error);
           set({ user: null, loading: false });
         }
       },
 
+      // Cierra sesión
       logout: async () => {
         try {
           await signOut(auth);
@@ -72,40 +72,71 @@ const useAuthStore = create(
         }
       },
 
-      updateUserScore: async (scoreToAdd) => {
-        try {
-          const { user } = get();
+      // Actualiza puntajes y progreso en Firestore
+      updateUserProgress: async (scoreToAdd) => {
+        const { user } = get();
+        if (user && user.uid) {
+          const userDocRef = doc(db, "users", user.uid);
+          const maxScore = 100; // Limitar puntaje por prueba
+          const maxTotalScore = 500; // Limitar puntaje total
 
-          if (user && user.uid) {
-            const userDocRef = doc(db, "users", user.uid);
-            const newScore = (user.score || 0) + scoreToAdd;
-            const newCompletedChallenges = (user.completedChallenges || 0) + 1;
+          const newScore = Math.min((user.score || 0) + scoreToAdd, maxScore);
+          const newTotalScore = Math.min((user.totalScore || 0) + scoreToAdd, maxTotalScore);
+          const newCompletedChallenges = (user.completedChallenges || 0) + 1;
+
+          try {
             await updateDoc(userDocRef, {
               score: newScore,
+              totalScore: newTotalScore,
               completedChallenges: newCompletedChallenges,
             });
 
-            // Actualizar el estado local del usuario
+            // Actualizar estado local
             set((state) => ({
               user: {
                 ...state.user,
                 score: newScore,
+                totalScore: newTotalScore,
                 completedChallenges: newCompletedChallenges,
               },
             }));
+          } catch (error) {
+            console.error("Error actualizando progreso del usuario:", error);
           }
-        } catch (error) {
-          console.error("Error actualizando puntaje del usuario:", error);
         }
       },
 
+      // Inicializa datos de usuario desde Firestore
+      initializeUserData: async () => {
+        const { user } = get();
+        if (user && user.uid) {
+          const userDocRef = doc(db, "users", user.uid);
+          try {
+            const userDoc = await getDoc(userDocRef);
+            if (userDoc.exists()) {
+              const userData = userDoc.data();
+              set({
+                user: {
+                  ...user,
+                  score: userData.score || 0,
+                  totalScore: userData.totalScore || 0,
+                  completedChallenges: userData.completedChallenges || 0,
+                },
+              });
+            }
+          } catch (error) {
+            console.error("Error inicializando datos del usuario:", error);
+          }
+        }
+      },
+
+      // Observa cambios de estado en la autenticación
       observeAuthState: () => {
         return onAuthStateChanged(auth, async (user) => {
           if (user) {
+            const userDocRef = doc(db, "users", user.uid);
             try {
-              const userDocRef = doc(db, "users", user.uid);
               let userDoc = await getDoc(userDocRef);
-
               if (!userDoc.exists()) {
                 await setDoc(userDocRef, {
                   uid: user.uid,
@@ -113,24 +144,24 @@ const useAuthStore = create(
                   email: user.email,
                   displayName: user.displayName,
                   score: 0,
+                  totalScore: 0,
                   completedChallenges: 0,
                 });
-                userDoc = await getDoc(userDocRef); // Vuelve a obtener el documento después de crearlo
+                userDoc = await getDoc(userDocRef);
               }
-
+              const userData = userDoc.data();
               set({
                 user: {
                   uid: user.uid,
                   email: user.email,
                   displayName: user.displayName,
                   photoURL: user.photoURL,
-                  score: userDoc.exists() ? userDoc.data().score || 0 : 0,
-                  completedChallenges: userDoc.exists() ? userDoc.data().completedChallenges || 0 : 0,
+                  score: userData.score || 0,
+                  totalScore: userData.totalScore || 0,
+                  completedChallenges: userData.completedChallenges || 0,
                 },
                 loading: false,
               });
-
-              usePuzzleStore.getState().initializeUserData();
             } catch (error) {
               console.error("Error obteniendo datos del usuario:", error);
             }
@@ -142,12 +173,12 @@ const useAuthStore = create(
     }),
     {
       name: "auth-store",
-      partialize: (state) => ({ user: state.user }),
+      partialize: (state) => ({ user: state.user }), // Persistencia parcial del estado
     }
   )
 );
 
-// Iniciar observación del estado de autenticación
+// Inicia la observación del estado de autenticación
 useAuthStore.getState().observeAuthState();
 
 export default useAuthStore;
