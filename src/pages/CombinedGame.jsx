@@ -41,7 +41,6 @@ const CombinedGame = () => {
             setMatches((prev) => [...prev, conceptId]);
             setConceptMatchScore((prevScore) => {
                 const newScore = Math.round((matches.length + 1) * (100 / concepts.length));  // Calcula el puntaje dinámicamente
-                console.log("Nuevo puntaje de coincidencias:", newScore); // Log para ver cómo se calcula
                 return newScore;
             });
         }
@@ -71,10 +70,7 @@ const CombinedGame = () => {
     // Manejo de la finalización del juego
     const handleGameCompletion = useCallback(() => {
         if (puzzleCompleted && conceptsMatched) {
-            console.log("Puzzle Score:", puzzleScore);
-            console.log("Concept Match Score:", conceptMatchScore);
             const finalScore = Math.round(conceptMatchScore + puzzleScore);
-            console.log("Final Score:", finalScore);
             setTotalScore(finalScore);
             resetPuzzle();
             setConceptMatchScore(0);
