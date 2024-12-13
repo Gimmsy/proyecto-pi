@@ -62,7 +62,7 @@ const WaterPollution = () => {
           fade
         />
         <OrbitControls />
-        <Suspense fallback={<Html center><div>Cargando...</div></Html>}>
+        <Suspense>
           <Html position={[0, 10, 0]} center>
             <div className="title">Contaminación del Agua</div>
           </Html>
