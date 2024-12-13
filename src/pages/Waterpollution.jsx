@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faArrowDown, faMouse, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import "../styles/WaterPollution.css";
 import VideoOcean from "../components/OceanPollutionVideo";
+import PostProcessing from "../components/PostProcessing";
 
 const WaterPollution = () => {
   const [showMessage, setShowMessage] = useState(false);
@@ -90,6 +91,7 @@ const WaterPollution = () => {
               )}
             </div>
           </Html>
+          <PostProcessing />
           <Physics>
             <Isla />
             <TitleWaterPollution position={[0, 5, 0]} />
