@@ -146,10 +146,10 @@ const CombinedGame = () => {
                         </div>
 
                         {matches.length === concepts.length && (
-                            <div className="success-message">
+                            <div className="success-message mb-20">
                                 ¡Has coincidido con todos los conceptos!
                                 <button
-                                    className="mt-4 p-2 bg-blue-500 text-white rounded"
+                                    className="mt-4 ml-2 p-2 bg-blue-500 text-white rounded"
                                     onClick={() => setCurrentLevel(2)}
                                 >
                                     Ir al Puzzle
@@ -161,7 +161,7 @@ const CombinedGame = () => {
 
                 {currentLevel === 2 && (
                     <div className="canvas-3d-container w-full h-full relative">
-                        <div className="challenge-message">¡Desafía tus conocimientos!</div>
+                        <div className="challenge-message-2">¡Desafía tus conocimientos!</div>
                         <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
                             <PuzzleGame
                                 imagePieces={imagePieces()}
