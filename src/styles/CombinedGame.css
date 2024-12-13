@@ -68,8 +68,26 @@ h2 {
     color: #3498db;
     /* Color azul para el texto */
     text-align: center;
-    margin-top: 100px;
     /* Separación desde la parte superior */
+    padding: 10px;
+    background-color: #ecf0f1;
+    /* Fondo claro para el mensaje */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Sombra ligera */
+    width: 80%;
+    /* Ocupa el 80% del ancho de la pantalla */
+    margin-left: auto;
+    margin-right: auto;
+}
+.challenge-message-2{
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #3498db;
+    /* Color azul para el texto */
+    text-align: center;
+    /* Separación desde la parte superior */
+    margin-top: 100px;
     padding: 10px;
     background-color: #ecf0f1;
     /* Fondo claro para el mensaje */
