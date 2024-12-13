@@ -3,6 +3,7 @@ import Sliderbar from "../components/Slidebar"; // Asegúrate de que la ruta es 
 import Scene from "../components/Scene";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWater } from "@fortawesome/free-solid-svg-icons"; // Importa el icono de agua
+import { Loader } from "@react-three/drei";
 
 const InfoPage = () => {
   const [temaSeleccionado, setTemaSeleccionado] = useState("contaminacion");
@@ -60,6 +61,7 @@ const InfoPage = () => {
           />
         </div>
       </div>
+      <Loader />
     </>
   );
 };

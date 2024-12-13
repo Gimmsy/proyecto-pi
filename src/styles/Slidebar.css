@@ -27,6 +27,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 10px;
+  overflow: visible;
 }
 
 .sidebar.open {
@@ -48,9 +49,9 @@ body {
   cursor: pointer;
   padding: 10px;
   border-radius: 4px;
-  position: absolute;
-  left: -20px; /* Ajusta esta propiedad para sobresalir el botón */
-  top: 15px; /* Ajusta esta propiedad para posicionar verticalmente */
+  position: relative;
+  left: 0px; /* Ajusta esta propiedad para sobresalir el botón */
+  top: 0px; /* Ajusta esta propiedad para posicionar verticalmente */
 }
 
 .sidebar-nav {
@@ -70,11 +71,6 @@ body {
 .sidebar-item:hover {
   color: #2F6FB8;
   text-decoration: underline;
-}
-
-.account-menu {
-  margin-top: auto;
-  padding: 10px;
 }
 
 @media (max-width: 768px) {

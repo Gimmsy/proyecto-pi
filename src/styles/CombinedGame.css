@@ -1,0 +1,224 @@
+@font-face {
+    font-family: 'Monsetrrat';
+    /* Nombre de la fuente */
+    src: url('/assets/fonts/Monsetrrat-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Estilos globales */
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('/assets/image/Fondo.jpg');
+    background-size: cover;
+    /* Asegura que la imagen cubra toda la pantalla */
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.w-screen.h-screen {
+    background: none;
+    /* Elimina cualquier color de fondo si existía */
+}
+
+h1 {
+    font-size: 2.5rem;
+    align-items: center;
+    text-align: center;
+    color: #1e2b37;
+    margin: 20px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    font-size: 1.8rem;
+
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+/* Contenedor principal */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    /* Hace que el contenedor ocupe el 100% de la altura de la ventana */
+    background-color: none;
+    /* Mantiene el fondo transparente */
+    border-radius: 0;
+    /* Elimina bordes redondeados para ocupar toda la página */
+    box-shadow: none;
+    /* Sin sombra */
+    padding: 0;
+    /* Sin padding adicional */
+    margin: 0;
+    /* Sin márgenes */
+    text-align: center;
+    overflow-y: auto;
+    /* Oculta cualquier contenido que se desborde */
+}
+
+.challenge-message {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #3498db;
+    /* Color azul para el texto */
+    text-align: center;
+    /* Separación desde la parte superior */
+    padding: 10px;
+    background-color: #ecf0f1;
+    /* Fondo claro para el mensaje */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Sombra ligera */
+    width: 80%;
+    /* Ocupa el 80% del ancho de la pantalla */
+    margin-left: auto;
+    margin-right: auto;
+}
+.challenge-message-2{
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #3498db;
+    /* Color azul para el texto */
+    text-align: center;
+    /* Separación desde la parte superior */
+    margin-top: 100px;
+    padding: 10px;
+    background-color: #ecf0f1;
+    /* Fondo claro para el mensaje */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Sombra ligera */
+    width: 80%;
+    /* Ocupa el 80% del ancho de la pantalla */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.concepts-and-definitions {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    /* Espacio entre los dos bloques */
+    width: 80%;
+    /* Ancho del contenedor de conceptos y definiciones */
+    max-width: 1200px;
+    /* Limitar el ancho máximo para pantallas grandes */
+    margin-top: 20px;
+    /* Margen superior para separar del título */
+}
+
+/* Contenedor de conceptos */
+.concepts {
+    flex: 1;
+    /* Tomará todo el espacio disponible */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* Espacio entre los conceptos */
+    align-items: center;
+    /* Alineación central de los elementos */
+}
+
+/* Contenedor de definiciones */
+.definitions {
+    flex: 1;
+    /* Tomará todo el espacio disponible */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* Espacio entre las definiciones */
+    align-items: center;
+    /* Alineación central de los elementos */
+}
+
+/* Estilos para conceptos */
+
+.concept,
+.definition {
+    padding: 15px 20px;
+    background-color: #ecf0f1;
+    border: 2px solid #bdc3c7;
+    border-radius: 10px;
+    cursor: grab;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1.1rem;
+    color: #2c3e50;
+    font-weight: bold;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.concept:active,
+.definition:active {
+    cursor: grabbing;
+}
+
+.concept.matched,
+.definition.matched {
+    background-color: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+    cursor: default;
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+}
+
+.concept:hover:not(.matched),
+.definition:hover:not(.matched) {
+    transform: scale(1.1);
+    background-color: #e1f5fe;
+    box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Mensaje de éxito */
+.success-message {
+    margin-top: 25px;
+    padding: 5px 20px 20px;
+    background-color: #5F68D9;
+    color: #fff;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: fade-in 1s ease-in-out;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Botones */
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #1c8edb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}

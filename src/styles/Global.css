@@ -42,13 +42,10 @@ h2,
 h3 {
     font-family: 'Monsetrrat', sans-serif;
     color: var(--color-primary);
-    /* Color de los encabezados */
 }
 
 p {
     font-family: 'Monsetrrat', sans-serif;
-    color: var(--color-black);
-    /* Color de los encabezados */
 }
 
 button {

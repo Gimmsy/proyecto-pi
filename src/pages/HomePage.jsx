@@ -1,17 +1,22 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Card from "../components/Card";
 import Sliderbar from "../components/Slidebar";
 import { Canvas } from "@react-three/fiber";
 import WelcomeText from "../components/WelcomeText";
 import OceanBackground from "../components/OceanBackground";
+import { Loader } from "@react-three/drei";
+import AudioComponent from "../components/AudioComponent";
 
 const HomePage = () => {
+  
   return (
     <div className="home-container text-center font-sans min-h-screen pt-20">
       <Sliderbar />
       <OceanBackground />
       <Canvas>
-        <WelcomeText />
+        <Suspense fallback={null}>
+          <WelcomeText />
+        </Suspense>
       </Canvas>
       <section className="cards-section flex flex-wrap justify-center gap-4 p-8 md:flex-row">
         <Card
@@ -27,17 +32,23 @@ const HomePage = () => {
           description="Imagina un mundo donde cada gota cuenta. La escasez de agua ya es una 
                       realidad en muchos lugares. 
                       Aprende cómo este recurso vital se está agotando y qué podemos hacer para preservarlo."
-          imageUrl="/assets/image/escasez-agua.jpg"
+          imageUrl="/assets/image/sensibilizacion-escasez-agua.jpg"
           buttonLabel="Ver más"
         />
         <Card
           title="Acidificación de los océanos"
           description="Nuestros mares están cambiando, y no es para mejor. La acidificación amenaza la vida marina, alterando ecosistemas enteros. 
                       Aprende cómo y por qué esto nos afecta a todos."
-          imageUrl="/assets/image/acidificacion-oceanos.jpg"
+          imageUrl="/assets/image/sensibilizacion-acidificacion-agua.jpg"
           buttonLabel="Ver más"
         />
       </section>
+      <AudioComponent
+        audioSrc="/assets/audio/sea.mp3"
+        title="Sonido del Océano"
+        description="Haz clic en el icono para escuchar el sonido del océano."
+      />
+      <Loader />
     </div>
   );
 };

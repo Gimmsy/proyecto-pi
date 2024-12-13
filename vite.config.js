@@ -7,6 +7,9 @@ export default defineConfig({
     react(),
     compression(), // Habilita compresión para activos grandes como modelos 3D
   ],
+  server: {
+    cors: true, // Habilita CORS para desarrollo
+  },
   base: './', // Rutas relativas para despliegues no en raíz
   assetsInclude: ['**/*.glb', '**/*.hdr', '**/*.mtl', '**/*.png', '**/*.woff', '**/*.woff2'], // Incluye tus formatos de activos
   build: {
@@ -18,7 +21,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           three: ['three'], // Paquete separado para "three"
-          vendor: ['react', 'react-dom', 'react-router-dom'], // Paquete separado para dependencias comunes
+          vendor: ['react', 'react-dom', 'react-router-dom', 'zustand', 'firebase/auth'], // Paquete separado para dependencias comunes
           // Puedes añadir más aquí si tienes otros paquetes grandes
         },
       },
@@ -29,5 +32,8 @@ export default defineConfig({
         'process.env.NODE_ENV': '"production"',
       },
     },
+  },
+  optimizeDeps: {
+    include: ['zustand', 'firebase/auth'],
   },
 });
