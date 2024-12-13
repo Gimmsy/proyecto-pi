@@ -2,14 +2,12 @@ import React, { Suspense, useState, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Sky, Stars, Html } from "@react-three/drei";
 import { Physics } from "@react-three/cannon";
-import { EffectComposer, Bloom, Vignette } from "@react-three/postprocessing";
 import Isla from "../components/Isla";
 import Sliderbar from "../components/Slidebar";
 import TitleWaterPollution from "../components/TitleWaterPollution";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faArrowDown, faMouse, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import "../styles/WaterPollution.css";
-import PostProcessing from "../components/PostProcessing";
 import VideoOcean from "../components/OceanPollutionVideo";
 
 const WaterPollution = () => {
@@ -92,17 +90,12 @@ const WaterPollution = () => {
               )}
             </div>
           </Html>
-          <PostProcessing />
           <Physics>
             <Isla />
             <TitleWaterPollution position={[0, 5, 0]} />
           </Physics>
           <VideoOcean name="screen" position-y={0} position-x={40} scale={15} />
         </Suspense>
-        <EffectComposer>
-          <Bloom luminanceThreshold={0.3} luminanceSmoothing={0.9} height={300} />
-          <Vignette eskil={false} offset={0.1} darkness={1.1} />
-        </EffectComposer>
       </Canvas>
     </div>
   );
